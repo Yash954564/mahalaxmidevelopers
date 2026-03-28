@@ -1,0 +1,334 @@
+// Build proper blog listing and individual blog pages
+const fs = require('fs');
+const path = require('path');
+
+// Curated blog data - only ACTUAL blog articles (excluding project pages, about, contact, reviews)
+const BLOGS = [
+  { file: "7-reasons-buy-plot-in-nagpur-2026.html", title: "7 Reasons to Buy a Plot in Nagpur in 2026", category: "Investment", desc: "Discover why 2026 is the ideal year to invest in plots in Nagpur — from infrastructure growth to appreciation potential.", img: "nagpur-plots-hero-slide-1.webp" },
+  { file: "7-reasons-why-buying-a-plot-in-nagpur-is-one-of-the-smartest-investments-of-2026.html", title: "Why Buying a Plot in Nagpur Is One of the Smartest Investments of 2026", category: "Investment", desc: "A deep dive into why Nagpur real estate is booming and how plots offer the best returns compared to other investment options.", img: "nagpur-plots-hero-slide-2.webp" },
+  { file: "amenities-that-matter-in-plotted-development.html", title: "Amenities That Matter in Plotted Development", category: "Buyer Guide", desc: "What amenities should you look for in a plotted layout? Roads, drainage, gardens, security — a complete checklist for buyers.", img: "nagpur-plots-hero-slide-3.webp" },
+  { file: "best-nit-sanctioned-plots-in-nagpur-mahalaxmi-developer.html", title: "Best NIT Sanctioned Plots in Nagpur", category: "Legal", desc: "Discover the best NIT sanctioned plots in Nagpur with Mahalaxmi Developers. Secure, legal, and ready for development.", img: "nagpur-plots-hero-slide-4.webp" },
+  { file: "best-time-to-buy-plot-in-nagpur.html", title: "Best Time to Buy a Plot in Nagpur", category: "Investment", desc: "Timing your plot purchase right can maximize returns. Learn the seasonal and market factors that affect plot prices in Nagpur.", img: "nagpur-plots-hero-slide-5.webp" },
+  { file: "clear-title-property-meaning.html", title: "Clear Title Property: What It Means", category: "Legal", desc: "Understanding clear title properties and why they're essential for a safe real estate investment in Nagpur.", img: "nagpur-plots-hero-slide-1.webp" },
+  { file: "clear-title-property-what-it-means-and-why-you-should-never-compromise-on-it.html", title: "Clear Title Property — Why You Should Never Compromise", category: "Legal", desc: "A comprehensive guide to clear title properties, document verification, and protecting your investment from legal disputes.", img: "nagpur-plots-hero-slide-2.webp" },
+  { file: "discover-best-rl-plots-in-nagpur-with-mahalaxmi-developers.html", title: "Best RL Plots in Nagpur with Mahalaxmi Developers", category: "Market Guide", desc: "Explore legally approved RL (Residential Layout) plots in Nagpur's prime locations with verified documentation.", img: "nagpur-plots-hero-slide-3.webp" },
+  { file: "documents-to-check-before-buying-a-plot-nagpur.html", title: "Documents to Check Before Buying a Plot in Nagpur", category: "Legal", desc: "Essential document checklist every buyer must verify before purchasing a residential plot in Nagpur.", img: "nagpur-plots-hero-slide-4.webp" },
+  { file: "from-dream-to-address-a-customers-journey-with-mahalaxmi-group.html", title: "From Dream to Address: A Customer's Journey with Mahalaxmi Group", category: "Market Guide", desc: "Real stories of customers who found their dream plot — from first enquiry to registration with Mahalaxmi Developers.", img: "nagpur-plots-hero-slide-5.webp" },
+  { file: "gated-community-plots-nagpur-benefits.html", title: "Benefits of Gated Community Plots in Nagpur", category: "Buyer Guide", desc: "Why gated community plots offer better security, lifestyle, and appreciation than open plots. A complete benefits guide.", img: "nagpur-plots-hero-slide-1.webp" },
+  { file: "home-loan-for-plot-purchase-in-nagpur.html", title: "Home Loan for Plot Purchase in Nagpur", category: "Finance", desc: "Everything you need to know about getting a home loan for plot purchase in Nagpur — eligibility, documents, and banks.", img: "nagpur-plots-hero-slide-2.webp" },
+  { file: "home-loan-for-plot-purchase-in-nagpur-everything-you-need-to-know.html", title: "Complete Guide: Home Loan for Plot Purchase in Nagpur", category: "Finance", desc: "Step-by-step guide to securing a home loan for plot purchase — from application to disbursement with bank tie-ups.", img: "nagpur-plots-hero-slide-3.webp" },
+  { file: "how-site-visit-should-look.html", title: "How a Site Visit Should Look Before Buying a Plot", category: "Buyer Guide", desc: "What to check, what to ask, and what to verify during a site visit. Expert tips for first-time plot buyers.", img: "nagpur-plots-hero-slide-4.webp" },
+  { file: "how-to-shortlist-plots-in-nagpur.html", title: "How to Shortlist Plots in Nagpur", category: "Buyer Guide", desc: "A practical framework to shortlist the right plot — budget, location, approvals, and connectivity factors explained.", img: "nagpur-plots-hero-slide-5.webp" },
+  { file: "inside-mahalaxmi-nagar-41-everything-you-need-to-know-about-our-gumgaon-project.html", title: "Inside Mahalaxmi Nagar 41: Everything About Our Gumgaon Project", category: "Market Guide", desc: "Complete project overview of Mahalaxmi Nagar 41 in Gumgaon — layout, amenities, approvals, and investment potential.", img: "nagpur-plots-hero-slide-1.webp" },
+  { file: "investing-in-nagpur-real-estate-why-mahalaxmi-developers-is-the-ideal-choice.html", title: "Investing in Nagpur Real Estate: Why Choose Mahalaxmi Developers", category: "Investment", desc: "With 67+ completed projects and 15000+ happy customers, learn why Mahalaxmi Developers is Nagpur's most trusted choice.", img: "nagpur-plots-hero-slide-2.webp" },
+  { file: "investment-plots-nagpur-how-to-evaluate.html", title: "How to Evaluate Investment Plots in Nagpur", category: "Investment", desc: "A data-driven approach to evaluating plot investments in Nagpur — ROI, location analysis, and growth corridor mapping.", img: "nagpur-plots-hero-slide-3.webp" },
+  { file: "nagpur-real-estate-zones-2026.html", title: "Nagpur Real Estate Zones in 2026", category: "Market Guide", desc: "Mapping Nagpur's real estate zones for 2026 — which areas are appreciating fastest and where to invest now.", img: "nagpur-plots-hero-slide-4.webp" },
+  { file: "nagpurs-fastest-growing-real-estate-zones-in-2026-where-should-you-invest.html", title: "Nagpur's Fastest Growing Real Estate Zones — Where Should You Invest?", category: "Investment", desc: "Data-backed analysis of Nagpur's fastest-growing zones in 2026. Compare Wardha Road, Besa, Manish Nagar, and more.", img: "nagpur-plots-hero-slide-5.webp" },
+  { file: "nmrda-vs-gram-panchayat-plots-nagpur.html", title: "NMRDA vs Gram Panchayat Plots in Nagpur", category: "Legal", desc: "Understand the critical difference between NMRDA sanctioned and Gram Panchayat plots. Why legal approval matters for bank loans and appreciation.", img: "nagpur-plots-hero-slide-1.webp" },
+  { file: "plot-registration-charges-maharashtra.html", title: "Plot Registration Charges in Maharashtra", category: "Finance", desc: "Complete breakdown of plot registration charges, stamp duty, and fees in Maharashtra for 2026. Budget your purchase accurately.", img: "nagpur-plots-hero-slide-2.webp" },
+  { file: "plot-vs-flat-which-is-better-investment-nagpur.html", title: "Plot vs Flat: Which Is a Better Investment in Nagpur?", category: "Investment", desc: "Compare plot vs flat investment in Nagpur for 2026. Appreciation potential, maintenance costs, and flexibility analyzed.", img: "nagpur-plots-hero-slide-3.webp" },
+  { file: "plots-in-besa-nagpur-what-to-know.html", title: "Plots in Besa, Nagpur — What to Know Before Buying", category: "Market Guide", desc: "Complete buyer's guide to plots in Besa, Nagpur — demand trends, connectivity, approvals, and best projects available.", img: "nagpur-plots-hero-slide-4.webp" },
+  { file: "plots-in-kotewada-residential-plots-in-nagpur-no-1-plots.html", title: "Plots in Kotewada — Premium Residential Plots in Nagpur", category: "Market Guide", desc: "Invest in prime plots in Kotewada with great appreciation potential. Explore NMRDA approved residential plots by Mahalaxmi Developers.", img: "nagpur-plots-hero-slide-5.webp" },
+  { file: "plots-in-manish-nagar-investment-guide.html", title: "Plots in Manish Nagar — Investment Guide", category: "Investment", desc: "Why Manish Nagar is one of the best areas for plot investment in Nagpur. Location advantages, price trends, and project options.", img: "nagpur-plots-hero-slide-1.webp" },
+  { file: "plots-on-wardha-road-with-no-1-plots-for-sale-in-nagpur.html", title: "Premium Plots on Wardha Road, Nagpur", category: "Market Guide", desc: "Discover premium residential plots on Wardha Road, Nagpur. Prime location with excellent connectivity to MIHAN, AIIMS, and Samriddhi Mahamarg.", img: "nagpur-plots-hero-slide-2.webp" },
+  { file: "rera-for-plots-nagpur-basics.html", title: "RERA for Plots in Nagpur — Basics Every Buyer Must Know", category: "Legal", desc: "Understanding RERA registration for plotted developments in Nagpur. What it means for buyers and how to verify compliance.", img: "nagpur-plots-hero-slide-3.webp" },
+  { file: "top-5-documents-to-check-while-purchasing-a-plot.html", title: "Top 5 Documents to Check While Purchasing a Plot", category: "Legal", desc: "The 5 most critical documents every plot buyer must verify — from 7/12 extract to NMRDA sanctions. Don't skip any.", img: "nagpur-plots-hero-slide-4.webp" },
+  { file: "top-areas-to-buy-plots-in-nagpur.html", title: "Top Areas to Buy Plots in Nagpur (2026 Guide)", category: "Market Guide", desc: "A buyer-friendly shortlist of the best areas to buy residential plots in Nagpur in 2026 — with what to check before you book.", img: "nagpur-plots-hero-slide-5.webp" },
+  { file: "wardha-road-plots-growth-corridor.html", title: "Wardha Road Plots — The Growth Corridor of Nagpur", category: "Market Guide", desc: "Why Wardha Road is Nagpur's fastest-growing corridor for plot investments. Infrastructure, connectivity, and future plans.", img: "nagpur-plots-hero-slide-1.webp" },
+  { file: "what-is-nmrda-sanctioned-plot.html", title: "What Is an NMRDA Sanctioned Plot?", category: "Legal", desc: "A simple explanation of NMRDA sanctioned plots — what it means, why it matters, and how to verify before buying.", img: "nagpur-plots-hero-slide-2.webp" },
+  { file: "what-is-an-nmrda-sanctioned-plot-why-does-it-matter.html", title: "What Is an NMRDA Sanctioned Plot & Why Does It Matter?", category: "Legal", desc: "Deep dive into NMRDA sanctions — legal significance, bank loan eligibility, appreciation benefits, and verification process.", img: "nagpur-plots-hero-slide-3.webp" },
+  { file: "why-jamtha-is-nagpurs-most-promising-real-estate-destination-right-now.html", title: "Why Jamtha Is Nagpur's Most Promising Real Estate Destination", category: "Market Guide", desc: "Jamtha is emerging as Nagpur's next big real estate zone. Explore why investors are rushing to this growth corridor.", img: "nagpur-plots-hero-slide-4.webp" },
+];
+
+// Get all unique categories
+const categories = [...new Set(BLOGS.map(b => b.category))].sort();
+
+// Generate blog card HTML
+function blogCard(blog) {
+  const searchText = blog.title.toLowerCase();
+  return `          <article class="card blog-card" data-category="${blog.category}" data-search="${searchText}" style="display: flex; flex-direction: column;">
+            <img src="../assets/images/${blog.img}" alt="${blog.title}" loading="lazy" style="height: 240px; object-fit: cover; width: 100%; border-radius: 12px;">
+            <div class="blog-meta" style="font-size: 13px; color: var(--gold); margin-top: 16px; margin-bottom: 8px; font-weight: 600;">${blog.category} · Real Estate Insights</div>
+            <h3 style="margin-bottom: 12px; font-size: 20px; line-height: 1.4;"><a href="../blogs/${blog.file}" style="text-decoration: none; color: inherit;">${blog.title}</a></h3>
+            <p style="color: var(--muted); font-size: 15px; margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.6;">${blog.desc}</p>
+            <a href="../blogs/${blog.file}" style="margin-top:auto;display:inline-flex;align-items:center;gap:6px;color: var(--teal);font-weight:700;font-size:14px; text-decoration: none;">Read Full Guide <img src="../assets/icons/right-arrow.svg" alt="" width="14" height="14"></a>
+          </article>`;
+}
+
+// Generate the full blogs.html
+const blogCards = BLOGS.map(blogCard).join('\n\n');
+const filterBtns = ['All', ...categories].map(cat => {
+  const active = cat === 'All' ? ' is-active' : '';
+  const dataCat = cat === 'All' ? 'all' : cat;
+  return `              <button class="filter-btn${active}" data-cat="${dataCat}">${cat}</button>`;
+}).join('\n');
+
+const blogsHTML = `<!DOCTYPE html><html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Real Estate Blogs & Market Insights | Buying Plots in Nagpur Guide</title>
+  <meta name="description" content="Read expert guides on buying NMRDA & RERA approved plots in Nagpur. Investment tips, market trends, legal checklists, and finance guides by Mahalaxmi Developers.">
+  <meta name="keywords" content="Real estate blogs Nagpur, buy plots in Nagpur guide, NMRDA vs Gram Panchayat plots, RERA approved plots Nagpur, Nagpur property investment tips">
+  <link rel="canonical" href="https://sz.mahalaxmidevelopers.com/pages/blogs.html">
+  <meta name="robots" content="index,follow">
+  <link rel="icon" href="../assets/images/mahalaxmi-infra-logo.avif" type="image/avif">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Real Estate Blogs & Insights | Mahalaxmi Developers">
+  <meta property="og:description" content="Expert guides on buying plots in Nagpur. Investment tips, market trends, and legal checklists.">
+  <meta property="og:url" content="https://sz.mahalaxmidevelopers.com/pages/blogs.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html" aria-label="Mahalaxmi Developers home">
+        <img src="../assets/images/mahalaxmi-group-header-logo.svg" alt="Mahalaxmi Group Logo" width="120" height="40">
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="../index.html">Home</a>
+        <a href="../pages/about.html">About</a>
+        <a href="../pages/projects.html">Projects</a>
+        <a href="../pages/blogs.html">Blogs</a>
+        <a href="../pages/contact.html">Contact</a>
+      </nav>
+      <div class="nav-cta">
+        <a class="btn btn-primary" href="../pages/contact.html#lead">Get in Touch <img src="../assets/icons/right-arrow.svg" alt="" width="16" height="16"></a>
+      </div>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu">&#9776;</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="../index.html">Home</a>
+      <a href="../pages/about.html">About</a>
+      <a href="../pages/projects.html">Projects</a>
+      <a href="../pages/blogs.html">Blogs</a>
+      <a href="../pages/contact.html">Contact</a>
+      <a href="tel:+917499654371">Call: +91 74996 54371</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-banner">
+      <div class="container">
+        <nav class="breadcrumb"><a href="../index.html">Home</a> <span>/</span> <span>Blogs &amp; Insights</span></nav>
+        <h1 class="heading-lg">Market <em class="serif-accent">Insights</em></h1>
+        <p>Expert guides, investment strategies, and everything you need to know about Nagpur real estate.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        
+        <div id="blogFilterBar" style="background: var(--bg-light); padding: 16px 24px; border-radius: 12px; margin-bottom: 40px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center;">
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;" id="categoryFilters">
+${filterBtns}
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;flex:1;max-width:400px;justify-content:flex-end;">
+                <span id="blogCount" style="font-size:13px;color:var(--muted);white-space:nowrap;">Showing ${BLOGS.length} articles</span>
+                <input type="text" id="blogSearch" placeholder="Search insights..." style="width: 100%; max-width: 240px; padding: 10px 16px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px;">
+            </div>
+        </div>
+        <div class="grid grid-3" id="blogsGrid">
+${blogCards}
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-container" id="pagination" style="margin-top: 64px; display: flex; justify-content: center; gap: 8px;">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="../index.html" aria-label="Mahalaxmi Developers home">
+            <img class="footer-brand" src="../assets/images/mahalaxmi-group-footer-logo.svg" alt="Mahalaxmi Group Logo" width="120" height="40" loading="lazy">
+          </a>
+          <h4 style="margin-top:24px"><span class="dot"></span> Head Office</h4>
+          <p style="font-size:14px;color:rgba(255,255,255,.7);line-height:1.7">N-103, 104 Laxmivihar Apartment, Besides Hotel Airport Center Point, Wardha Road, Somalwada, Nagpur - 440025</p>
+          <iframe class="footer-map" src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=Laxmi%2BVihar%2BComplex%2BNo.3&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen title="Mahalaxmi Developers office location"></iframe>
+        </div>
+        <div>
+          <h4><span class="dot"></span> Quick Links</h4>
+          <div class="footer-columns">
+            <nav class="footer-links" aria-label="Footer navigation">
+              <a href="../pages/about.html">About</a>
+              <a href="../pages/projects.html">Projects</a>
+              <a href="../pages/blogs.html">Blogs</a>
+              <a href="../pages/contact.html">Contact</a>
+            </nav>
+            <nav class="footer-links" aria-label="Secondary navigation">
+              <a href="../plots/plots-in-manish-nagar/">Plots in Manish Nagar</a>
+              <a href="../plots/plots-in-besa/">Plots in Besa</a>
+              <a href="../plots/plots-in-beltarodi/">Plots in Beltarodi</a>
+              <a href="../plots/plots-on-wardha-road/">Plots on Wardha Road</a>
+            </nav>
+          </div>
+        </div>
+        <div>
+          <h4><span class="dot"></span> Contact Us</h4>
+          <div class="footer-contact" style="display:flex;flex-direction:column;gap:8px">
+            <a href="mailto:mahalaxmidevelopers14@gmail.com">mahalaxmidevelopers14@gmail.com</a>
+            <a href="tel:+917499654371">+91 74996 54371</a>
+          </div>
+          <div style="margin-top:32px">
+            <h3 style="font-family:'Playfair Display',serif;font-style:italic;font-size:28px;color:#fff;margin-bottom:16px">Stay up to date</h3>
+            <form id="newsletterForm" style="display:flex;gap:12px;flex-wrap:wrap">
+              <input type="email" name="email" placeholder="Enter your email" required style="flex:1;min-width:200px;padding:12px 14px;border:none;border-bottom:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;font-size:14px;outline:none">
+              <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-social">
+          <a href="https://www.youtube.com/channel/UC4bvBlUgF6CWV0B8M3P0vCQ" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><img src="../assets/icons/youtube.svg" alt="YouTube" width="24" height="24" loading="lazy"></a>
+          <a href="https://www.instagram.com/mahalaxminagpur/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img src="../assets/icons/instagram.svg" alt="Instagram" width="24" height="24" loading="lazy"></a>
+        </div>
+        <span class="footer-copy">&copy; <span id="year"></span> Mahalaxmi Developers. All rights reserved.</span>
+        <span class="footer-copy"><a href="../pages/privacy.html" style="text-decoration:underline">Privacy</a> · <a href="../pages/terms.html" style="text-decoration:underline">Terms</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="floaters" aria-label="Floating call and WhatsApp buttons">
+    <a class="floater floater-call" href="tel:+917499654371" aria-label="Call us">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a class="floater floater-wa" href="#" data-wa="general" aria-label="WhatsApp us">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+  </div>
+
+  <div class="modal" id="leadModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Lead enquiry popup">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-card">
+      <div class="modal-head">
+        <div class="modal-title-area">
+          <h3>Get Project Details</h3>
+          <p class="muted" style="font-size: 14px;">We'll reply with pricing, approvals &amp; site visit options in 2 minutes.</p>
+        </div>
+        <button class="modal-close" type="button" aria-label="Close popup" data-close-modal>&times;</button>
+      </div>
+      <form id="modalLeadForm" class="page-form" novalidate>
+        <div class="grid grid-2" style="gap: 16px; margin-bottom: 0;">
+          <div class="field"><label for="mname">Name</label><input id="mname" name="name" autocomplete="name" placeholder="Your full name" required></div>
+          <div class="field"><label for="mphone">Phone</label><input id="mphone" name="phone" inputmode="tel" autocomplete="tel" placeholder="10-digit mobile" required pattern="[0-9]{10}"></div>
+        </div>
+        <div class="field"><label for="memail">Email (Optional)</label><input id="memail" name="email" type="email" autocomplete="email" placeholder="email@example.com"></div>
+        <div class="field"><label for="mmsg">Preferred Area / Message</label><textarea id="mmsg" name="message" rows="3" placeholder="I'm interested in plots in Besa / Manish Nagar..." required></textarea></div>
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit">Send Enquiry</button>
+          <a class="btn btn-outline" href="https://wa.me/917499654371?text=Hi%2C%20I'm%20interested%20in%20plots%20in%20Nagpur.%20Please%20share%20pricing%2C%20approvals%2C%20and%20site%20visit%20details." data-wa="general" target="_blank" rel="noopener">WhatsApp Now</a>
+        </div>
+        <p class="muted form-status" id="modalStatus" role="status" aria-live="polite" style="margin-top:12px;font-size:12px;text-align:center;"></p>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/app.js" defer></script>
+
+  <script data-pagination="true">
+  document.addEventListener('DOMContentLoaded', () => {
+      const postsPerPage = 9;
+      const allCards = Array.from(document.querySelectorAll('.blog-card'));
+      const paginationContainer = document.getElementById('pagination');
+      const filterBtns = document.querySelectorAll('#categoryFilters .filter-btn');
+      const searchInput = document.getElementById('blogSearch');
+      const blogCount = document.getElementById('blogCount');
+      
+      let filteredCards = [...allCards];
+      let currentPage = 1;
+
+      function applyFilters() {
+          const activeCat = document.querySelector('#categoryFilters .filter-btn.is-active').getAttribute('data-cat');
+          const searchTerm = searchInput.value.toLowerCase().trim();
+
+          filteredCards = allCards.filter(card => {
+              const matchesCat = activeCat === 'all' || card.getAttribute('data-category') === activeCat;
+              const matchesSearch = searchTerm === '' || card.getAttribute('data-search').includes(searchTerm);
+              return matchesCat && matchesSearch;
+          });
+
+          currentPage = 1;
+          showPage(1);
+      }
+
+      filterBtns.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+              filterBtns.forEach(b => b.classList.remove('is-active'));
+              e.target.classList.add('is-active');
+              applyFilters();
+          });
+      });
+
+      searchInput.addEventListener('input', () => { applyFilters(); });
+
+      function showPage(page) {
+          currentPage = page;
+          const start = (page - 1) * postsPerPage;
+          const end = start + postsPerPage;
+
+          allCards.forEach(card => card.style.display = 'none');
+          
+          filteredCards.forEach((card, index) => {
+              if (index >= start && index < end) {
+                  card.style.display = 'flex';
+              }
+          });
+
+          if (blogCount) {
+              const total = filteredCards.length;
+              const showing = Math.min(end, total) - start;
+              blogCount.textContent = 'Showing ' + (start + 1) + '-' + Math.min(end, total) + ' of ' + total + ' articles';
+          }
+
+          updatePagination();
+          if (page > 1) window.scrollTo({ top: 300, behavior: 'smooth' });
+      }
+
+      function updatePagination() {
+          paginationContainer.innerHTML = '';
+          const totalPages = Math.ceil(filteredCards.length / postsPerPage);
+          if (totalPages <= 1) return;
+
+          const prevBtn = document.createElement('button');
+          prevBtn.innerHTML = '\\u2190';
+          prevBtn.className = 'filter-btn' + (currentPage === 1 ? ' muted' : '');
+          prevBtn.disabled = currentPage === 1;
+          prevBtn.onclick = () => showPage(currentPage - 1);
+          paginationContainer.appendChild(prevBtn);
+
+          for (let i = 1; i <= totalPages; i++) {
+              const btn = document.createElement('button');
+              btn.innerText = i;
+              btn.className = 'filter-btn' + (i === currentPage ? ' is-active' : '');
+              btn.onclick = () => showPage(i);
+              paginationContainer.appendChild(btn);
+          }
+
+          const nextBtn = document.createElement('button');
+          nextBtn.innerHTML = '\\u2192';
+          nextBtn.className = 'filter-btn' + (currentPage === totalPages ? ' muted' : '');
+          nextBtn.disabled = currentPage === totalPages;
+          nextBtn.onclick = () => showPage(currentPage + 1);
+          paginationContainer.appendChild(nextBtn);
+      }
+
+      applyFilters();
+  });
+  </script>
+</body></html>`;
+
+// Write blogs.html
+fs.writeFileSync(path.join(__dirname, 'pages', 'blogs.html'), blogsHTML);
+console.log('✅ blogs.html rebuilt with ' + BLOGS.length + ' curated articles');
+console.log('Categories: ' + categories.join(', '));
+
+// Export blog data for the blog template builder
+fs.writeFileSync(path.join(__dirname, 'blog_curated.json'), JSON.stringify(BLOGS, null, 2));
+console.log('✅ blog_curated.json saved');

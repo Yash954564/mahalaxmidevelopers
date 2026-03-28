@@ -1,17 +1,91 @@
-<!DOCTYPE html><html lang="en"><head>
+// Rebuild individual blog pages with proper templates
+const fs = require('fs');
+const path = require('path');
+
+const blogsDir = path.join(__dirname, 'blogs');
+const curatedData = JSON.parse(fs.readFileSync(path.join(__dirname, 'blog_curated.json'), 'utf8'));
+
+// Map file -> curated info
+const curatedMap = {};
+curatedData.forEach(b => { curatedMap[b.file] = b; });
+
+// Hero images to cycle through
+const heroImages = [
+  'nagpur-plots-hero-slide-1.webp','nagpur-plots-hero-slide-2.webp','nagpur-plots-hero-slide-3.webp',
+  'nagpur-plots-hero-slide-4.webp','nagpur-plots-hero-slide-5.webp'
+];
+
+function getHeroImg(index) {
+  return heroImages[index % heroImages.length];
+}
+
+// Extract the actual article content from a blog file
+function extractArticleContent(html) {
+  // Try to get content from <article class="prose">
+  let match = html.match(/<article\s+class="prose[^"]*"[^>]*>([\s\S]*?)<\/article>/i);
+  if (match) return match[1];
+  
+  // Try content between blog-hero section end and sidebar
+  match = html.match(/<\/section>\s*<section class="section">\s*<div class="container">\s*<div class="grid[^"]*"[^>]*>\s*<article[^>]*>([\s\S]*?)<\/article>/i);
+  if (match) return match[1];
+
+  // For legacy full pages, try to find main content area
+  match = html.match(/<div class="blog-content[^"]*"[^>]*>([\s\S]*?)<\/div>/i);
+  if (match) return match[1];
+
+  // Fallback: grab everything in <main>
+  match = html.match(/<main[^>]*>([\s\S]*?)<\/main>/i);
+  if (match) return match[1];
+
+  // Last resort: body content
+  match = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+  if (match) return match[1];
+
+  return html;
+}
+
+// Related blogs function
+function getRelatedBlogs(currentFile, category) {
+  const related = curatedData.filter(b => b.file !== currentFile);
+  const sameCategory = related.filter(b => b.category === category);
+  const picks = sameCategory.length >= 3 ? sameCategory.slice(0, 3) : [...sameCategory, ...related.filter(b => b.category !== category)].slice(0, 3);
+  return picks;
+}
+
+function buildBlogPage(blog, index) {
+  const heroImg = getHeroImg(index);
+  const related = getRelatedBlogs(blog.file, blog.category);
+  const slug = blog.file.replace('.html', '');
+  
+  // Read existing file to extract article content
+  const filePath = path.join(blogsDir, blog.file);
+  const existingHTML = fs.readFileSync(filePath, 'utf8');
+  let articleContent = extractArticleContent(existingHTML);
+  
+  // Clean up the extracted content - remove duplicate CTA sections if any
+  articleContent = articleContent.replace(/<div class="blog-cta"[\s\S]*?<\/div>\s*<\/div>/gi, '');
+
+  const relatedHTML = related.map((r, ri) => `
+            <a href="../blogs/${r.file}" style="text-decoration:none;color:inherit;" class="card blog-card">
+              <img src="../assets/images/${getHeroImg(ri + index)}" alt="${r.title}" loading="lazy" style="height:180px;object-fit:cover;width:100%;border-radius:12px;">
+              <div class="blog-meta" style="font-size:13px;color:var(--gold);margin-top:12px;font-weight:600;">${r.category}</div>
+              <h3 style="font-size:17px;margin-top:8px;line-height:1.4;">${r.title}</h3>
+            </a>`).join('');
+
+  return `<!DOCTYPE html><html lang="en"><head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Nagpur Real Estate Zones in 2026 | Mahalaxmi Developers Blog</title>
-  <meta name="description" content="Mapping Nagpur's real estate zones for 2026 — which areas are appreciating fastest and where to invest now.">
-  <meta name="keywords" content="nagpur, real, estate, zones, 2026, Nagpur plots, real estate Nagpur">
-  <link rel="canonical" href="https://sz.mahalaxmidevelopers.com/blogs/nagpur-real-estate-zones-2026.html">
+  <title>${blog.title} | Mahalaxmi Developers Blog</title>
+  <meta name="description" content="${blog.desc}">
+  <meta name="keywords" content="${slug.replace(/-/g, ', ')}, Nagpur plots, real estate Nagpur">
+  <link rel="canonical" href="https://sz.mahalaxmidevelopers.com/blogs/${blog.file}">
   <meta name="robots" content="index,follow">
   <link rel="icon" href="../assets/images/mahalaxmi-infra-logo.avif" type="image/avif">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Nagpur Real Estate Zones in 2026">
-  <meta property="og:description" content="Mapping Nagpur's real estate zones for 2026 — which areas are appreciating fastest and where to invest now.">
-  <meta property="og:url" content="https://sz.mahalaxmidevelopers.com/blogs/nagpur-real-estate-zones-2026.html">
-  <meta property="og:image" content="https://sz.mahalaxmidevelopers.com/assets/images/nagpur-plots-hero-slide-4.webp">
+  <meta property="og:title" content="${blog.title}">
+  <meta property="og:description" content="${blog.desc}">
+  <meta property="og:url" content="https://sz.mahalaxmidevelopers.com/blogs/${blog.file}">
+  <meta property="og:image" content="https://sz.mahalaxmidevelopers.com/assets/images/${heroImg}">
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/styles.css">
@@ -28,7 +102,7 @@
     @media(max-width:768px){.blog-sidebar{position:static}}
   </style>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Article","headline":"Nagpur Real Estate Zones in 2026","description":"Mapping Nagpur's real estate zones for 2026 — which areas are appreciating fastest and where to invest now.","author":{"@type":"Organization","name":"Mahalaxmi Developers"},"publisher":{"@type":"Organization","name":"Mahalaxmi Developers","logo":{"@type":"ImageObject","url":"https://sz.mahalaxmidevelopers.com/assets/images/mahalaxmi-group-header-logo.svg"}},"datePublished":"2026-03-01","image":"https://sz.mahalaxmidevelopers.com/assets/images/nagpur-plots-hero-slide-4.webp"}
+  {"@context":"https://schema.org","@type":"Article","headline":"${blog.title.replace(/"/g, '\\"')}","description":"${blog.desc.replace(/"/g, '\\"')}","author":{"@type":"Organization","name":"Mahalaxmi Developers"},"publisher":{"@type":"Organization","name":"Mahalaxmi Developers","logo":{"@type":"ImageObject","url":"https://sz.mahalaxmidevelopers.com/assets/images/mahalaxmi-group-header-logo.svg"}},"datePublished":"2026-03-01","image":"https://sz.mahalaxmidevelopers.com/assets/images/${heroImg}"}
   </script>
 </head>
 <body>
@@ -53,18 +127,18 @@
   <main id="main">
     <section style="position:relative;padding:100px 0 60px;background:var(--dark);overflow:hidden;color:#fff;text-align:center;">
       <div style="position:absolute;inset:0;opacity:0.15;z-index:1;">
-        <img src="../assets/images/nagpur-plots-hero-slide-4.webp" alt="" style="width:100%;height:100%;object-fit:cover;filter:blur(20px);">
+        <img src="../assets/images/${heroImg}" alt="" style="width:100%;height:100%;object-fit:cover;filter:blur(20px);">
       </div>
       <div class="container" style="position:relative;z-index:2;max-width:800px;">
         <nav class="breadcrumb" style="justify-content:center;margin-bottom:24px;">
           <a href="../index.html" style="color:rgba(255,255,255,0.7);">Home</a> <span>/</span>
           <a href="../pages/blogs.html" style="color:rgba(255,255,255,0.7);">Blogs</a> <span>/</span>
-          <span style="color:#fff;">Market Guide</span>
+          <span style="color:#fff;">${blog.category}</span>
         </nav>
-        <div style="display:inline-block;background:var(--gold);color:#fff;padding:4px 14px;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:16px;text-transform:uppercase;">Market Guide</div>
-        <h1 class="heading-md" style="margin-bottom:12px;color:#fff;">Nagpur Real Estate Zones in 2026</h1>
+        <div style="display:inline-block;background:var(--gold);color:#fff;padding:4px 14px;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:16px;text-transform:uppercase;">${blog.category}</div>
+        <h1 class="heading-md" style="margin-bottom:12px;color:#fff;">${blog.title}</h1>
         <div style="color:rgba(255,255,255,0.6);font-size:14px;margin-bottom:30px;">By Mahalaxmi Developers · March 2026 · 5 min read</div>
-        <img src="../assets/images/nagpur-plots-hero-slide-4.webp" alt="Nagpur Real Estate Zones in 2026" style="width:100%;border-radius:16px;box-shadow:var(--shadow-lg);object-fit:cover;max-height:450px;">
+        <img src="../assets/images/${heroImg}" alt="${blog.title}" style="width:100%;border-radius:16px;box-shadow:var(--shadow-lg);object-fit:cover;max-height:450px;">
       </div>
     </section>
 
@@ -72,11 +146,7 @@
       <div class="container">
         <div class="grid grid-7-5" style="gap:48px;align-items:start;">
           <article class="prose animate-in">
-            
-                            <h2>Key Points</h2><ul class="list"><li>Evaluate location and access</li><li>Verify project documents</li><li>Compare long-term value potential</li></ul>
-                            
-                            
-                        
+            ${articleContent}
 
             <div style="background:var(--bg-light);border-radius:16px;padding:32px;margin:40px 0;border-left:4px solid var(--gold);">
               <h3 style="margin-top:0;">Looking for verified plots?</h3>
@@ -112,22 +182,7 @@
       <div class="container">
         <div class="sub-label"><span class="dot"></span> More Insights</div>
         <h2 class="heading-sm" style="margin-bottom:32px;">Related Articles</h2>
-        <div class="grid grid-3">
-            <a href="../blogs/discover-best-rl-plots-in-nagpur-with-mahalaxmi-developers.html" style="text-decoration:none;color:inherit;" class="card blog-card">
-              <img src="../assets/images/nagpur-plots-hero-slide-4.webp" alt="Best RL Plots in Nagpur with Mahalaxmi Developers" loading="lazy" style="height:180px;object-fit:cover;width:100%;border-radius:12px;">
-              <div class="blog-meta" style="font-size:13px;color:var(--gold);margin-top:12px;font-weight:600;">Market Guide</div>
-              <h3 style="font-size:17px;margin-top:8px;line-height:1.4;">Best RL Plots in Nagpur with Mahalaxmi Developers</h3>
-            </a>
-            <a href="../blogs/from-dream-to-address-a-customers-journey-with-mahalaxmi-group.html" style="text-decoration:none;color:inherit;" class="card blog-card">
-              <img src="../assets/images/nagpur-plots-hero-slide-5.webp" alt="From Dream to Address: A Customer's Journey with Mahalaxmi Group" loading="lazy" style="height:180px;object-fit:cover;width:100%;border-radius:12px;">
-              <div class="blog-meta" style="font-size:13px;color:var(--gold);margin-top:12px;font-weight:600;">Market Guide</div>
-              <h3 style="font-size:17px;margin-top:8px;line-height:1.4;">From Dream to Address: A Customer's Journey with Mahalaxmi Group</h3>
-            </a>
-            <a href="../blogs/inside-mahalaxmi-nagar-41-everything-you-need-to-know-about-our-gumgaon-project.html" style="text-decoration:none;color:inherit;" class="card blog-card">
-              <img src="../assets/images/nagpur-plots-hero-slide-1.webp" alt="Inside Mahalaxmi Nagar 41: Everything About Our Gumgaon Project" loading="lazy" style="height:180px;object-fit:cover;width:100%;border-radius:12px;">
-              <div class="blog-meta" style="font-size:13px;color:var(--gold);margin-top:12px;font-weight:600;">Market Guide</div>
-              <h3 style="font-size:17px;margin-top:8px;line-height:1.4;">Inside Mahalaxmi Nagar 41: Everything About Our Gumgaon Project</h3>
-            </a>
+        <div class="grid grid-3">${relatedHTML}
         </div>
       </div>
     </section>
@@ -204,4 +259,20 @@
   </div>
 
   <script src="../js/app.js" defer></script>
-</body></html>
+</body></html>`;
+}
+
+// Process all curated blogs
+let count = 0;
+curatedData.forEach((blog, index) => {
+  const filePath = path.join(blogsDir, blog.file);
+  if (!fs.existsSync(filePath)) {
+    console.log(`⚠️  Skipping ${blog.file} - file not found`);
+    return;
+  }
+  const fullPage = buildBlogPage(blog, index);
+  fs.writeFileSync(filePath, fullPage);
+  count++;
+});
+
+console.log(`✅ Rebuilt ${count} individual blog pages with full template`);
