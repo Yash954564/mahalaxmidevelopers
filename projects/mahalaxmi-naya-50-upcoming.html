@@ -27,7 +27,7 @@
         <a href="../pages/contact.html">Contact</a>
       </nav>
       <div class="nav-cta">
-        <a class="btn btn-primary" href="../pages/contact.html">Get in Touch <img src="../assets/icons/right-arrow.svg" alt="" width="16" height="16"></a>
+        <a class="btn btn-primary" href="../pages/contact.html#lead">Get in Touch <img src="../assets/icons/right-arrow.svg" alt="" width="16" height="16"></a>
       </div>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu">☰</button>
     </div>
@@ -169,35 +169,41 @@
     <div class="modal-backdrop" data-close-modal=""></div>
     <div class="modal-card">
       <div class="modal-head">
-        <strong style="font-size:18px">Get Project Details in 2 Minutes</strong>
+        <div class="modal-title-area">
+          <h3>Get Project Details</h3>
+          <p class="muted" style="font-size: 14px;">We'll reply with pricing, approvals &amp; site visit options in 2 minutes.</p>
+        </div>
         <button class="modal-close" type="button" aria-label="Close popup" data-close-modal="">×</button>
       </div>
-      <p class="muted" style="margin-bottom:16px">Tell us your preferred area (Besa / Manish Nagar / Wardha Road). We'll reply with pricing, approvals &amp; site visit options.</p>
       <form id="modalLeadForm" class="page-form" novalidate="">
-        <div class="field">
-          <label for="mname">Name</label>
-          <input id="mname" name="name" autocomplete="name" placeholder="Your full name" required="">
+        <div class="grid grid-2" style="gap: 16px; margin-bottom: 0;">
+          <div class="field">
+            <label for="mname">Name</label>
+            <input id="mname" name="name" autocomplete="name" placeholder="Your full name" required="">
+          </div>
+          <div class="field">
+            <label for="mphone">Phone</label>
+            <input id="mphone" name="phone" inputmode="tel" autocomplete="tel" placeholder="10-digit mobile" required="" pattern="[0-9]{10}">
+          </div>
         </div>
         <div class="field">
-          <label for="mphone">Phone</label>
-          <input id="mphone" name="phone" inputmode="tel" autocomplete="tel" placeholder="10-digit mobile number" required="" pattern="[0-9]{10}">
+          <label for="memail">Email (Optional)</label>
+          <input id="memail" name="email" type="email" autocomplete="email" placeholder="email@example.com">
         </div>
         <div class="field">
-          <label for="memail">Email</label>
-          <input id="memail" name="email" type="email" autocomplete="email" placeholder="Optional email for brochure">
-        </div>
-        <div class="field">
-          <label for="mmsg">Message</label>
-          <textarea id="mmsg" name="message" rows="3" placeholder="Share pricing for plots in..." required=""></textarea>
+          <label for="mmsg">Preferred Area / Message</label>
+          <textarea id="mmsg" name="message" rows="3" placeholder="I'm interested in plots in Besa / Manish Nagar..." required=""></textarea>
         </div>
         <div class="form-actions">
           <button class="btn btn-primary" type="submit">Send Enquiry</button>
-          <a class="btn btn-outline" href="#" data-wa="general">WhatsApp Instead</a>
+          <a class="btn btn-outline" href="https://wa.me/917499654371?text=Hi%2C%20I'm%20interested%20in%20plots%20in%20Nagpur.%20Please%20share%20pricing%2C%20approvals%2C%20and%20site%20visit%20details." data-wa="general" target="_blank" rel="noopener">WhatsApp Now</a>
         </div>
-        <p class="muted form-status" id="modalStatus" role="status" aria-live="polite" style="margin-top:8px;font-size:12px"></p>
+        <p class="muted form-status" id="modalStatus" role="status" aria-live="polite" style="margin-top:12px;font-size:12px;text-align:center;"></p>
       </form>
     </div>
   </div>
+
+
   <script src="../js/app.js" defer=""></script>
 
 
