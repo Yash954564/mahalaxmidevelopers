@@ -171,7 +171,7 @@ h6 {
 }
 
 .bg-dark {
-  background: var(--dark);
+  background: #36534C;
   color: var(--white);
 }
 
@@ -374,7 +374,7 @@ h6 {
 }
 
 .btn-outline:hover {
-  background: var(--dark);
+  background: #36534C;
   color: var(--white);
   border-color: var(--dark);
 }
@@ -452,7 +452,7 @@ h6 {
 }
 
 .header.scrolled {
-  padding: 12px 0;
+  padding: 0px 0;
   background-color: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -815,7 +815,7 @@ h6 {
 
 .slider-progress-bar {
   height: 100%;
-  background: var(--dark);
+  background: #36534C;
   border-radius: 2px;
   transition: width .3s ease;
 }
@@ -841,7 +841,7 @@ h6 {
 }
 
 .slider-btn:hover {
-  background: var(--dark);
+  background: #36534C;
   color: var(--white);
   border-color: var(--dark);
 }
@@ -1049,7 +1049,7 @@ h6 {
 
 /* ===== FOOTER ===== */
 .footer {
-  background: var(--dark);
+  background: #36534C;
   padding: 72px 0 32px;
   color: var(--white);
 }
@@ -1433,7 +1433,7 @@ h6 {
 
 /* ===== PAGE BANNER ===== */
 .page-banner {
-  background: var(--dark);
+  background: #36534C;
   padding: 80px 0 40px;
   color: var(--white);
 }
@@ -1477,11 +1477,24 @@ h6 {
 }
 
 /* ===== PROJECT CARD ===== */
-.project-card {
+.project-card,
+.blog-card {
   position: relative;
+  display: flex !important;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
 }
 
-.project-status {
+.project-card:hover,
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.project-status,
+.blog-category {
   position: absolute;
   top: 12px;
   right: 12px;
@@ -1489,30 +1502,66 @@ h6 {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  background: var(--dark);
+  background: #36534C;
   color: var(--white);
   padding: 6px 12px;
   border-radius: var(--radius-full);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.project-card img.card-thumb {
-  height: 260px;
+.project-card img.card-thumb,
+.blog-card img.card-thumb {
+  height: 240px;
+  width: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-.project-location {
+.card-content {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-location,
+.blog-date {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   font-size: 13px;
   color: var(--muted);
   margin-top: 8px;
 }
 
-.project-location img {
-  width: 18px;
-  height: 18px;
+.card-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+  padding: 20px;
+  border-top: 1px solid var(--border-light);
+}
+
+.card-actions .btn {
+  flex: 1;
+  font-size: 13px;
+  padding: 8px 12px;
+  text-align: center;
+  justify-content: center;
+}
+
+.card-link-mask {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.card-actions a {
+  position: relative;
+  z-index: 2;
 }
 
 /* ===== ANIMATION UTILITIES ===== */
@@ -1581,12 +1630,12 @@ h6 {
 }
 
 .filter-btn:hover {
-  background: var(--dark);
+  background: #36534C;
   color: var(--white);
 }
 
 .filter-btn.is-active {
-  background: var(--dark);
+  background: #36534C;
   color: var(--white);
   border-color: var(--dark);
 }
@@ -1602,7 +1651,9 @@ h6 {
   position: relative;
   z-index: 10;
 }
-.trust-marquee::before, .trust-marquee::after {
+
+.trust-marquee::before,
+.trust-marquee::after {
   content: '';
   position: absolute;
   top: 0;
@@ -1611,14 +1662,17 @@ h6 {
   z-index: 2;
   pointer-events: none;
 }
+
 .trust-marquee::before {
   left: 0;
   background: linear-gradient(to right, var(--dark), transparent);
 }
+
 .trust-marquee::after {
   right: 0;
   background: linear-gradient(to left, var(--dark), transparent);
 }
+
 .marquee-content {
   display: flex;
   gap: 48px;
@@ -1626,13 +1680,21 @@ h6 {
   padding-right: 48px;
   width: max-content;
 }
+
 .marquee-content:hover {
   animation-play-state: paused;
 }
+
 @keyframes scrollMarquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
+
 .trust-item {
   display: flex;
   align-items: center;
@@ -1642,6 +1704,7 @@ h6 {
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
+
 .trust-item svg {
   color: var(--gold);
 }

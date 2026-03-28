@@ -94,24 +94,24 @@
         <img src="assets/images/mahalaxmi-group-header-logo.svg" alt="Mahalaxmi Group Logo" width="120" height="40">
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
-        <a href="/">Home</a>
-        <a href="pages/about.html">About</a>
-        <a href="pages/projects.html">Projects</a>
-        <a href="pages/blogs.html">Blogs</a>
-        <a href="pages/contact.html">Contact</a>
+        <a href="./">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="blogs.html">Blogs</a>
+        <a href="contact.html">Contact</a>
       </nav>
       <div class="nav-cta">
-        <a class="btn btn-primary" href="pages/contact.html#lead">Get in Touch <img src="assets/icons/right-arrow.svg"
-            alt="" width="16" height="16"></a>
+        <a class="btn btn-primary" href="contact.html#lead">Get in Touch <img src="assets/icons/right-arrow.svg" alt=""
+            width="16" height="16"></a>
       </div>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu">&#9776;</button>
     </div>
     <div class="mobile-menu" id="mobileMenu">
-      <a href="/">Home</a>
-      <a href="pages/about.html">About</a>
-      <a href="pages/projects.html">Projects</a>
-      <a href="pages/blogs.html">Blogs</a>
-      <a href="pages/contact.html">Contact</a>
+      <a href="./">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="contact.html">Contact</a>
       <a href="tel:+917499654371">Call: +91 74996 54371</a>
     </div>
   </header>
@@ -136,19 +136,120 @@
       <div class="hero-overlay" aria-hidden="true"></div>
       <div class="container hero-content" style="margin: 60px auto 40px; padding: 40px;">
         <div class="hero-grid">
-          <div class="hero-text">
-            <h1 class="heading-lg">NMRDA & RERA Approved <em class="serif-accent">Plots in Nagpur.</em></h1>
-            <p>Invest in Nagpur's fastest-growing corridors. Premium residential plots near AIIMS, IIM, and VCA Stadium.
-              Mahalaxmi Developers offers clear titles, bank loan facilities, and confirmed NMRDA/NIT sanctions in
-              Manish Nagar, Besa, and Wardha Road.</p>
-            <div class="hero-ctas">
+          <div class="hero-text" style="position: relative; min-height: 280px;">
+            <!-- Primary Text (Visible Initially) -->
+            <div id="hero-primary-text"
+              style="position: absolute; top: 0; left: 0; width: 100%; transition: opacity 1s ease; opacity: 1; z-index: 2;">
+              <h1 class="heading-lg">NMRDA & RERA Approved <em class="serif-accent">Plots in Nagpur.</em></h1>
+              <p>Invest in Nagpur's fastest-growing corridors. Premium residential plots near AIIMS, IIM, and VCA
+                Stadium.
+                Mahalaxmi Developers offers clear titles, bank loan facilities, and confirmed NMRDA/NIT sanctions in
+                Manish Nagar, Besa, and Wardha Road.</p>
+            </div>
+
+            <!-- SEO Text with Typing Effect (Hidden Initially) -->
+            <div id="hero-seo-text"
+              style="position: absolute; top: 0; left: 0; width: 100%; transition: opacity 1s ease; opacity: 0; z-index: 1; pointer-events: none;">
+              <div
+                style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:30px;background:rgba(255,193,7,0.15);border:1px solid rgba(255,193,7,0.3);margin-bottom:20px;color:#fbbf24;font-size:14px;">
+                ✔ NMRDA Sanction & RERA Approved
+              </div>
+              <h1 class="heading-lg" style="line-height:1.2;margin-bottom:15px;">
+                Are you looking for <br /><em class="serif-accent" id="typing-text"
+                  style="color:#fbbf24; border-right: 2px solid #fbbf24; padding-right: 5px; white-space: nowrap;">Plots
+                  in Nagpur</em>
+              </h1>
+              <p style="font-size:16px;color:#ccc;margin-bottom:20px;">
+                With Trust of Mahalaxmi Developers <br>
+                NMRDA Sanction & RERA Approved Plots | Prime Locations | RL Plots
+              </p>
+            </div>
+
+            <!-- Fix height issue with relative positioning by putting buttons outside absolute blocks -->
+            <div style="margin-top: 260px;"></div>
+
+            <div class="hero-ctas" style="position: relative; z-index: 3;">
+              <button class="btn btn-primary" style="background:#BA8635;border-color:#BA8635;color:#fff;"
+                onclick="document.getElementById('leadModal').classList.add('is-open')"
+                aria-label="Book Appointment">Book Appointment</button>
               <a class="btn btn-primary" href="tel:+917499654371">Call for Pricing</a>
               <a class="btn btn-white" href="#" data-wa="general">WhatsApp Brochure</a>
               <a class="btn btn-outline" href="pages/projects.html"
                 style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.3)">View Ongoing
                 Projects</a>
             </div>
-            <div class="trust-badges">
+
+            <script>
+              document.addEventListener('DOMContentLoaded', function () {
+                var p = document.getElementById('hero-primary-text');
+                var s = document.getElementById('hero-seo-text');
+                var typeText = document.getElementById('typing-text');
+
+                var phrases = [
+                  "Plots in Nagpur",
+                  "Residential Plots in Nagpur",
+                  "RERA Approved RL Plots",
+                  "Plots Near AIIMS",
+                  "Plots Near IIM",
+                  "Plots Near VCA Stadium",
+                  "Plots Near Iskcon Temple",
+                  "Plots in Besa",
+                  "Best Plots in Nagpur"
+                ];
+
+                var currentPhraseIndex = 0;
+                var isDeleting = false;
+                var txt = '';
+                var typingSpeed = 100;
+                var deletingSpeed = 50;
+                var pauseTime = 3000; // Time to pause when word is fully typed
+                var cycleTime = 5000; // The user requested "typig change effect only 5sec"
+                var typingInterval;
+
+                // Function to handle the typing effect precisely every 5s
+                function startTypingCycle() {
+                  currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+                  var targetTxt = phrases[currentPhraseIndex];
+
+                  // First, quickly delete the old text
+                  var delInterval = setInterval(function () {
+                    txt = typeText.innerText;
+                    if (txt.length > 0) {
+                      typeText.innerText = txt.substring(0, txt.length - 1);
+                    } else {
+                      clearInterval(delInterval);
+                      // Then quickly type the new text
+                      var typeInInterval = setInterval(function () {
+                        if (txt.length < targetTxt.length) {
+                          txt = targetTxt.substring(0, txt.length + 1);
+                          typeText.innerText = txt;
+                        } else {
+                          clearInterval(typeInInterval);
+                        }
+                      }, 50);
+                    }
+                  }, 30);
+                }
+
+                // Initial swap after 5 seconds to show the typing effect block
+                setTimeout(function () {
+                  if (p && s) {
+                    p.style.opacity = '0';
+                    setTimeout(function () {
+                      p.style.display = 'none';
+                      s.style.pointerEvents = 'auto'; // Re-enable pointer events
+                      s.style.opacity = '1';
+
+                      // Start the 5-second typing effect loop
+                      typingInterval = setInterval(startTypingCycle, 5000);
+
+                    }, 1000);
+                  }
+                }, 5000); // 5 seconds initial viewing of primary text
+              });
+            </script>
+
+            <div class="trust-badges" style="position: relative; z-index: 3; margin-top: 25px;">
               <span class="badge"><img src="assets/icons/CheckCircle.svg" alt="" width="14" height="14"> RERA
                 Approved</span>
               <span class="badge"><img src="assets/icons/CheckCircle.svg" alt="" width="14" height="14"> NMRDA / NIT
@@ -256,11 +357,22 @@
         <div class="grid-7-5 grid" style="align-items:center">
           <div>
             <h2 class="heading-lg">Building <em class="serif-accent">Trust,</em> Transforming Spaces.</h2>
-            <p class="muted" style="margin:12px 0 24px;max-width:55ch">Transforming Dreams into Reality in Nagpur's
-              Thriving Real Estate Market. Explore Elegant Flats, Grand Townships, and Secure NMRDA-Sanctioned Plots
-              with Mahalaxmi Group.</p>
-            <a class="btn btn-primary" href="pages/projects.html">Our Portfolio <img src="assets/icons/right-arrow.svg"
-                alt="" width="16" height="16"></a>
+            <p class="muted" style="margin:12px 0 24px;max-width:55ch;line-height:1.7;">
+              Mahalaxmi Developers नागपुर के विश्वसनीय रियल एस्टेट ब्रांडों में से एक है, जो NMRDA अनुमोदित और RERA
+              पंजीकृत प्रीमियम रेसिडेंशियल प्लॉट्स प्रदान करता है। हमारे प्रोजेक्ट्स नागपुर के तेजी से विकसित हो रहे
+              क्षेत्रों जैसे कि शंकरपुर, समृद्धि नगर, जामठा, कोराडी, वर्धा रोड, बेसा और आसपास की अन्य लोकेशनों में स्थित
+              हैं।<br><br>
+              66+ सफल प्रोजेक्ट्स और 12,000+ संतुष्ट ग्राहकों के साथ, हम स्पष्ट दस्तावेज़ीकरण, क्लियर टाइटल भूमि और पूरी
+              तरह विकसित लेआउट्स के लिए जाने जाते हैं।
+            </p>
+            <ul style="list-style-type:none;padding:0;margin:0 0 24px 0;line-height:2;color:var(--dark);">
+              <li>✅ 100% NMRDA Sanctioned & RL Plots</li>
+              <li>✅ Premium Locations Across Nagpur</li>
+              <li>✅ Modern Amenities for Comfortable Living</li>
+              <li>✅ Easy Bank Loan Assistance</li>
+            </ul>
+            <a class="btn btn-primary" href="projects.html">Our Portfolio <img src="assets/icons/right-arrow.svg" alt=""
+                width="16" height="16"></a>
           </div>
           <img src="assets/images/Crafting.png" alt="Mahalaxmi Group premium real estate developments in Nagpur"
             loading="lazy" width="700" height="400" style="border-radius:var(--radius)">
@@ -277,8 +389,8 @@
             <div class="sub-label"><span class="dot"></span> Exclusive Listings</div>
             <h2 class="heading-md">Featured <em class="serif-accent">Properties</em></h2>
           </div>
-          <a class="btn btn-outline" href="pages/projects.html">View All Projects <img
-              src="assets/icons/right-arrow.svg" alt="" width="16" height="16"></a>
+          <a class="btn btn-outline" href="projects.html">View All Projects <img src="assets/icons/right-arrow.svg"
+              alt="" width="16" height="16"></a>
         </div>
 
         <div class="slider-container">
@@ -286,87 +398,124 @@
             <!-- Project 1 -->
             <div class="slider-slide">
               <article class="card project-card">
+                <a class="card-link-mask"
+                  href="https://wa.me/917499654371?text=Hi%2C%20I'm%20interested%20in%20Mahalaxmi%20Naya%2045."
+                  target="_blank"></a>
                 <span class="project-status"><img src="assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
                   Ongoing</span>
-                <img class="card-thumb" src="assets/images/mahalaxmi-naya-45-thumbnail.jpg"
-                  alt="Mahalaxmi Naya 45 - Luxury residential plots near Samriddhi Mahamarg Nagpur" loading="lazy"
-                  width="400" height="260">
-                <h3>Mahalaxmi Naya — 45</h3>
-                <p>Luxury premium residential and commercial plots near Samriddhi Mahamarg. Near TCS, Infosys, AIIMS
-                  corridor.</p>
-                <div class="project-location"><img src="assets/icons/MapPin.svg" alt="Location" width="18" height="18">
-                  Near Samriddhi Mahamarg, Nagpur</div>
+                <img class="card-thumb" src="assets/images/mahalaxmi-naya-45-thumbnail.jpg" alt="Mahalaxmi Naya 45"
+                  loading="lazy">
+                <div class="card-content">
+                  <h3>Mahalaxmi Naya — 45</h3>
+                  <p>Luxury premium residential and commercial plots near Samriddhi Mahamarg. Near TCS, Infosys, AIIMS
+                    corridor.</p>
+                  <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Near
+                    Samriddhi Mahamarg, Nagpur</div>
+                </div>
                 <div class="card-actions">
-                  <a class="btn btn-primary" href="projects/mahalaxmi-naya-45.html">Know More</a>
+                  <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-naya-45.html">Details</a>
+                  <a class="btn btn-primary btn-sm"
+                    href="https://wa.me/917499654371?text=Hi%2C%20I'm%20interested%20in%20Mahalaxmi%20Naya%2045."
+                    target="_blank">Know More</a>
                 </div>
               </article>
             </div>
             <!-- Project 2 -->
             <div class="slider-slide">
               <article class="card project-card">
+                <a class="card-link-mask"
+                  href="https://wa.me/917499654371?text=Hi%2C%20I'm%20interested%20in%20Mahalaxmi%20Naya%2049."
+                  target="_blank"></a>
                 <span class="project-status"><img src="assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
                   Ongoing</span>
                 <img class="card-thumb" src="assets/legacy/images/projects_images/1751279055_banner_M-39-PROJECT.webp"
-                  alt="Mahalaxmi Naya 49 - Highway touch plots near AIIMS Nagpur" loading="lazy" width="400"
-                  height="260">
-                <h3>Mahalaxmi Naya — 49</h3>
-                <p>Highway touch location near AIIMS. Beside National Cancer Institute (NCI). High growth corridor.</p>
-                <div class="project-location"><img src="assets/icons/MapPin.svg" alt="Location" width="18" height="18">
-                  Near AIIMS, Nagpur</div>
+                  alt="Mahalaxmi Naya 49" loading="lazy">
+                <div class="card-content">
+                  <h3>Mahalaxmi Naya — 49</h3>
+                  <p>Highway touch location near AIIMS. Beside National Cancer Institute (NCI). High growth corridor.
+                  </p>
+                  <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Near
+                    AIIMS, Nagpur</div>
+                </div>
                 <div class="card-actions">
-                  <a class="btn btn-primary" href="projects/mahalaxmi-naya-49.html">Know More</a>
+                  <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-naya-49.html">Details</a>
+                  <a class="btn btn-primary btn-sm"
+                    href="https://wa.me/917499654371?text=Hi%2C%20I'm%20interested%20in%20Mahalaxmi%20Naya%2049."
+                    target="_blank">Know More</a>
                 </div>
               </article>
             </div>
             <!-- Project 3 -->
             <div class="slider-slide">
               <article class="card project-card">
+                <a class="card-link-mask"
+                  href="https://wa.me/917499654371?text=Hi%2C%20I'm%20interested%20in%20Mahalaxmi%20Naya%2043."
+                  target="_blank"></a>
                 <span class="project-status"><img src="assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
                   Ongoing</span>
                 <img class="card-thumb" src="assets/legacy/images/projects_images/1765015487_thumb_M-43-THUMBNAIL.jpg"
-                  alt="Mahalaxmi Naya 43 Shankarpur - residential plots near Manish Nagar Nagpur" loading="lazy"
-                  width="400" height="260">
-                <h3>Mahalaxmi Naya — 43 (Shankarpur)</h3>
-                <p>Residential plots near Dr. Manish Nagar growth belt. Close to Beltarodi D-Mart. Excellent
-                  connectivity.</p>
-                <div class="project-location"><img src="assets/icons/MapPin.svg" alt="Location" width="18" height="18">
-                  Near Manish Nagar, Nagpur</div>
+                  alt="Mahalaxmi Naya 43" loading="lazy">
+                <div class="card-content">
+                  <h3>Mahalaxmi Naya — 43 (Shankarpur)</h3>
+                  <p>Residential plots near Dr. Manish Nagar growth belt. Close to Beltarodi D-Mart. Excellent
+                    connectivity.</p>
+                  <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Near
+                    Manish Nagar, Nagpur</div>
+                </div>
                 <div class="card-actions">
-                  <a class="btn btn-primary" href="projects/mahalaxmi-naya-43-shankarpur.html">Know More</a>
+                  <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-naya-43-shankarpur.html">Details</a>
+                  <a class="btn btn-primary btn-sm"
+                    href="https://wa.me/917499654371?text=Hi%2C%20I'm%20interested%20in%20Mahalaxmi%20Naya%2043."
+                    target="_blank">Know More</a>
                 </div>
               </article>
             </div>
             <!-- Project 4 -->
             <div class="slider-slide">
               <article class="card project-card">
-                <span class="project-status" style="background:var(--gold)"><img src="assets/icons/RocketLaunch.svg"
-                    alt="" width="14" height="14"> Upcoming</span>
-                <img class="card-thumb" src="assets/images/1773218364_thumb_M-52.jpg"
-                  alt="Mahalaxmi Naya 50 upcoming highway touch project Nagpur" loading="lazy" width="400" height="260">
-                <h3>Mahalaxmi Naya — 50 (Upcoming)</h3>
-                <p>Highway touch project at Samriddhi Circle. Early interest open for premium plotted development.</p>
-                <div class="project-location"><img src="assets/icons/MapPin.svg" alt="Location" width="18" height="18">
-                  Samriddhi Circle, Nagpur</div>
+                <a class="card-link-mask"
+                  href="https://wa.me/917499654371?text=Hi%2C%20I'm%20interested%20in%20Mahalaxmi%20Naya%2050."
+                  target="_blank"></a>
+                <span class="project-status" style="background:var(--gold)"><img src="assets/icons/Clock.svg" alt=""
+                    width="14" height="14"> Upcoming</span>
+                <img class="card-thumb" src="assets/images/1773218364_thumb_M-52.jpg" alt="Mahalaxmi Naya 50"
+                  loading="lazy">
+                <div class="card-content">
+                  <h3>Mahalaxmi Naya — 50</h3>
+                  <p>Highway touch project at Samriddhi Circle. Early interest open for premium plotted development.</p>
+                  <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18">
+                    Samriddhi Circle, Nagpur</div>
+                </div>
                 <div class="card-actions">
-                  <a class="btn btn-primary" href="projects/mahalaxmi-naya-50-upcoming.html">Know More</a>
+                  <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-naya-50-upcoming.html">Details</a>
+                  <a class="btn btn-primary btn-sm"
+                    href="https://wa.me/917499654371?text=Hi%2C%20I'm%20interested%20in%20Mahalaxmi%20Naya%2050."
+                    target="_blank">Know More</a>
                 </div>
               </article>
             </div>
             <!-- Project 5 -->
             <div class="slider-slide">
               <article class="card project-card">
-                <span class="project-status"><img src="assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
-                  Ongoing</span>
-                <img class="card-thumb" src="assets/images/1760355019_thumb_TATVA APAS THUMBNAIL.jpg"
-                  alt="Tattva Apas premium plotted development by Mahalaxmi Infra Nagpur" loading="lazy" width="400"
-                  height="260">
-                <h3>Tattva Apas</h3>
-                <p>Premium plotted development project by Mahalaxmi Infra. Curated living experience with long-term
-                  value.</p>
-                <div class="project-location"><img src="assets/icons/MapPin.svg" alt="Location" width="18" height="18">
-                  Nagpur, Maharashtra</div>
+                <a class="card-link-mask"
+                  href="https://wa.me/917499654371?text=Hi%2C%20I'm%20interested%20in%20Mahalaxmi%20Nagar%2052."
+                  target="_blank"></a>
+                <span class="project-status" style="background:var(--gold)"><img src="assets/icons/Clock.svg" alt=""
+                    width="14" height="14"> Upcoming</span>
+                <img class="card-thumb" src="assets/legacy/images/projects_images/1773218364_banner_M-52.jpg"
+                  alt="Mahalaxmi Nagar 52" loading="lazy">
+                <div class="card-content">
+                  <h3>Mahalaxmi Nagar — 52</h3>
+                  <p>Premium NIT/NMRDA sanctioned plots in a fully developed locality with RL and high appreciation
+                    potential.</p>
+                  <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18">
+                    Nagpur, Maharashtra</div>
+                </div>
                 <div class="card-actions">
-                  <a class="btn btn-primary" href="projects/tattva-apas.html">Know More</a>
+                  <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-52.html">Details</a>
+                  <a class="btn btn-primary btn-sm"
+                    href="https://wa.me/917499654371?text=Hi%2C%20I'm%20interested%20in%20Mahalaxmi%20Nagar%2052."
+                    target="_blank">Know More</a>
                 </div>
               </article>
             </div>
@@ -393,6 +542,138 @@
         </div>
       </div>
     </section>
+
+
+    <!-- ===== BRAND PARTNERS (ELEMENTOR) ===== -->
+    <style>
+      .brand-partners-flex {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 60px;
+        align-items: center;
+      }
+
+      .brand-partners-flex img {
+        height: auto;
+        width: auto;
+        max-width: 100%;
+        max-height: 200px;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+      }
+
+      .brand-partners-flex img:hover {
+        transform: scale(1.05);
+      }
+
+      @media (max-width: 991px) {
+        .brand-partners-flex {
+          gap: 40px;
+        }
+
+        .brand-partners-flex img {
+          max-height: 110px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .brand-partners-flex {
+          gap: 30px;
+        }
+
+        .brand-partners-flex img {
+          max-height: 90px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .brand-partners-flex {
+          gap: 20px;
+        }
+
+        .brand-partners-flex img {
+          max-height: 75px;
+          flex: 0 0 calc(50% - 20px);
+        }
+      }
+    </style>
+    <section class="section" style="padding: 60px 0; background: #fff;">
+      <div class="container">
+        <div class="elementor-element elementor-element-cf0363c e-flex e-con-boxed e-con e-parent e-lazyloaded"
+          data-id="cf0363c" data-element_type="container"
+          data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;_ha_eqh_enable&quot;:false}">
+          <div class="e-con-inner brand-partners-flex">
+            <div class="elementor-element elementor-element-9a30881 e-con-full e-flex e-con e-child" data-id="9a30881"
+              data-element_type="container" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+              <div class="elementor-element elementor-element-36dfe7c elementor-widget elementor-widget-image"
+                data-id="36dfe7c" data-element_type="widget" data-widget_type="image.default">
+                <div class="elementor-widget-container">
+                  <img loading="lazy" decoding="async" width="200" height="200"
+                    src="https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/12/1.png"
+                    class="attachment-large size-large wp-image-3608" alt=""
+                    srcset="https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/12/1.png 1024w, https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/12/1-300x300.png 300w, https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/12/1-150x150.png 150w, https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/12/1-768x768.png 768w"
+                    sizes="(max-width: 1024px) 100vw, 1024px">
+                </div>
+              </div>
+            </div>
+            <div class="elementor-element elementor-element-57bbbe0 e-con-full e-flex e-con e-child" data-id="57bbbe0"
+              data-element_type="container" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+              <div class="elementor-element elementor-element-95729fe elementor-widget elementor-widget-image"
+                data-id="95729fe" data-element_type="widget" data-widget_type="image.default">
+                <div class="elementor-widget-container">
+                  <img loading="lazy" decoding="async" width="200" height="200"
+                    src="https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/12/2.jpg"
+                    class="attachment-large size-large wp-image-3610" alt=""
+                    srcset="https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/12/2.jpg 1024w, https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/12/2-300x300.jpg 300w, https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/12/2-150x150.jpg 150w, https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/12/2-768x768.jpg 768w"
+                    sizes="(max-width: 1024px) 100vw, 1024px">
+                </div>
+              </div>
+            </div>
+            <div class="elementor-element elementor-element-c344e81 e-con-full e-flex e-con e-child" data-id="c344e81"
+              data-element_type="container" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+              <div class="elementor-element elementor-element-19bcbb7 elementor-widget elementor-widget-image"
+                data-id="19bcbb7" data-element_type="widget" data-widget_type="image.default">
+                <div class="elementor-widget-container">
+                  <img loading="lazy" decoding="async" width="200" height="200"
+                    src="https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/12/3.jpg"
+                    class="attachment-large size-large wp-image-3609" alt=""
+                    srcset="https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/12/3.jpg 1024w, https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/12/3-300x300.jpg 300w, https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/12/3-150x150.jpg 150w, https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/12/3-768x768.jpg 768w"
+                    sizes="(max-width: 1024px) 100vw, 1024px">
+                </div>
+              </div>
+            </div>
+            <div class="elementor-element elementor-element-1eef531 e-con-full e-flex e-con e-child" data-id="1eef531"
+              data-element_type="container" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+              <div class="elementor-element elementor-element-1beeb9b elementor-widget elementor-widget-image"
+                data-id="1beeb9b" data-element_type="widget" data-widget_type="image.default">
+                <div class="elementor-widget-container">
+                  <img loading="lazy" decoding="async" width="200" height="200"
+                    src="https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/12/4.jpg"
+                    class="attachment-large size-large wp-image-3607" alt=""
+                    srcset="https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/12/4.jpg 1024w, https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/12/4-300x300.jpg 300w, https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/12/4-150x150.jpg 150w, https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/12/4-768x768.jpg 768w"
+                    sizes="(max-width: 1024px) 100vw, 1024px">
+                </div>
+              </div>
+            </div>
+            <div class="elementor-element elementor-element-18a13b6 e-con-full e-flex e-con e-child" data-id="18a13b6"
+              data-element_type="container" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+              <div class="elementor-element elementor-element-fda5d9e elementor-widget elementor-widget-image"
+                data-id="fda5d9e" data-element_type="widget" data-widget_type="image.default">
+                <div class="elementor-widget-container">
+                  <img loading="lazy" decoding="async" width="200" height="200"
+                    src="https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/12/5.jpg"
+                    class="attachment-large size-large wp-image-3606" alt=""
+                    srcset="https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/12/5.jpg 1024w, https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/12/5-300x300.jpg 300w, https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/12/5-150x150.jpg 150w, https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/12/5-768x768.jpg 768w"
+                    sizes="(max-width: 1024px) 100vw, 1024px">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
 
     <!-- ===== GALLERY & HIGHLIGHTS ===== -->
     <section class="section-lg bg-dark" aria-label="Gallery and Highlights">
@@ -642,7 +923,8 @@
               style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.15);pointer-events:none">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--primary)">
                 <path d="M8 5v14l11-7z" />
-              </svg></div>
+              </svg>
+            </div>
           </div>
           <div style="position:relative;border-radius:16px;overflow:hidden;cursor:pointer"
             onclick="window.open('https://www.youtube.com/channel/UC4bvBlUgF6CWV0B8M3P0vCQ', '_blank')">
@@ -653,7 +935,8 @@
               style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.15);pointer-events:none">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--primary)">
                 <path d="M8 5v14l11-7z" />
-              </svg></div>
+              </svg>
+            </div>
           </div>
           <div style="position:relative;border-radius:16px;overflow:hidden;cursor:pointer"
             onclick="window.open('https://www.youtube.com/channel/UC4bvBlUgF6CWV0B8M3P0vCQ', '_blank')">
@@ -664,7 +947,8 @@
               style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.15);pointer-events:none">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--primary)">
                 <path d="M8 5v14l11-7z" />
-              </svg></div>
+              </svg>
+            </div>
           </div>
         </div>
 
@@ -813,57 +1097,69 @@
               alt="" width="16" height="16"></a>
         </div>
 
-        <div class="grid grid-3" id="homepageBlogsGrid">
+        <div class="grid grid-3">
           <article class="card blog-card">
-            <a href="blogs/top-areas-to-buy-plots-in-nagpur.html"
-              style="display:block;overflow:hidden;border-radius:12px;margin-bottom:16px;">
-              <img src="assets/images/nagpur-plots-hero-slide-4.webp" alt="Top areas to buy plots" loading="lazy"
-                style="width:100%;height:220px;object-fit:cover;transition:transform 0.3s"
-                onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-            </a>
-            <div style="font-size:13px;color:var(--primary);font-weight:600;margin-bottom:8px">Market Guide</div>
-            <h3 style="font-size:20px;margin-bottom:12px;line-height:1.4"><a
-                href="blogs/top-areas-to-buy-plots-in-nagpur.html">Top Areas to Buy Plots in Nagpur in 2026</a></h3>
-            <p style="color:var(--text-light);font-size:15px;margin-bottom:16px">Explore the fastest-growing zones in
-              Nagpur for maximum real estate appreciation and connectivity.</p>
-            <a href="blogs/top-areas-to-buy-plots-in-nagpur.html"
-              style="font-size:14px;font-weight:600;color:var(--dark);display:flex;align-items:center;gap:8px">Read
-              Article <img src="assets/icons/right-arrow.svg" alt="" width="14" height="14"></a>
+            <a class="card-link-mask"
+              href="https://wa.me/917499654371?text=Hi%2C%20I'm%20interested%20in%20learning%20more%20about%3A%20Top%20Areas%20to%20Buy%20Plots%20in%20Nagpur%20in%202026."
+              target="_blank"></a>
+            <span class="blog-category">Market Guide</span>
+            <img class="card-thumb" src="assets/images/nagpur-plots-hero-slide-4.webp" alt="Top areas to buy plots"
+              loading="lazy">
+            <div class="card-content">
+              <h3 class="blog-title">Top Areas to Buy Plots in Nagpur in 2026</h3>
+              <p class="blog-excerpt">Explore the fastest-growing zones in Nagpur for maximum real estate appreciation
+                and connectivity.</p>
+              <div class="blog-date">March 2026 · 5 min read</div>
+            </div>
+            <div class="card-actions">
+              <a class="btn btn-outline btn-sm" href="blogs/top-areas-to-buy-plots-in-nagpur.html">Read Article</a>
+              <a class="btn btn-primary btn-sm"
+                href="https://wa.me/917499654371?text=Hi%2C%20I'm%20interested%20in%20learning%20more%20about%3A%20Top%20Areas%20to%20Buy%20Plots%20in%20Nagpur%20in%202026."
+                target="_blank">Know More</a>
+            </div>
           </article>
 
           <article class="card blog-card">
-            <a href="blogs/nmrda-vs-gram-panchayat-plots-nagpur.html"
-              style="display:block;overflow:hidden;border-radius:12px;margin-bottom:16px;">
-              <img src="assets/images/nagpur-plots-hero-slide-2.webp" alt="NMRDA vs Gram Panchayat" loading="lazy"
-                style="width:100%;height:220px;object-fit:cover;transition:transform 0.3s"
-                onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-            </a>
-            <div style="font-size:13px;color:var(--primary);font-weight:600;margin-bottom:8px">Legal</div>
-            <h3 style="font-size:20px;margin-bottom:12px;line-height:1.4"><a
-                href="blogs/nmrda-vs-gram-panchayat-plots-nagpur.html">NMRDA vs Gram Panchayat Plots in Nagpur</a></h3>
-            <p style="color:var(--text-light);font-size:15px;margin-bottom:16px">Understand the critical differences in
-              legal approvals, risks, and ROI before making your plot investment.</p>
-            <a href="blogs/nmrda-vs-gram-panchayat-plots-nagpur.html"
-              style="font-size:14px;font-weight:600;color:var(--dark);display:flex;align-items:center;gap:8px">Read
-              Article <img src="assets/icons/right-arrow.svg" alt="" width="14" height="14"></a>
+            <a class="card-link-mask"
+              href="https://wa.me/917499654371?text=Hi%2C%20I'm%20interested%20in%20learning%20more%20about%3A%20NMRDA%20vs%20Gram%20Panchayat%20Plots%20in%20Nagpur."
+              target="_blank"></a>
+            <span class="blog-category">Legal</span>
+            <img class="card-thumb" src="assets/images/nagpur-plots-hero-slide-1.webp" alt="NMRDA vs Gram Panchayat"
+              loading="lazy">
+            <div class="card-content">
+              <h3 class="blog-title">NMRDA vs Gram Panchayat Plots in Nagpur</h3>
+              <p class="blog-excerpt">Understand the critical differences in legal approvals, risks, and ROI before
+                making your plot investment.</p>
+              <div class="blog-date">March 2026 · 7 min read</div>
+            </div>
+            <div class="card-actions">
+              <a class="btn btn-outline btn-sm" href="blogs/nmrda-vs-gram-panchayat-plots-nagpur.html">Read Article</a>
+              <a class="btn btn-primary btn-sm"
+                href="https://wa.me/917499654371?text=Hi%2C%20I'm%20interested%20in%20learning%20more%20about%3A%20NMRDA%20vs%20Gram%20Panchayat%20Plots%20in%20Nagpur."
+                target="_blank">Know More</a>
+            </div>
           </article>
 
           <article class="card blog-card">
-            <a href="blogs/plot-vs-flat-which-is-better-investment-nagpur.html"
-              style="display:block;overflow:hidden;border-radius:12px;margin-bottom:16px;">
-              <img src="assets/images/nagpur-plots-hero-slide-5.webp" alt="Plot vs Flat" loading="lazy"
-                style="width:100%;height:220px;object-fit:cover;transition:transform 0.3s"
-                onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-            </a>
-            <div style="font-size:13px;color:var(--primary);font-weight:600;margin-bottom:8px">Investment</div>
-            <h3 style="font-size:20px;margin-bottom:12px;line-height:1.4"><a
-                href="blogs/plot-vs-flat-which-is-better-investment-nagpur.html">Plot vs Flat: Which is a Better
-                Investment?</a></h3>
-            <p style="color:var(--text-light);font-size:15px;margin-bottom:16px">A comprehensive comparison of investing
-              in plotted developments versus apartments in Nagpur's market.</p>
-            <a href="blogs/plot-vs-flat-which-is-better-investment-nagpur.html"
-              style="font-size:14px;font-weight:600;color:var(--dark);display:flex;align-items:center;gap:8px">Read
-              Article <img src="assets/icons/right-arrow.svg" alt="" width="14" height="14"></a>
+            <a class="card-link-mask"
+              href="https://wa.me/917499654371?text=Hi%2C%20I'm%20interested%20in%20learning%20more%20about%3A%20Plot%20vs%20Flat%3A%20Which%20is%20a%20Better%20Investment%3F"
+              target="_blank"></a>
+            <span class="blog-category">Investment</span>
+            <img class="card-thumb" src="assets/images/nagpur-plots-hero-slide-5.webp" alt="Plot vs Flat"
+              loading="lazy">
+            <div class="card-content">
+              <h3 class="blog-title">Plot vs Flat: Which is a Better Investment?</h3>
+              <p class="blog-excerpt">A comprehensive comparison of investing in plotted developments versus apartments
+                in Nagpur's market.</p>
+              <div class="blog-date">March 2026 · 6 min read</div>
+            </div>
+            <div class="card-actions">
+              <a class="btn btn-outline btn-sm" href="blogs/plot-vs-flat-which-is-better-investment-nagpur.html">Read
+                Article</a>
+              <a class="btn btn-primary btn-sm"
+                href="https://wa.me/917499654371?text=Hi%2C%20I'm%20interested%20in%20learning%20more%20about%3A%20Plot%20vs%20Flat%3A%20Which%20is%20a%20Better%20Investment%3F"
+                target="_blank">Know More</a>
+            </div>
           </article>
         </div>
       </div>
@@ -881,6 +1177,10 @@
             <img class="footer-brand" src="assets/images/mahalaxmi-group-footer-logo.svg" alt="Mahalaxmi Group Logo"
               width="120" height="40" loading="lazy">
           </a>
+          <p style="font-size:14px;color:rgba(255,255,255,.9);line-height:1.7;margin-top:16px;">Mahalaxmi Developers, a
+            trusted name in Nagpur's real estate, delivers excellence with over 67 successful projects offering premium
+            residential plots in Nagpur and commercial spaces.</p>
+
           <h4 style="margin-top:24px"><span class="dot"></span> Head Office</h4>
           <p style="font-size:14px;color:rgba(255,255,255,.7);line-height:1.7">N-103, 104 Laxmivihar Apartment, Besides
             Hotel Airport Center Point, Wardha Road, Somalwada, Nagpur - 440025</p>
