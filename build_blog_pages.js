@@ -11,8 +11,8 @@ curatedData.forEach(b => { curatedMap[b.file] = b; });
 
 // Hero images to cycle through
 const heroImages = [
-  'nagpur-plots-hero-slide-1.webp','nagpur-plots-hero-slide-2.webp','nagpur-plots-hero-slide-3.webp',
-  'nagpur-plots-hero-slide-4.webp','nagpur-plots-hero-slide-5.webp'
+  'nagpur-plots-hero-slide-1.webp', 'nagpur-plots-hero-slide-2.webp', 'nagpur-plots-hero-slide-3.webp',
+  'nagpur-plots-hero-slide-4.webp', 'nagpur-plots-hero-slide-5.webp'
 ];
 
 function getHeroImg(index) {
@@ -24,7 +24,7 @@ function extractArticleContent(html) {
   // Try to get content from <article class="prose">
   let match = html.match(/<article\s+class="prose[^"]*"[^>]*>([\s\S]*?)<\/article>/i);
   if (match) return match[1];
-  
+
   // Try content between blog-hero section end and sidebar
   match = html.match(/<\/section>\s*<section class="section">\s*<div class="container">\s*<div class="grid[^"]*"[^>]*>\s*<article[^>]*>([\s\S]*?)<\/article>/i);
   if (match) return match[1];
@@ -56,12 +56,12 @@ function buildBlogPage(blog, index) {
   const heroImg = getHeroImg(index);
   const related = getRelatedBlogs(blog.file, blog.category);
   const slug = blog.file.replace('.html', '');
-  
+
   // Read existing file to extract article content
   const filePath = path.join(blogsDir, blog.file);
   const existingHTML = fs.readFileSync(filePath, 'utf8');
   let articleContent = extractArticleContent(existingHTML);
-  
+
   // Clean up the extracted content - remove duplicate CTA sections if any
   articleContent = articleContent.replace(/<div class="blog-cta"[\s\S]*?<\/div>\s*<\/div>/gi, '');
 
@@ -109,17 +109,17 @@ function buildBlogPage(blog, index) {
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="header" id="header">
     <div class="container header-inner">
-      <a class="brand" href="../index.html" aria-label="Mahalaxmi Developers home">
+      <a class="brand" href="../" aria-label="Mahalaxmi Developers home">
         <img src="../assets/images/mahalaxmi-group-header-logo.svg" alt="Mahalaxmi Group Logo" width="120" height="40">
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
-        <a href="../index.html">Home</a><a href="../pages/about.html">About</a><a href="../pages/projects.html">Projects</a><a href="../pages/blogs.html">Blogs</a><a href="../pages/contact.html">Contact</a>
+        <a href="../">Home</a><a href="../pages/about.html">About</a><a href="../pages/projects.html">Projects</a><a href="../pages/blogs.html">Blogs</a><a href="../pages/contact.html">Contact</a>
       </nav>
       <div class="nav-cta"><a class="btn btn-primary" href="../pages/contact.html#lead">Get in Touch <img src="../assets/icons/right-arrow.svg" alt="" width="16" height="16"></a></div>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu">&#9776;</button>
     </div>
     <div class="mobile-menu" id="mobileMenu">
-      <a href="../index.html">Home</a><a href="../pages/about.html">About</a><a href="../pages/projects.html">Projects</a><a href="../pages/blogs.html">Blogs</a><a href="../pages/contact.html">Contact</a>
+      <a href="../">Home</a><a href="../pages/about.html">About</a><a href="../pages/projects.html">Projects</a><a href="../pages/blogs.html">Blogs</a><a href="../pages/contact.html">Contact</a>
       <a href="tel:+917499654371">Call: +91 74996 54371</a>
     </div>
   </header>
@@ -131,7 +131,7 @@ function buildBlogPage(blog, index) {
       </div>
       <div class="container" style="position:relative;z-index:2;max-width:800px;">
         <nav class="breadcrumb" style="justify-content:center;margin-bottom:24px;">
-          <a href="../index.html" style="color:rgba(255,255,255,0.7);">Home</a> <span>/</span>
+          <a href="../" style="color:rgba(255,255,255,0.7);">Home</a> <span>/</span>
           <a href="../pages/blogs.html" style="color:rgba(255,255,255,0.7);">Blogs</a> <span>/</span>
           <span style="color:#fff;">${blog.category}</span>
         </nav>
@@ -192,7 +192,7 @@ function buildBlogPage(blog, index) {
     <div class="container">
       <div class="footer-grid">
         <div>
-          <a href="../index.html" aria-label="Mahalaxmi Developers home"><img class="footer-brand" src="../assets/images/mahalaxmi-group-footer-logo.svg" alt="Mahalaxmi Group Logo" width="120" height="40" loading="lazy"></a>
+          <a href="../" aria-label="Mahalaxmi Developers home"><img class="footer-brand" src="../assets/images/mahalaxmi-group-footer-logo.svg" alt="Mahalaxmi Group Logo" width="120" height="40" loading="lazy"></a>
           <h4 style="margin-top:24px"><span class="dot"></span> Head Office</h4>
           <p style="font-size:14px;color:rgba(255,255,255,.7);line-height:1.7">N-103, 104 Laxmivihar Apartment, Besides Hotel Airport Center Point, Wardha Road, Somalwada, Nagpur - 440025</p>
           <iframe class="footer-map" src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=Laxmi%2BVihar%2BComplex%2BNo.3&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen title="Office location"></iframe>

@@ -4,18 +4,21 @@ const path = require('path');
 
 const fixes = [
   // Pages in /pages/ directory need ../plots/ prefix
-  { dir: 'pages', files: ['about.html','contact.html','locations.html','privacy.html','projects.html','reviews.html','terms.html','blogs.html'],
+  {
+    dir: 'pages', files: ['about.html', 'contact.html', 'locations.html', 'privacy.html', 'projects.html', 'reviews.html', 'terms.html', 'blogs.html'],
     from: ['"plots-in-manish-nagar/"', '"plots-in-besa/"', '"plots-in-beltarodi/"', '"plots-on-wardha-road/"'],
     to: ['"../plots/plots-in-manish-nagar/"', '"../plots/plots-in-besa/"', '"../plots/plots-in-beltarodi/"', '"../plots/plots-on-wardha-road/"']
   },
   // Homepage needs plots/ prefix
-  { dir: '.', files: ['index.html'],
+  {
+    dir: '.', files: ['/'],
     from: ['"plots-in-manish-nagar/"', '"plots-in-besa/"', '"plots-in-beltarodi/"', '"plots-on-wardha-road/"'],
     to: ['"plots/plots-in-manish-nagar/"', '"plots/plots-in-besa/"', '"plots/plots-in-beltarodi/"', '"plots/plots-on-wardha-road/"']
   },
   // Plots pages themselves - already correct (relative to own dir) or need fixing
   // Fix about.html CTA links
-  { dir: 'pages', files: ['about.html'],
+  {
+    dir: 'pages', files: ['about.html'],
     from: ['href="contact.html"', 'href="projects.html"'],
     to: ['href="../pages/contact.html"', 'href="../pages/projects.html"']
   }

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Gallery | Mahalaxmi Developers | Premium Plots in Nagpur</title>
+  <meta name="description" content="View our gallery of completed and ongoing premium plotted development projects in Nagpur. See high-quality images of amenities, plots, and infrastructure.">
+  <link rel="canonical" href="https://sz.mahalaxmidevelopers.com/pages/gallery.html">
+  <link rel="icon" href="../assets/images/mahalaxmi-infra-logo.avif" type="image/avif">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .gallery-masonry {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 40px;
+    }
+    .gallery-item {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      cursor: pointer;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .gallery-item:hover::after {
+      opacity: 1;
+    }
+    .item-tall { grid-row: span 2; aspect-ratio: auto; min-height: 400px; }
+    .item-wide { grid-column: span 2; }
+    @media (max-width: 768px) {
+      .item-wide { grid-column: span 1; }
+    }
+    .gallery-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 32px;
+    }
+    .filter-btn {
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1px solid var(--border-light);
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a class="brand" href="../" aria-label="Mahalaxmi Developers home">
+        <img src="../assets/images/mahalaxmi-group-header-logo.svg" alt="Mahalaxmi Group Logo" width="120" height="40">
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="../">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="blogs.html">Blogs</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="nav-cta">
+        <a class="btn btn-primary" href="contact.html#lead">Get in Touch <img src="../assets/icons/right-arrow.svg" alt="" width="16" height="16"></a>
+      </div>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu">&#9776;</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="../">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="contact.html">Contact</a>
+      <a href="tel:+917499654371">Call: +91 74996 54371</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-banner">
+      <div class="container">
+        <nav class="breadcrumb"><a href="../">Home</a> <span>/</span> <span>Gallery</span></nav>
+        <h1 class="heading-lg">Project <em class="serif-accent">Gallery</em></h1>
+        <p>Explore our successfully delivered and upcoming premium plotted developments across Nagpur.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        
+        <div class="gallery-filters" id="galleryFilters">
+          <button class="filter-btn active" data-filter="all">All Photos</button>
+          <button class="filter-btn" data-filter="completed">Completed Projects</button>
+          <button class="filter-btn" data-filter="ongoing">Ongoing Projects</button>
+          <button class="filter-btn" data-filter="amenities">Amenities</button>
+        </div>
+
+        <div class="gallery-masonry" id="galleryGrid">
+          <div class="gallery-item item-wide" data-category="ongoing" tabindex="0">
+            <img src="../assets/images/mahalaxmi-naya-45-banner.jpg" alt="Mahalaxmi Naya 45 Overview" loading="lazy">
+          </div>
+          <div class="gallery-item item-tall" data-category="ongoing" tabindex="0">
+            <img src="../assets/legacy/images/projects_images/1751279055_banner_M-39-PROJECT.webp" alt="Mahalaxmi Naya 49 Project Overview" loading="lazy">
+          </div>
+          <div class="gallery-item" data-category="completed" tabindex="0">
+            <img src="../assets/images/nagpur-plots-hero-slide-1.webp" alt="Completed Layout Nagpur" loading="lazy">
+          </div>
+          <div class="gallery-item" data-category="amenities" tabindex="0">
+            <img src="../assets/images/nagpur-plots-hero-slide-2.webp" alt="Layout Amenities Area" loading="lazy">
+          </div>
+          <div class="gallery-item" data-category="amenities" tabindex="0">
+            <img src="../assets/images/nagpur-plots-hero-slide-3.webp" alt="Project Cement Road" loading="lazy">
+          </div>
+          <div class="gallery-item item-tall" data-category="completed" tabindex="0">
+            <img src="../assets/images/nagpur-plots-hero-slide-4.webp" alt="Completed Corner Plot" loading="lazy">
+          </div>
+          <div class="gallery-item" data-category="completed" tabindex="0">
+            <img src="../assets/images/nagpur-plots-hero-slide-5.webp" alt="Gated Community Entrance" loading="lazy">
+          </div>
+          <div class="gallery-item" data-category="ongoing" tabindex="0">
+            <img src="../assets/images/mahalaxmi-naya-43-thumbnail.jpg" alt="Mahalaxmi Naya 43 Shankarpur" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="../"><img class="footer-brand" src="../assets/images/mahalaxmi-group-footer-logo.svg" alt="Mahalaxmi Group Logo" width="120" height="40" loading="lazy"></a>
+          <h4 style="margin-top:24px"><span class="dot"></span> Head Office</h4>
+          <p style="font-size:14px;color:rgba(255,255,255,.7);line-height:1.7">N-103, 104 Laxmivihar Apartment, Besides Hotel Airport Center Point, Wardha Road, Somalwada, Nagpur - 440025</p>
+        </div>
+        <div>
+          <h4><span class="dot"></span> Quick Links</h4>
+          <div class="footer-columns">
+            <nav class="footer-links">
+              <a href="about.html">About</a>
+              <a href="projects.html">Projects</a>
+              <a href="blogs.html">Blogs</a>
+              <a href="contact.html">Contact</a>
+            </nav>
+            <nav class="footer-links">
+              <a href="../plots/plots-in-manish-nagar/">Plots in Manish Nagar</a>
+              <a href="../plots/plots-in-besa/">Plots in Besa</a>
+              <a href="../plots/plots-in-beltarodi/">Plots in Beltarodi</a>
+              <a href="../plots/plots-on-wardha-road/">Plots on Wardha Road</a>
+            </nav>
+          </div>
+        </div>
+        <div>
+          <h4><span class="dot"></span> Contact Us</h4>
+          <div class="footer-contact" style="display:flex;flex-direction:column;gap:8px">
+            <a href="mailto:mahalaxmidevelopers14@gmail.com">mahalaxmidevelopers14@gmail.com</a>
+            <a href="tel:+917499654371">+91 74996 54371</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; <span id="year"></span> Mahalaxmi Developers. All rights reserved.</span>
+        <span class="footer-copy"><a href="privacy.html" style="text-decoration:underline">Privacy</a> &middot; <a href="terms.html" style="text-decoration:underline">Terms</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal for Gallery -->
+  <div class="modal" id="lightboxModal" aria-hidden="true" role="dialog">
+    <div class="modal-backdrop" onclick="closeLightbox()"></div>
+    <div style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2001;max-width:90vw;max-height:90vh;">
+      <button onclick="closeLightbox()" style="position:absolute;top:-40px;right:0;background:none;border:none;color:white;font-size:32px;cursor:pointer;">&times;</button>
+      <img id="lightboxImg" src="" alt="Gallery Image Full" style="max-width:100%;max-height:85vh;object-fit:contain;border-radius:8px;">
+    </div>
+  </div>
+
+  <script src="../js/app.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Gallery Filtering
+      const filters = document.querySelectorAll('.filter-btn');
+      const items = document.querySelectorAll('.gallery-item');
+      
+      filters.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filters.forEach(f => f.classList.remove('active'));
+          btn.classList.add('active');
+          const filter = btn.getAttribute('data-filter');
+          
+          items.forEach(item => {
+            if (filter === 'all' || item.getAttribute('data-category') === filter) {
+              item.style.display = 'block';
+              // Trigger reflow for animation
+              setTimeout(() => { item.style.opacity = '1'; item.style.transform = 'scale(1)'; }, 50);
+            } else {
+              item.style.opacity = '0';
+              item.style.transform = 'scale(0.9)';
+              setTimeout(() => item.style.display = 'none', 300);
+            }
+          });
+        });
+      });
+
+      // Simple Lightbox
+      const lightboxModal = document.getElementById('lightboxModal');
+      const lightboxImg = document.getElementById('lightboxImg');
+      
+      items.forEach(item => {
+        item.addEventListener('click', () => {
+          const imgSrc = item.querySelector('img').src;
+          lightboxImg.src = imgSrc;
+          lightboxModal.classList.add('is-open');
+          lightboxModal.setAttribute('aria-hidden', 'false');
+        });
+        // Accessibility
+        item.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') item.click();
+        });
+      });
+      
+      window.closeLightbox = () => {
+        lightboxModal.classList.remove('is-open');
+        lightboxModal.setAttribute('aria-hidden', 'true');
+        lightboxImg.src = '';
+      };
+    });
+  </script>
+</body>
+</html>

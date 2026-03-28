@@ -451,13 +451,13 @@ h6 {
   transition: padding 0.3s ease, background-color 0.3s ease, border-bottom 0.3s ease;
 }
 
-/* Shrink on scroll class added by JS */
 .header.scrolled {
   padding: 12px 0;
-  background-color: rgba(20, 40, 35, 0.95);
+  background-color: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
 .header .container {
@@ -1589,6 +1589,61 @@ h6 {
   background: var(--dark);
   color: var(--white);
   border-color: var(--dark);
+}
+
+/* ===== TRUST MARQUEE ===== */
+.trust-marquee {
+  background: var(--dark);
+  color: #fff;
+  padding: 16px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  position: relative;
+  z-index: 10;
+}
+.trust-marquee::before, .trust-marquee::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  z-index: 2;
+  pointer-events: none;
+}
+.trust-marquee::before {
+  left: 0;
+  background: linear-gradient(to right, var(--dark), transparent);
+}
+.trust-marquee::after {
+  right: 0;
+  background: linear-gradient(to left, var(--dark), transparent);
+}
+.marquee-content {
+  display: flex;
+  gap: 48px;
+  animation: scrollMarquee 25s linear infinite;
+  padding-right: 48px;
+  width: max-content;
+}
+.marquee-content:hover {
+  animation-play-state: paused;
+}
+@keyframes scrollMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.trust-item svg {
+  color: var(--gold);
 }
 
 /* ===== PRINT ===== */

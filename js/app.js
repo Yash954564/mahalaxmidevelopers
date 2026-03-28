@@ -323,9 +323,9 @@
     window.addEventListener("scroll", () => {
       const y = window.scrollY;
       if (y > 60) {
-        header.style.boxShadow = "0 2px 12px rgba(0,0,0,.06)";
+        header.classList.add("scrolled");
       } else {
-        header.style.boxShadow = "none";
+        header.classList.remove("scrolled");
       }
       lastScroll = y;
     }, { passive: true });

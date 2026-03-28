@@ -84,11 +84,11 @@ const blogsHTML = `<!DOCTYPE html><html lang="en"><head>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="header" id="header">
     <div class="container header-inner">
-      <a class="brand" href="../index.html" aria-label="Mahalaxmi Developers home">
+      <a class="brand" href="../" aria-label="Mahalaxmi Developers home">
         <img src="../assets/images/mahalaxmi-group-header-logo.svg" alt="Mahalaxmi Group Logo" width="120" height="40">
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
-        <a href="../index.html">Home</a>
+        <a href="../">Home</a>
         <a href="../pages/about.html">About</a>
         <a href="../pages/projects.html">Projects</a>
         <a href="../pages/blogs.html">Blogs</a>
@@ -100,7 +100,7 @@ const blogsHTML = `<!DOCTYPE html><html lang="en"><head>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu">&#9776;</button>
     </div>
     <div class="mobile-menu" id="mobileMenu">
-      <a href="../index.html">Home</a>
+      <a href="../">Home</a>
       <a href="../pages/about.html">About</a>
       <a href="../pages/projects.html">Projects</a>
       <a href="../pages/blogs.html">Blogs</a>
@@ -112,7 +112,7 @@ const blogsHTML = `<!DOCTYPE html><html lang="en"><head>
   <main id="main">
     <section class="page-banner">
       <div class="container">
-        <nav class="breadcrumb"><a href="../index.html">Home</a> <span>/</span> <span>Blogs &amp; Insights</span></nav>
+        <nav class="breadcrumb"><a href="../">Home</a> <span>/</span> <span>Blogs &amp; Insights</span></nav>
         <h1 class="heading-lg">Market <em class="serif-accent">Insights</em></h1>
         <p>Expert guides, investment strategies, and everything you need to know about Nagpur real estate.</p>
       </div>
@@ -145,7 +145,7 @@ ${blogCards}
     <div class="container">
       <div class="footer-grid">
         <div>
-          <a href="../index.html" aria-label="Mahalaxmi Developers home">
+          <a href="../" aria-label="Mahalaxmi Developers home">
             <img class="footer-brand" src="../assets/images/mahalaxmi-group-footer-logo.svg" alt="Mahalaxmi Group Logo" width="120" height="40" loading="lazy">
           </a>
           <h4 style="margin-top:24px"><span class="dot"></span> Head Office</h4>

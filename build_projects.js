@@ -10,13 +10,13 @@ function extractProjectData(html, filename) {
 
   // Title from <h1>
   const h1 = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
-  data.rawTitle = h1 ? h1[1].replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim() : filename.replace('.html','').replace(/-/g,' ');
-  
+  data.rawTitle = h1 ? h1[1].replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim() : filename.replace('.html', '').replace(/-/g, ' ');
+
   // Extract project number from filename
   const numMatch = filename.match(/(\d+)/);
   data.number = numMatch ? numMatch[1] : '';
   data.title = `Mahalaxmi Nagar ${data.number}`;
-  
+
   // Status - check for completed/ongoing/upcoming  
   if (html.includes('Completed') || html.includes('completed')) data.status = 'Completed';
   else if (html.includes('Upcoming') || html.includes('upcoming')) data.status = 'Upcoming';
@@ -36,7 +36,7 @@ function extractProjectData(html, filename) {
 
   // Site Address
   const addrMatch = html.match(/Site Address\s*<\/p>\s*<span[^>]*>\s*([\s\S]*?)\s*<\/span>/i);
-  data.address = addrMatch ? addrMatch[1].replace(/<[^>]*>/g, '').replace(/&amp;/g,'&').trim() : '';
+  data.address = addrMatch ? addrMatch[1].replace(/<[^>]*>/g, '').replace(/&amp;/g, '&').trim() : '';
 
   // Description from first <p> in about section
   const descMatch = html.match(/<p class="text-base text-justify[^"]*"[^>]*>\s*([\s\S]*?)\s*<\/p>/i);
@@ -67,7 +67,7 @@ function extractProjectData(html, filename) {
   const bannerImgs = html.match(/src="([^"]*projects_images[^"]*banner[^"]*)"/gi) || [];
   data.banners = bannerImgs.map(g => {
     const m = g.match(/src="([^"]*)"/);
-    return m ? m[1] : '';  
+    return m ? m[1] : '';
   }).filter(Boolean);
 
   // Map coordinates
@@ -105,8 +105,8 @@ function buildProjectPage(data) {
   const slug = data.filename.replace('.html', '');
   const statusIcon = data.status === 'Completed' ? 'CheckCircle' : (data.status === 'Upcoming' ? 'Clock' : 'RocketLaunch');
   const bannerImg = data.banners[0] || data.thumbnail;
-  
-  const highlightsHTML = data.highlights.map(h => 
+
+  const highlightsHTML = data.highlights.map(h =>
     `              <li style="display:flex;gap:12px;align-items:center"><img src="../assets/icons/CheckCircle.svg" alt="" width="20" height="20" style="filter:invert(40%) sepia(85%) saturate(300%) hue-rotate(345deg) brightness(85%) contrast(85%)">${h}</li>`
   ).join('\n');
 
@@ -121,7 +121,7 @@ function buildProjectPage(data) {
   const nearbyHTML = data.nearby.length ? data.nearby.map(n => `<li>${n}</li>`).join('\n                    ') : '';
 
   const documentsHTML = data.documents.length ? data.documents.map((doc, i) => {
-    const docName = doc.split('/').pop().replace(/_/g,' ').replace(/\.[^.]+$/,'').substring(0, 50);
+    const docName = doc.split('/').pop().replace(/_/g, ' ').replace(/\.[^.]+$/, '').substring(0, 50);
     return `              <tr style="border-bottom:1px solid var(--border-light)">
                 <td style="padding:14px 16px;font-size:14px">${docName}</td>
                 <td style="padding:14px 16px"><a href="${doc}" target="_blank" download class="btn btn-outline btn-sm" style="font-size:12px">Download</a></td>
@@ -147,31 +147,31 @@ function buildProjectPage(data) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>${data.title} | Premium Plots in Nagpur | Mahalaxmi Developers</title>
-  <meta name="description" content="${data.description.substring(0,160)}">
+  <meta name="description" content="${data.description.substring(0, 160)}">
   <meta name="keywords" content="${data.title}, plots in Nagpur, NMRDA approved plots Nagpur, ${slug.replace(/-/g, ' ')}">
   <link rel="canonical" href="https://sz.mahalaxmidevelopers.com/projects/${data.filename}">
   <meta name="robots" content="index,follow">
   <link rel="icon" href="../assets/images/mahalaxmi-infra-logo.avif" type="image/avif">
   <meta property="og:type" content="website">
   <meta property="og:title" content="${data.title} | Mahalaxmi Developers">
-  <meta property="og:description" content="${data.description.substring(0,160)}">
+  <meta property="og:description" content="${data.description.substring(0, 160)}">
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/styles.css">
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"RealEstateListing","name":"${data.title}","description":"${data.description.substring(0,160).replace(/"/g,'\\"')}","address":{"@type":"PostalAddress","addressLocality":"Nagpur","addressRegion":"Maharashtra","addressCountry":"IN"},"provider":{"@type":"Organization","name":"Mahalaxmi Developers"}}
+  {"@context":"https://schema.org","@type":"RealEstateListing","name":"${data.title}","description":"${data.description.substring(0, 160).replace(/"/g, '\\"')}","address":{"@type":"PostalAddress","addressLocality":"Nagpur","addressRegion":"Maharashtra","addressCountry":"IN"},"provider":{"@type":"Organization","name":"Mahalaxmi Developers"}}
   </script>
 </head>
 <body class="active-project-page">
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="header" id="header">
     <div class="container header-inner">
-      <a class="brand" href="../index.html" aria-label="Mahalaxmi Developers home"><img src="../assets/images/mahalaxmi-group-header-logo.svg" alt="Mahalaxmi Group Logo" width="120" height="40"></a>
-      <nav class="nav-links" aria-label="Primary navigation"><a href="../index.html">Home</a><a href="../pages/about.html">About</a><a href="../pages/projects.html">Projects</a><a href="../pages/blogs.html">Blogs</a><a href="../pages/contact.html">Contact</a></nav>
+      <a class="brand" href="../" aria-label="Mahalaxmi Developers home"><img src="../assets/images/mahalaxmi-group-header-logo.svg" alt="Mahalaxmi Group Logo" width="120" height="40"></a>
+      <nav class="nav-links" aria-label="Primary navigation"><a href="../">Home</a><a href="../pages/about.html">About</a><a href="../pages/projects.html">Projects</a><a href="../pages/blogs.html">Blogs</a><a href="../pages/contact.html">Contact</a></nav>
       <div class="nav-cta"><a class="btn btn-primary" href="../pages/contact.html#lead">Get in Touch <img src="../assets/icons/right-arrow.svg" alt="" width="16" height="16"></a></div>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu">&#9776;</button>
     </div>
-    <div class="mobile-menu" id="mobileMenu"><a href="../index.html">Home</a><a href="../pages/about.html">About</a><a href="../pages/projects.html">Projects</a><a href="../pages/blogs.html">Blogs</a><a href="../pages/contact.html">Contact</a><a href="tel:+917499654371">Call: +91 74996 54371</a></div>
+    <div class="mobile-menu" id="mobileMenu"><a href="../">Home</a><a href="../pages/about.html">About</a><a href="../pages/projects.html">Projects</a><a href="../pages/blogs.html">Blogs</a><a href="../pages/contact.html">Contact</a><a href="tel:+917499654371">Call: +91 74996 54371</a></div>
   </header>
 
   <main id="main">
@@ -179,10 +179,10 @@ function buildProjectPage(data) {
       <div class="hero-media"><img class="is-active" src="${bannerImg}" alt="${data.title} overview" style="opacity:1" width="1600" height="600"></div>
       <div class="hero-overlay" style="background:linear-gradient(to top, rgba(23,17,7,0.9), transparent)"></div>
       <div class="container hero-content" style="padding-bottom:24px">
-        <nav class="breadcrumb" style="margin-bottom:16px"><a href="../index.html" style="color:#fff">Home</a> <span>/</span> <a href="../pages/projects.html" style="color:#fff">Projects</a> <span>/</span> <span>${data.title}</span></nav>
+        <nav class="breadcrumb" style="margin-bottom:16px"><a href="../" style="color:#fff">Home</a> <span>/</span> <a href="../pages/projects.html" style="color:#fff">Projects</a> <span>/</span> <span>${data.title}</span></nav>
         <span class="project-status" style="position:relative;display:inline-flex;margin-bottom:12px;top:auto;right:auto"><img src="../assets/icons/${statusIcon}.svg" alt="" width="14" height="14" onerror="this.style.display='none'"> ${data.status} Project</span>
         <h1 class="heading-lg" style="color:#fff;margin-bottom:8px">${data.title.replace(/(\d+)$/, '<em class="serif-accent">$1</em>')}</h1>
-        ${data.address ? `<p style="color:rgba(255,255,255,.8);font-size:16px;max-width:700px;margin-bottom:24px"><img src="../assets/icons/MapPin.svg" alt="" width="18" height="18" style="display:inline;vertical-align:bottom" onerror="this.style.display='none'"> ${data.address.substring(0,100)}</p>` : ''}
+        ${data.address ? `<p style="color:rgba(255,255,255,.8);font-size:16px;max-width:700px;margin-bottom:24px"><img src="../assets/icons/MapPin.svg" alt="" width="18" height="18" style="display:inline;vertical-align:bottom" onerror="this.style.display='none'"> ${data.address.substring(0, 100)}</p>` : ''}
         <div class="trust-badges">
           <span class="badge"><img src="../assets/icons/CheckCircle.svg" alt="" width="14" height="14" onerror="this.style.display='none'"> NMRDA Approved</span>
           <span class="badge"><img src="../assets/icons/CheckCircle.svg" alt="" width="14" height="14" onerror="this.style.display='none'"> Clear Title</span>
@@ -265,7 +265,7 @@ ${videosHTML}
     <div class="container">
       <div class="footer-grid">
         <div>
-          <a href="../index.html"><img class="footer-brand" src="../assets/images/mahalaxmi-group-footer-logo.svg" alt="Mahalaxmi Group Logo" width="120" height="40" loading="lazy"></a>
+          <a href="../"><img class="footer-brand" src="../assets/images/mahalaxmi-group-footer-logo.svg" alt="Mahalaxmi Group Logo" width="120" height="40" loading="lazy"></a>
           <h4 style="margin-top:24px"><span class="dot"></span> Head Office</h4>
           <p style="font-size:14px;color:rgba(255,255,255,.7);line-height:1.7">N-103, 104 Laxmivihar Apartment, Besides Hotel Airport Center Point, Wardha Road, Somalwada, Nagpur - 440025</p>
           <iframe class="footer-map" src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=Laxmi%2BVihar%2BComplex%2BNo.3&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" loading="lazy" allowfullscreen title="Office location"></iframe>
