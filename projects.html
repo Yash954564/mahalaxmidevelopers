@@ -65,12 +65,19 @@
         <div class="sub-label"><span class="dot"></span> Featured Projects</div>
         <h2 class="heading-sm" style="margin-bottom:24px">Explore Our <em class="serif-accent">Developments</em></h2>
 
-        <!-- Project Filter -->
-        <div class="project-filter" id="projectFilter">
-          <button class="filter-btn is-active" data-filter="All">All</button>
-          <button class="filter-btn" data-filter="Ongoing">Ongoing</button>
-          <button class="filter-btn" data-filter="Upcoming">Upcoming</button>
-          <button class="filter-btn" data-filter="Completed">Completed</button>
+        <div id="projectFilterBar"
+          style="background: var(--bg-light); padding: 16px 24px; border-radius: 12px; margin-bottom: 40px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center;">
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;" id="projectFilter">
+            <button class="filter-btn is-active" data-filter="All">All</button>
+            <button class="filter-btn" data-filter="Ongoing">Ongoing</button>
+            <button class="filter-btn" data-filter="Upcoming">Upcoming</button>
+            <button class="filter-btn" data-filter="Completed">Completed</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:16px;flex:1;max-width:450px;justify-content:flex-end;">
+            <span id="projectStats" style="font-size:13px;color:var(--muted);white-space:nowrap;">Showing all projects</span>
+            <input type="text" id="projectSearch" placeholder="Search projects by name or location..."
+              style="width: 100%; max-width: 280px; padding: 10px 16px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px;">
+          </div>
         </div>
 
         <div class="grid grid-3" id="projectsGrid">
@@ -80,650 +87,953 @@
 
 
 
-          <article class="card project-card animate-in" data-status="Ongoing"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status"><img src="../assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
+          <!-- Card 1: Tattva Apas -->
+          <article data-search="tattva apas a supreme living experience in the heart of the city... 
+                nagpur, maharashtra" class="card project-card animate-in" data-status="Ongoing"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Tattva%20Apas%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status"><img src="assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
               Ongoing</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1751271820_banner_M-40-PROJECT.webp"
-              alt="Mahalaxmi Nagar - 40" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar - 40</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 40. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-40.html">Know More</a></div>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1760355019_banner_S-1.webp"
+              alt="Tattva Apas" loading="lazy">
+            <div class="card-content">
+              <h3>Tattva Apas</h3>
+              <p class="muted">A SUPREME LIVING EXPERIENCE IN THE HEART OF THE CITY...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18">
+                Nagpur, Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Tattva%20Apas%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/tattva-apas.html">Know More</a>
+            </div>
           </article>
 
-          <article class="card project-card animate-in" data-status="Ongoing"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status"><img src="../assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
-              Ongoing</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1751370643_banner_M-41 PROJECT.webp"
-              alt="Mahalaxmi Nagar - 41" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar - 41</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 41. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-41.html">Know More</a></div>
-          </article>
-
-          <article class="card project-card animate-in" data-status="Ongoing"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status"><img src="../assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
-              Ongoing</span>
-            <img class="card-thumb" src="../assets/images/mahalaxmi-naya-45-thumbnail.jpg" alt="Mahalaxmi Nagar - 42"
-              loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar - 42</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 42. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-42.html">Know More</a></div>
-          </article>
-
-          <article class="card project-card animate-in" data-status="Ongoing"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status"><img src="../assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
-              Ongoing</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1765015487_banner_S-1.jpg"
-              alt="Mahalaxmi Nagar-43" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar-43</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 42. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-43.html">Know More</a></div>
-          </article>
-
-          <article class="card project-card animate-in" data-status="Ongoing"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status"><img src="../assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
-              Ongoing</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1773217016_banner_M-44.jpg"
-              alt="Mahalaxmi Nagar-44" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar-44</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 44. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-44.html">Know More</a></div>
-          </article>
-
-          <article class="card project-card animate-in" data-status="Ongoing"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status"><img src="../assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
-              Ongoing</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1769078680_banner_M-45.jpg"
-              alt="Mahalaxmi Nagar-45" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar-45</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 42. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-45.html">Know More</a></div>
-          </article>
-
-          <article class="card project-card animate-in" data-status="Ongoing"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status"><img src="../assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
-              Ongoing</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1773217821_banner_M-46.jpg"
-              alt="Mahalaxmi Nagar-46" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar-46</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 46. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-46.html">Know More</a></div>
-          </article>
-
-          <article class="card project-card animate-in" data-status="Ongoing"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status"><img src="../assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
-              Ongoing</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1773222871_banner_M-47.jpg"
-              alt="Mahalaxmi Nagar-47" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar-47</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 47. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-47.html">Know More</a></div>
-          </article>
-
-          <article class="card project-card animate-in" data-status="Ongoing"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status"><img src="../assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
-              Ongoing</span>
-            <img class="card-thumb" src="../assets/images/mahalaxmi-naya-45-thumbnail.jpg" alt="Mahalaxmi Naya — 43"
-              loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Naya — 43</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Shankarpur, Near Manish Nagar &amp; Beltarodi,
-              Nagpur...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-naya-43-shankarpur.html">Know More</a></div>
-          </article>
-
-          <article class="card project-card animate-in" data-status="Ongoing"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status"><img src="../assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
-              Ongoing</span>
-            <img class="card-thumb" src="../assets/images/mahalaxmi-naya-45-thumbnail.jpg" alt="Mahalaxmi Naya — 45"
-              loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Naya — 45</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Near Samriddhi Mahamarg, Nagpur...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-naya-45.html">Know More</a></div>
-          </article>
-
-          <article class="card project-card animate-in" data-status="Ongoing"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status"><img src="../assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
-              Ongoing</span>
-            <img class="card-thumb" src="../assets/images/mahalaxmi-naya-45-thumbnail.jpg" alt="Mahalaxmi Naya — 49"
-              loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Naya — 49</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Near AIIMS &amp; NCI, Highway Touch, Nagpur...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-naya-49.html">Know More</a></div>
-          </article>
-
-          <article class="card project-card animate-in" data-status="Ongoing"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status"><img src="../assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
-              Ongoing</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1760355019_banner_S-1.webp"
-              alt="Tattva Apas" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Tattva Apas</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">A SUPREME LIVING EXPERIENCE IN THE HEART OF THE CITY...
-            </p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/tattva-apas.html">Know More</a></div>
-          </article>
-
-          <article class="card project-card animate-in" data-status="Upcoming"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--gold)"><img src="../assets/icons/RocketLaunch.svg"
+          <!-- Card 2: Mahalaxmi Nagar 50 -->
+          <article data-search="mahalaxmi nagar — 50 samriddhi circle, highway touch, nagpur... 
+                nagpur, maharashtra" class="card project-card animate-in" data-status="Upcoming"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2050%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--gold)"><img src="assets/icons/RocketLaunch.svg"
                 alt="" width="14" height="14"> Upcoming</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1773218364_banner_M-52.jpg"
-              alt="Mahalaxmi Nagar-52" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar-52</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 52. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-52.html">Know More</a></div>
+            <img class="card-thumb" src="assets/images/mahalaxmi-naya-45-thumbnail.jpg" alt="Mahalaxmi Nagar — 50"
+              loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar — 50</h3>
+              <p class="muted">Samriddhi Circle, Highway Touch, Nagpur...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18">
+                Nagpur, Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2050%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-naya-50-upcoming.html">Know More</a>
+            </div>
           </article>
 
-          <article class="card project-card animate-in" data-status="Upcoming"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--gold)"><img src="../assets/icons/RocketLaunch.svg"
+          <!-- Card 3: Mahalaxmi Nagar 49 -->
+          <article data-search="mahalaxmi nagar — 49 near aiims &amp; nci, highway touch, nagpur... 
+                nagpur, maharashtra" class="card project-card animate-in" data-status="Ongoing"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2049%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status"><img src="assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
+              Ongoing</span>
+            <img class="card-thumb" src="assets/images/mahalaxmi-naya-45-thumbnail.jpg" alt="Mahalaxmi Nagar — 49"
+              loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar — 49</h3>
+              <p class="muted">Near AIIMS &amp; NCI, Highway Touch, Nagpur...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18">
+                Nagpur, Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Naya%2049%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-naya-49.html">Know More</a>
+            </div>
+          </article>
+
+          <!-- Card 4: Mahalaxmi Nagar 47 -->
+          <article data-search="mahalaxmi nagar-47 nit / nmrda sanctioned layout with rl. bank finance available 75% to 80%... 
+                nagpur, maharashtra" class="card project-card animate-in" data-status="Ongoing"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2047%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status"><img src="assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
+              Ongoing</span>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1773222871_banner_M-47.jpg"
+              alt="Mahalaxmi Nagar-47" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar-47</h3>
+              <p class="muted">NIT / NMRDA sanctioned layout with RL. Bank finance available 75% to 80%...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18">
+                Nagpur, Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2047%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-47.html">Know More</a>
+            </div>
+          </article>
+
+          <!-- Card 5: Mahalaxmi Nagar 45 -->
+          <article data-search="mahalaxmi nagar-45 nit / nmrda sanctioned layout with rl near major healthcare hubs... 
+                nagpur, maharashtra" class="card project-card animate-in" data-status="Ongoing"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2045%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status"><img src="assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
+              Ongoing</span>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1769078680_banner_M-45.jpg"
+              alt="Mahalaxmi Nagar-45" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar-45</h3>
+              <p class="muted">NIT / NMRDA sanctioned layout with RL near major healthcare hubs...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18">
+                Nagpur, Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2045%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-45.html">Know More</a>
+            </div>
+          </article>
+
+          <!-- Card 6: Mahalaxmi Nagar 43 -->
+          <article data-search="mahalaxmi nagar-43 premium residential plots near dr. manish nagar growth belt... 
+                nagpur, maharashtra" class="card project-card animate-in" data-status="Ongoing"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2043%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status"><img src="assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
+              Ongoing</span>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1765015487_banner_S-1.jpg"
+              alt="Mahalaxmi Nagar-43" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar-43</h3>
+              <p class="muted">Premium residential plots near Dr. Manish Nagar growth belt...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18">
+                Nagpur, Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2043%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-43.html">Know More</a>
+            </div>
+          </article>
+                    <!-- Card 7: Mahalaxmi Nagar-46 -->
+          <article data-search="mahalaxmi nagar-46 mahalaxmi developers launched the project mahalaxmi nagar 46. the layout is nit / nmrda sanctioned with rl... 
+                nagpur, maharashtra" class="card project-card animate-in" data-status="Ongoing"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2046%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status"><img src="assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
+              Ongoing</span>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1773217821_banner_M-46.jpg"
+              alt="Mahalaxmi Nagar-46" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar-46</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 46. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18">
+                Nagpur, Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2046%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-46.html">Know More</a>
+            </div>
+          </article>
+
+          <!-- Card 8: Mahalaxmi Nagar - 40 -->
+          <article data-search="mahalaxmi nagar - 40 mahalaxmi developers launched the project mahalaxmi nagar 40. the layout is nit / nmrda sanctioned with rl... 
+                nagpur, maharashtra" class="card project-card animate-in" data-status="Ongoing"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2040%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status"><img src="assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
+              Ongoing</span>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1751271820_banner_M-40-PROJECT.webp"
+              alt="Mahalaxmi Nagar - 40" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar - 40</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 40. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18">
+                Nagpur, Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2040%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-40.html">Know More</a>
+            </div>
+          </article>
+
+          <!-- Card 9: Mahalaxmi Nagar - 41 -->
+          <article data-search="mahalaxmi nagar - 41 mahalaxmi developers launched the project mahalaxmi nagar 41. the layout is nit / nmrda sanctioned with rl... 
+                nagpur, maharashtra" class="card project-card animate-in" data-status="Ongoing"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2041%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status"><img src="assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
+              Ongoing</span>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1751370643_banner_M-41 PROJECT.webp"
+              alt="Mahalaxmi Nagar - 41" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar - 41</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 41. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18">
+                Nagpur, Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2041%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-41.html">Know More</a>
+            </div>
+          </article>
+
+          <!-- Card 10: Mahalaxmi Nagar - 42 -->
+          <article data-search="mahalaxmi nagar - 42 mahalaxmi developers launched the project mahalaxmi nagar 42. the layout is nit / nmrda sanctioned with rl... 
+                nagpur, maharashtra" class="card project-card animate-in" data-status="Ongoing"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2042%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status"><img src="assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
+              Ongoing</span>
+            <img class="card-thumb" src="assets/images/mahalaxmi-naya-45-thumbnail.jpg" alt="Mahalaxmi Nagar - 42"
+              loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar - 42</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 42. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18">
+                Nagpur, Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2042%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-42.html">Know More</a>
+            </div>
+          </article>
+
+          <!-- Card 11: Mahalaxmi Nagar-44 -->
+          <article data-search="mahalaxmi nagar-44 mahalaxmi developers launched the project mahalaxmi nagar 44. the layout is nit / nmrda sanctioned with rl... 
+                nagpur, maharashtra" class="card project-card animate-in" data-status="Ongoing"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2044%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status"><img src="assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
+              Ongoing</span>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1773217016_banner_M-44.jpg"
+              alt="Mahalaxmi Nagar-44" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar-44</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 44. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18">
+                Nagpur, Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2044%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-44.html">Know More</a>
+            </div>
+          </article>
+
+          <!-- Card 12: Mahalaxmi Naya — 43 -->
+          <article data-search="mahalaxmi naya — 43 shankarpur, near manish nagar &amp; beltarodi, nagpur... 
+                nagpur, maharashtra" class="card project-card animate-in" data-status="Ongoing"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Naya%2043%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status"><img src="assets/icons/RocketLaunch.svg" alt="" width="14" height="14">
+              Ongoing</span>
+            <img class="card-thumb" src="assets/images/mahalaxmi-naya-45-thumbnail.jpg" alt="Mahalaxmi Naya — 43"
+              loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Naya — 43</h3>
+              <p class="muted">Shankarpur, Near Manish Nagar &amp; Beltarodi, Nagpur...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18">
+                Nagpur, Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Naya%2043%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-naya-43-shankarpur.html">Know More</a>
+            </div>
+          </article>
+
+          <!-- Card 13: Mahalaxmi Nagar-52 -->
+          <article data-search="mahalaxmi nagar-52 mahalaxmi developers launched the project mahalaxmi nagar 52. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Upcoming"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2052%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--gold)"><img src="assets/icons/RocketLaunch.svg"
                 alt="" width="14" height="14"> Upcoming</span>
-            <img class="card-thumb" src="../assets/images/mahalaxmi-naya-45-thumbnail.jpg" alt="Mahalaxmi Naya — 50"
-              loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Naya — 50</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Samriddhi Circle, Highway Touch, Nagpur...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-naya-50-upcoming.html">Know More</a></div>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1773218364_banner_M-52.jpg"
+              alt="Mahalaxmi Nagar-52" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar-52</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 52. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2052%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-52.html">Know More</a>
+            </div>
           </article>
 
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
+          <!-- Card 14: Mahalaxmi Nagar - 10 -->
+          <article data-search="mahalaxmi nagar - 10 mahalaxmi developers launched the project mahalaxmi nagar 10. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2010%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
                 alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1772781588_banner_S-1.jpg"
-              alt="Mahalaxmi Nagar - 10" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar - 10</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 10. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-10.html">Know More</a></div>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1772781588_banner_S-1.jpg"
+              alt="Mahalaxmi Nagar - 10" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar - 10</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 10. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2010%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-10.html">Know More</a>
+            </div>
           </article>
 
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
+          <!-- Card 16: Mahalaxmi Nagar - 11 -->
+          <article data-search="mahalaxmi nagar - 11 mahalaxmi developers launched the project mahalaxmi nagar 11. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2011%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
                 alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1772782612_banner_S-1.jpg"
-              alt="Mahalaxmi Nagar - 11" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar - 11</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 11. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-11.html">Know More</a></div>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1772782612_banner_S-1.jpg"
+              alt="Mahalaxmi Nagar - 11" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar - 11</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 11. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2011%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-11.html">Know More</a>
+            </div>
           </article>
 
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
+          <!-- Card 17: Mahalaxmi Nagar - 12 -->
+          <article data-search="mahalaxmi nagar - 12 mahalaxmi developers launched the project mahalaxmi nagar 12. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2012%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
                 alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1772783157_banner_M-12.jpg"
-              alt="Mahalaxmi Nagar - 12" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar - 12</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 12. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-12.html">Know More</a></div>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1772783157_banner_M-12.jpg"
+              alt="Mahalaxmi Nagar - 12" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar - 12</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 12. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2012%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-12.html">Know More</a>
+            </div>
           </article>
 
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
+          <!-- Card 18: Mahalaxmi Nagar-13 -->
+          <article data-search="mahalaxmi nagar-13 mahalaxmi developers launched the project mahalaxmi nagar 13. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2013%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
                 alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1773145405_banner_M-13.jpg"
-              alt="Mahalaxmi Nagar-13" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar-13</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 13. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-13.html">Know More</a></div>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1773145405_banner_M-13.jpg"
+              alt="Mahalaxmi Nagar-13" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar-13</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 13. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2013%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-13.html">Know More</a>
+            </div>
           </article>
 
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
+          <!-- Card 19: Mahalaxmi Nagar-14 -->
+          <article data-search="mahalaxmi nagar-14 mahalaxmi developers launched the project mahalaxmi nagar 14. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2014%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
                 alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1773145125_banner_M-14.jpg"
-              alt="Mahalaxmi Nagar-14" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar-14</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 14. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-14.html">Know More</a></div>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1773145125_banner_M-14.jpg"
+              alt="Mahalaxmi Nagar-14" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar-14</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 14. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2014%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-14.html">Know More</a>
+            </div>
           </article>
 
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
+          <!-- Card 20: Mahalaxmi Nagar-15 -->
+          <article data-search="mahalaxmi nagar-15 mahalaxmi developers launched the project mahalaxmi nagar 15. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2015%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
                 alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1773146408_banner_M-15.jpg"
-              alt="Mahalaxmi Nagar-15" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar-15</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 15. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-15.html">Know More</a></div>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1773146408_banner_M-15.jpg"
+              alt="Mahalaxmi Nagar-15" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar-15</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 15. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2015%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-15.html">Know More</a>
+            </div>
           </article>
 
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
+          <!-- Card 21: Mahalaxmi Nagar-16 -->
+          <article data-search="mahalaxmi nagar-16 mahalaxmi developers launched the project mahalaxmi nagar 16. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2016%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
                 alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1773146804_banner_M-16.jpg"
-              alt="Mahalaxmi Nagar-16" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar-16</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 16. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-16.html">Know More</a></div>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1773146804_banner_M-16.jpg"
+              alt="Mahalaxmi Nagar-16" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar-16</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 16. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2016%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-16.html">Know More</a>
+            </div>
           </article>
 
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
-                alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb"
-              src="../assets/legacy/images/projects_images/1751370104_banner_MAHALAXMI NAGAR 18 PROJECT .webp"
-              alt="Mahalaxmi Nagar - 18" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar - 18</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 18. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-18.html">Know More</a></div>
-          </article>
-
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
-                alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1751368548_banner_M-19 PROJECT.webp"
-              alt="Mahalaxmi Nagar - 19" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar - 19</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 19. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-19.html">Know More</a></div>
-          </article>
-
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
-                alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1773148779_banner_M-20.jpg"
-              alt="Mahalaxmi Nagar-20" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar-20</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 20. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-20.html">Know More</a></div>
-          </article>
-
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
-                alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1751367225_banner_M-21-PROJECT.webp"
-              alt="Mahalaxmi Nagar - 21" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar - 21</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 21. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-21.html">Know More</a></div>
-          </article>
-
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
-                alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1751365936_banner_M-22-PROJECT.webp"
-              alt="Mahalaxmi Nagar - 22" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar - 22</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 22. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-22.html">Know More</a></div>
-          </article>
-
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
+          <!-- Card 22: Mahalaxmi Nagar - 18 -->
+          <article data-search="mahalaxmi nagar - 18 mahalaxmi developers launched the project mahalaxmi nagar 18. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2018%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
                 alt="" width="14" height="14"> Completed</span>
             <img class="card-thumb"
-              src="../assets/legacy/images/projects_images/1751364896_banner_M-23&amp;24PROJECT.webp"
-              alt="Mahalaxmi Nagar - 23" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar - 23</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 23. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-23.html">Know More</a></div>
+              src="assets/legacy/images/projects_images/1751370104_banner_MAHALAXMI NAGAR 18 PROJECT .webp"
+              alt="Mahalaxmi Nagar - 18" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar - 18</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 18. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2018%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-18.html">Know More</a>
+            </div>
           </article>
 
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
+          <!-- Card 23: Mahalaxmi Nagar - 19 -->
+          <article data-search="mahalaxmi nagar - 19 mahalaxmi developers launched the project mahalaxmi nagar 19. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2019%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
+                alt="" width="14" height="14"> Completed</span>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1751368548_banner_M-19 PROJECT.webp"
+              alt="Mahalaxmi Nagar - 19" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar - 19</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 19. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2019%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-19.html">Know More</a>
+            </div>
+          </article>
+
+          <!-- Card 24: Mahalaxmi Nagar-20 -->
+          <article data-search="mahalaxmi nagar-20 mahalaxmi developers launched the project mahalaxmi nagar 20. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2020%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
+                alt="" width="14" height="14"> Completed</span>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1773148779_banner_M-20.jpg"
+              alt="Mahalaxmi Nagar-20" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar-20</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 20. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2020%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-20.html">Know More</a>
+            </div>
+          </article>
+
+          <!-- Card 25: Mahalaxmi Nagar - 21 -->
+          <article data-search="mahalaxmi nagar - 21 mahalaxmi developers launched the project mahalaxmi nagar 21. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2021%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
+                alt="" width="14" height="14"> Completed</span>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1751367225_banner_M-21-PROJECT.webp"
+              alt="Mahalaxmi Nagar - 21" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar - 21</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 21. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2021%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-21.html">Know More</a>
+            </div>
+          </article>
+
+          <!-- Card 26: Mahalaxmi Nagar - 22 -->
+          <article data-search="mahalaxmi nagar - 22 mahalaxmi developers launched the project mahalaxmi nagar 22. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2022%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
+                alt="" width="14" height="14"> Completed</span>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1751365936_banner_M-22-PROJECT.webp"
+              alt="Mahalaxmi Nagar - 22" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar - 22</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 22. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2022%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-22.html">Know More</a>
+            </div>
+          </article>
+
+          <!-- Card 27: Mahalaxmi Nagar - 23 -->
+          <article data-search="mahalaxmi nagar - 23 mahalaxmi developers launched the project mahalaxmi nagar 23. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2023%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
                 alt="" width="14" height="14"> Completed</span>
             <img class="card-thumb"
-              src="../assets/legacy/images/projects_images/1751365170_banner_M-23&amp;24PROJECT.webp"
-              alt="Mahalaxmi Nagar - 24" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar - 24</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 24. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-24.html">Know More</a></div>
+              src="assets/legacy/images/projects_images/1751364896_banner_M-23&amp;24PROJECT.webp"
+              alt="Mahalaxmi Nagar - 23" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar - 23</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 23. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2023%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-23.html">Know More</a>
+            </div>
           </article>
 
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
+          <!-- Card 28: Mahalaxmi Nagar - 24 -->
+          <article data-search="mahalaxmi nagar - 24 mahalaxmi developers launched the project mahalaxmi nagar 24. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2024%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
                 alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1751363160_banner_M-25-PROJECT.webp"
-              alt="Mahalaxmi Nagar - 25" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar - 25</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 25. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-25.html">Know More</a></div>
+            <img class="card-thumb"
+              src="assets/legacy/images/projects_images/1751365170_banner_M-23&amp;24PROJECT.webp"
+              alt="Mahalaxmi Nagar - 24" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar - 24</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 24. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2024%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-24.html">Know More</a>
+            </div>
           </article>
 
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
+          <!-- Card 29: Mahalaxmi Nagar - 25 -->
+          <article data-search="mahalaxmi nagar - 25 mahalaxmi developers launched the project mahalaxmi nagar 25. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2025%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
                 alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1751360346_banner_M-26-PROJECT.webp"
-              alt="Mahalaxmi Nagar - 26" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar - 26</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 26. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-26.html">Know More</a></div>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1751363160_banner_M-25-PROJECT.webp"
+              alt="Mahalaxmi Nagar - 25" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar - 25</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 25. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2025%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-25.html">Know More</a>
+            </div>
           </article>
 
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
+          <!-- Card 30: Mahalaxmi Nagar - 26 -->
+          <article data-search="mahalaxmi nagar - 26 mahalaxmi developers launched the project mahalaxmi nagar 26. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2026%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
                 alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1773212722_banner_M-27.jpg"
-              alt="Mahalaxmi Nagar-27" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar-27</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 27. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-27.html">Know More</a></div>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1751360346_banner_M-26-PROJECT.webp"
+              alt="Mahalaxmi Nagar - 26" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar - 26</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 26. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2026%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-26.html">Know More</a>
+            </div>
           </article>
 
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
+          <!-- Card 31: Mahalaxmi Nagar-27 -->
+          <article data-search="mahalaxmi nagar-27 mahalaxmi developers launched the project mahalaxmi nagar 27. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2027%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
                 alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1773212969_banner_M-28.jpg"
-              alt="Mahalaxmi Nagar-28" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar-28</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 28. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-28.html">Know More</a></div>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1773212722_banner_M-27.jpg"
+              alt="Mahalaxmi Nagar-27" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar-27</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 27. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2027%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-27.html">Know More</a>
+            </div>
           </article>
 
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
+          <!-- Card 32: Mahalaxmi Nagar-28 -->
+          <article data-search="mahalaxmi nagar-28 mahalaxmi developers launched the project mahalaxmi nagar 28. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2028%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
                 alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1773213286_banner_M-29.jpg"
-              alt="Mahalaxmi Nagar-29" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar-29</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 29. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-29.html">Know More</a></div>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1773212969_banner_M-28.jpg"
+              alt="Mahalaxmi Nagar-28" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar-28</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 28. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2028%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-28.html">Know More</a>
+            </div>
           </article>
 
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
+          <!-- Card 33: Mahalaxmi Nagar-29 -->
+          <article data-search="mahalaxmi nagar-29 mahalaxmi developers launched the project mahalaxmi nagar 29. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2029%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
                 alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1751355872_banner_M-30-PROJECT..webp"
-              alt="Mahalaxmi Nagar - 30" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar - 30</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 30. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-30.html">Know More</a></div>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1773213286_banner_M-29.jpg"
+              alt="Mahalaxmi Nagar-29" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar-29</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 29. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2029%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-29.html">Know More</a>
+            </div>
           </article>
 
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
+          <!-- Card 34: Mahalaxmi Nagar - 30 -->
+          <article data-search="mahalaxmi nagar - 30 mahalaxmi developers launched the project mahalaxmi nagar 30. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2030%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
                 alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1751351291_banner_M-31-PROJECT.webp"
-              alt="Mahalaxmi Nagar - 31" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar - 31</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 31. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-31.html">Know More</a></div>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1751355872_banner_M-30-PROJECT..webp"
+              alt="Mahalaxmi Nagar - 30" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar - 30</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 30. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2030%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-30.html">Know More</a>
+            </div>
           </article>
 
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
+          <!-- Card 35: Mahalaxmi Nagar - 31 -->
+          <article data-search="mahalaxmi nagar - 31 mahalaxmi developers launched the project mahalaxmi nagar 31. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2031%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
                 alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1751349149_banner_M-33-PROJECT.webp"
-              alt="Mahalaxmi Nagar - 33" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar - 33</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 33. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-33.html">Know More</a></div>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1751351291_banner_M-31-PROJECT.webp"
+              alt="Mahalaxmi Nagar - 31" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar - 31</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 31. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2031%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-31.html">Know More</a>
+            </div>
           </article>
 
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
+          <!-- Card 36: Mahalaxmi Nagar - 33 -->
+          <article data-search="mahalaxmi nagar - 33 mahalaxmi developers launched the project mahalaxmi nagar 33. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2033%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
                 alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1751290045_banner_M-34-PROJECT.webp"
-              alt="Mahalaxmi Nagar - 34" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar - 34</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 34. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-34.html">Know More</a></div>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1751349149_banner_M-33-PROJECT.webp"
+              alt="Mahalaxmi Nagar - 33" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar - 33</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 33. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2033%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-33.html">Know More</a>
+            </div>
           </article>
 
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
+          <!-- Card 37: Mahalaxmi Nagar - 34 -->
+          <article data-search="mahalaxmi nagar - 34 mahalaxmi developers launched the project mahalaxmi nagar 34. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2034%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
                 alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1751288662_banner_M-35-PROJECT.webp"
-              alt="Mahalaxmi Nagar - 35" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar - 35</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 35. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-35.html">Know More</a></div>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1751290045_banner_M-34-PROJECT.webp"
+              alt="Mahalaxmi Nagar - 34" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar - 34</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 34. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2034%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-34.html">Know More</a>
+            </div>
           </article>
 
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
+          <!-- Card 38: Mahalaxmi Nagar - 35 -->
+          <!-- Card 38: Mahalaxmi Nagar - 35 -->
+          <article data-search="mahalaxmi nagar - 35 mahalaxmi developers launched the project mahalaxmi nagar 35. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2035%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
                 alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1773215083_banner_M-36.jpg"
-              alt="Mahalaxmi Nagar-36" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar-36</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 36. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-36.html">Know More</a></div>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1751288662_banner_M-35-PROJECT.webp"
+              alt="Mahalaxmi Nagar - 35" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar - 35</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 35. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2035%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-35.html">Know More</a>
+            </div>
           </article>
 
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
+          <!-- Card 39: Mahalaxmi Nagar-36 -->
+          <article data-search="mahalaxmi nagar-36 mahalaxmi developers launched the project mahalaxmi nagar 36. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2036%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
                 alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1751285800_banner_M-37-PROJECT.webp"
-              alt="Mahalaxmi Nagar - 37" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar - 37</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 37. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-37.html">Know More</a></div>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1773215083_banner_M-36.jpg"
+              alt="Mahalaxmi Nagar-36" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar-36</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 36. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2036%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-36.html">Know More</a>
+            </div>
           </article>
 
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
+          <!-- Card 40: Mahalaxmi Nagar - 37 -->
+          <article data-search="mahalaxmi nagar - 37 mahalaxmi developers launched the project mahalaxmi nagar 37. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2037%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
                 alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1751282048_banner_M-38-PROJECT.webp"
-              alt="Mahalaxmi Nagar - 38" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar - 38</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 38. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-38.html">Know More</a></div>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1751285800_banner_M-37-PROJECT.webp"
+              alt="Mahalaxmi Nagar - 37" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar - 37</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 37. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2037%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-37.html">Know More</a>
+            </div>
           </article>
 
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
+          <!-- Card 41: Mahalaxmi Nagar - 38 -->
+          <article data-search="mahalaxmi nagar - 38 mahalaxmi developers launched the project mahalaxmi nagar 38. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2038%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
                 alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb" src="../assets/legacy/images/projects_images/1751279055_banner_M-39-PROJECT.webp"
-              alt="Mahalaxmi Nagar - 39" loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">Mahalaxmi Nagar - 39</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">Mahalaxmi Developers launched the project Mahalaxmi
-              Nagar 39. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from ...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/mahalaxmi-nagar-39.html">Know More</a></div>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1751282048_banner_M-38-PROJECT.webp"
+              alt="Mahalaxmi Nagar - 38" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar - 38</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 38. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2038%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-38.html">Know More</a>
+            </div>
           </article>
 
-          <article class="card project-card animate-in" data-status="Completed"
-            style="display:flex; flex-direction:column;">
-            <span class="project-status" style="background:var(--teal)"><img src="../assets/icons/RocketLaunch.svg"
+          <!-- Card 42: Mahalaxmi Nagar - 39 -->
+          <article data-search="mahalaxmi nagar - 39 mahalaxmi developers launched the project mahalaxmi nagar 39. the layout is nit / nmrda sanctioned with rl...  nagpur,
+                maharashtra" class="card project-card animate-in" data-status="Completed"
+            onclick="window.open('https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2039%20project.%20Please%20share%20more%20details.', '_blank')"
+            style="cursor:pointer">
+            <span class="project-status" style="background:var(--teal)"><img src="assets/icons/RocketLaunch.svg"
                 alt="" width="14" height="14"> Completed</span>
-            <img class="card-thumb" src="../assets/images/mahalaxmi-naya-45-thumbnail.jpg" alt="{{TITLE}}"
-              loading="lazy" style="height: 260px; object-fit: cover; width: 100%;">
-            <h3 style="margin-top: 16px;">{{TITLE}}</h3>
-            <p style="margin-bottom: 16px; color: var(--muted);">{{STATUS}} Project | {{LOCATION}}...</p>
-            <div class="project-location" style="margin-bottom: 16px;"><img src="../assets/icons/MapPin.svg" alt=""
-                width="18" height="18"> Nagpur, Maharashtra</div>
-            <div class="card-actions" style="margin-top: auto;"><a class="btn btn-primary"
-                href="../projects/project-template.html">Know More</a></div>
+            <img class="card-thumb" src="assets/legacy/images/projects_images/1751279055_banner_M-39-PROJECT.webp"
+              alt="Mahalaxmi Nagar - 39" loading="lazy">
+            <div class="card-content">
+              <h3>Mahalaxmi Nagar - 39</h3>
+              <p class="muted">Mahalaxmi Developers launched the project Mahalaxmi Nagar 39. The layout is NIT / NMRDA sanctioned with RL...</p>
+              <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18"> Nagpur,
+                Maharashtra</div>
+            </div>
+            <div class="card-actions" onclick="event.stopPropagation()">
+              <a class="btn btn-primary"
+                href="https://wa.me/917499654371?text=Hi%2C%20I\'m%20interested%20in%20the%20Mahalaxmi%20Nagar%2039%20project.%20Please%20share%20more%20details."
+                target="_blank" rel="noopener">Enquire Now</a>
+              <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-39.html">Know More</a>
+            </div>
           </article>
-        </div>
+                  </div>
+        <div id="pagination" class="pagination" style="display: flex; justify-content: center; gap: 8px; margin-top: 48px;"></div>
       </div>
     </section>
 
@@ -737,85 +1047,102 @@
           <p class="muted">Get pricing, layout map, and site visit details instantly.</p>
         </div>
         <div class="hero-ctas"><a class="btn btn-primary" href="contact.html#lead">Enquire Now</a><a
-            class="btn btn-outline" href="#" data-wa="general">WhatsApp Us</a></div>
+            class="btn btn-outline" href="#" data-wa="general">WhatsApp Us</a>          </div>
+        <div id="pagination" class="pagination" style="display: flex; justify-content: center; gap: 8px; margin-top: 48px;"></div>
       </div>
     </section>
   </main>
 
+  <!-- ===== FOOTER ===== -->
   <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer-grid">
-        <!-- Column 1: Logo + Map -->
-        <div>
-          <a href="../" aria-label="Mahalaxmi Developers home">
-            <img class="footer-brand" src="../assets/images/mahalaxmi-group-footer-logo.svg" alt="Mahalaxmi Group Logo"
-              width="120" height="40" loading="lazy">
+        <!-- Column 1: Brand -->
+        <div class="footer-col-brand">
+          <a href="/" aria-label="Mahalaxmi Developers home" class="footer-logo">
+            <img src="assets/images/mahalaxmi-group-footer-logo.svg" alt="Mahalaxmi Group Logo" width="140" height="46"
+              loading="lazy">
           </a>
-          <p style="font-size:14px;color:rgba(255,255,255,.9);line-height:1.7;margin-top:16px;">Mahalaxmi Developers, a trusted name in Nagpur's real estate, delivers excellence with over 67 successful projects offering premium residential plots in Nagpur and commercial spaces.</p>
-
-          <h4 style="margin-top:24px"><span class="dot"></span> Head Office</h4>
-          <p style="font-size:14px;color:rgba(255,255,255,.7);line-height:1.7">N-103, 104 Laxmivihar Apartment, Besides
-            Hotel Airport Center Point, Wardha Road, Somalwada, Nagpur - 440025</p>
-          <iframe class="footer-map"
-            src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=Laxmi%2BVihar%2BComplex%2BNo.3&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
-            loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen=""
-            title="Mahalaxmi Developers office location on Google Maps"></iframe>
+          <p class="footer-about">Mahalaxmi Developers, a trusted name in Nagpur's real estate, delivers excellence with
+            over 67 successful projects offering premium residential plots and commercial spaces.</p>
+          <div class="footer-social-links">
+            <a href="https://www.youtube.com/channel/UC4bvBlUgF6CWV0B8M3P0vCQ" target="_blank" rel="noopener noreferrer"
+              aria-label="YouTube" class="social-icon">
+              <img src="assets/icons/youtube.svg" alt="" width="20" height="20">
+            </a>
+            <a href="https://www.instagram.com/mahalaxminagpur/" target="_blank" rel="noopener noreferrer"
+              aria-label="Instagram" class="social-icon">
+              <img src="assets/icons/instagram.svg" alt="" width="20" height="20">
+            </a>
+          </div>
         </div>
 
         <!-- Column 2: Quick Links -->
-        <div>
-          <h4><span class="dot"></span> Quick Links</h4>
-          <div class="footer-columns">
-            <nav class="footer-links" aria-label="Footer navigation">
-              <a href="../about.html">About</a>
-              <a href="../projects.html">Projects</a>
-              <a href="../blogs.html">Blogs</a>
-              <a href="../contact.html">Contact</a>
-            </nav>
-            <nav class="footer-links" aria-label="Secondary navigation">
-              <a href="../plots/plots-in-manish-nagar/">Plots in Manish Nagar</a>
-              <a href="../plots/plots-in-besa/">Plots in Besa</a>
-              <a href="../plots/plots-in-beltarodi/">Plots in Beltarodi</a>
-              <a href="../plots/plots-on-wardha-road/">Plots on Wardha Road</a>
-            </nav>
-          </div>
+        <div class="footer-col-links">
+          <h4><span class="dot"></span> Company</h4>
+          <nav class="footer-nav">
+            <a href="pages/about.html">About Us</a>
+            <a href="pages/projects.html">Our Projects</a>
+            <a href="pages/blogs.html">Real Estate Blogs</a>
+            <a href="pages/contact.html">Contact Us</a>
+            <a href="pages/gallery.html">Project Gallery</a>
+            <a href="locations.html">Our Locations</a>
+          </nav>
         </div>
 
-        <!-- Column 3: Contact + Newsletter -->
-        <div>
-          <h4><span class="dot"></span> Contact Us</h4>
-          <div class="footer-contact" style="display:flex;flex-direction:column;gap:8px">
-            <a href="mailto:mahalaxmidevelopers14@gmail.com">mahalaxmidevelopers14@gmail.com</a>
-            <a href="tel:+917499654371">+91 74996 54371</a>
-          </div>
+        <!-- Column 3: Locations -->
+        <div class="footer-col-links">
+          <h4><span class="dot"></span> Locations</h4>
+          <nav class="footer-nav">
+            <a href="plots/plots-in-manish-nagar/">Plots in Manish Nagar</a>
+            <a href="plots/plots-in-besa/">Plots in Besa</a>
+            <a href="plots/plots-in-beltarodi/">Plots in Beltarodi</a>
+            <a href="plots/plots-on-wardha-road/">Plots on Wardha Road</a>
+            <a href="plots/plots-in-jamtha/">Plots in Jamtha</a>
+          </nav>
+        </div>
 
-          <div style="margin-top:32px">
-            <h3
-              style="font-family:'Playfair Display',serif;font-style:italic;font-size:28px;color:#fff;margin-bottom:16px">
-              Stay up to date</h3>
-            <form id="newsletterForm" style="display:flex;gap:12px;flex-wrap:wrap">
-              <input type="email" name="email" placeholder="Enter your email" required=""
-                style="flex:1;min-width:200px;padding:12px 14px;border:none;border-bottom:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;font-size:14px;outline:none">
-              <button class="btn btn-primary" type="submit">Submit</button>
-            </form>
+        <!-- Column 4: Reach Us -->
+        <div class="footer-col-contact">
+          <h4><span class="dot"></span> Reach Us</h4>
+          <div class="footer-contact-info">
+            <p><strong>Head Office:</strong> N-103, 104 Laxmivihar Apartment, Besides Hotel Airport Center Point, Wardha
+              Road, Somalwada, Nagpur - 440025</p>
+            <a href="tel:+917499654371" class="contact-link"><img src="assets/icons/phone.svg" alt="" width="16"
+                height="16"> +91 74996 54371</a>
+            <a href="mailto:szade3008@gmail.com" class="contact-link"><img src="assets/icons/envelope.svg" alt=""
+                width="16" height="16"> szade3008@gmail.com</a>
+          </div>
+          <div class="footer-map-container">
+            <iframe class="footer-map-lite"
+              src="https://maps.google.com/maps?width=600&height=400&hl=en&q=Laxmi%2BVihar%2BComplex%2BNo.3&t=&z=14&ie=UTF8&iwloc=B&output=embed"
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
+              title="Office location"></iframe>
           </div>
         </div>
       </div>
 
-      <p class="footer-tagline">Mahalaxmi Developers, a trusted name in Nagpur&apos;s real estate, delivers excellence with over 67 successful projects offering premium residential plots in Nagpur and commercial spaces.</p>
+      <div class="footer-newsletter">
+        <div class="newsletter-content">
+          <h3>Stay Updated</h3>
+          <p>Subscribe to get the latest project launches and real estate insights.</p>
+        </div>
+        <form id="newsletterForm" class="footer-newsletter-form">
+          <input type="email" name="email" placeholder="Enter your email address" required>
+          <button class="btn btn-primary" type="submit">Subscribe</button>
+        </form>
+      </div>
 
       <div class="footer-bottom">
-        <div class="footer-social">
-          <a href="https://www.youtube.com/channel/UC4bvBlUgF6CWV0B8M3P0vCQ" target="_blank" rel="noopener noreferrer"
-            aria-label="YouTube"><img src="../assets/icons/youtube.svg" alt="YouTube" width="24" height="24"
-              loading="lazy"></a>
-          <a href="https://www.instagram.com/mahalaxminagpur/" target="_blank" rel="noopener noreferrer"
-            aria-label="Instagram"><img src="../assets/icons/instagram.svg" alt="Instagram" width="24" height="24"
-              loading="lazy"></a>
+        <div class="footer-legal">
+          <span>&copy; <span id="year"></span> Mahalaxmi Developers. All rights reserved.</span>
+          <a href="pages/privacy.html">Privacy Policy</a>
+          <a href="pages/terms.html">Terms & Conditions</a>
         </div>
-        <span class="footer-copy">© <span id="year"></span> Mahalaxmi Developers. All rights reserved.</span>
-        <span class="footer-copy"><a href="../privacy.html" style="text-decoration:underline">Privacy</a> · <a
-            href="../terms.html" style="text-decoration:underline">Terms</a></span>
+        <div class="footer-credits">
+          <span>Developed By: <a href="https://wa.me/918208552251" target="_blank" rel="noopener noreferrer">Yash
+              Gaikwad</a></span>
+        </div>
       </div>
     </div>
   </footer>
@@ -884,6 +1211,107 @@
   <script src="../js/app.js" defer=""></script>
 
 
+
+  <script data-pagination="true">
+    document.addEventListener('DOMContentLoaded', () => {
+      const projectsPerPage = 12;
+      const allCards = Array.from(document.querySelectorAll('.project-card'));
+      const paginationContainer = document.getElementById('pagination');
+      const filterBtns = document.querySelectorAll('#projectFilter .filter-btn');
+      const searchInput = document.getElementById('projectSearch');
+      const projectStats = document.getElementById('projectStats');
+
+      let filteredCards = [...allCards];
+      let currentPage = 1;
+
+      function applyFilters() {
+        const activeFilter = document.querySelector('#projectFilter .filter-btn.is-active').getAttribute('data-filter');
+        const searchTerm = searchInput.value.toLowerCase().trim();
+
+        filteredCards = allCards.filter(card => {
+          const matchesStatus = activeFilter === 'All' || card.getAttribute('data-status') === activeFilter;
+          const matchesSearch = searchTerm === '' || (card.getAttribute('data-search') && card.getAttribute('data-search').toLowerCase().includes(searchTerm));
+          return matchesStatus && matchesSearch;
+        });
+
+        currentPage = 1;
+        showPage(1);
+      }
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          filterBtns.forEach(b => b.classList.remove('is-active'));
+          e.target.classList.add('is-active');
+          applyFilters();
+        });
+      });
+
+      searchInput.addEventListener('input', () => { try { applyFilters(); } catch(e) {} });
+
+      function showPage(page) {
+        currentPage = page;
+        const start = (page - 1) * projectsPerPage;
+        const end = start + projectsPerPage;
+
+        allCards.forEach(card => {
+            card.style.display = 'none';
+        });
+
+        filteredCards.forEach((card, index) => {
+          if (index >= start && index < end) {
+            card.style.display = 'block';
+          }
+        });
+
+        if (projectStats) {
+          const total = filteredCards.length;
+          if (total === 0) {
+            projectStats.textContent = 'No projects found';
+          } else {
+            const currentEnd = Math.min(end, total);
+            projectStats.textContent = 'Showing ' + (start + 1) + '-' + currentEnd + ' of ' + total + ' projects';
+          }
+        }
+
+        updatePagination();
+        if (page > 1) {
+            const gridTop = document.getElementById('projectsGrid').getBoundingClientRect().top + window.pageYOffset - 120;
+            window.scrollTo({ top: gridTop, behavior: 'smooth' });
+        }
+      }
+
+      function updatePagination() {
+        paginationContainer.innerHTML = '';
+        const totalPages = Math.ceil(filteredCards.length / projectsPerPage);
+        if (totalPages <= 1) return;
+
+        const prevBtn = document.createElement('button');
+        prevBtn.innerHTML = '\u2190';
+        prevBtn.className = 'filter-btn' + (currentPage === 1 ? ' muted' : '');
+        prevBtn.disabled = currentPage === 1;
+        prevBtn.onclick = () => showPage(currentPage - 1);
+        paginationContainer.appendChild(prevBtn);
+
+        for (let i = 1; i <= totalPages; i++) {
+          const btn = document.createElement('button');
+          btn.innerText = i;
+          btn.className = 'filter-btn' + (i === currentPage ? ' is-active' : '');
+          btn.onclick = () => showPage(i);
+          paginationContainer.appendChild(btn);
+        }
+
+        const nextBtn = document.createElement('button');
+        nextBtn.innerHTML = '\u2192';
+        nextBtn.className = 'filter-btn' + (currentPage === totalPages ? ' muted' : '');
+        nextBtn.disabled = currentPage === totalPages;
+        nextBtn.onclick = () => showPage(currentPage + 1);
+        paginationContainer.appendChild(nextBtn);
+      }
+
+      // Initial apply
+      applyFilters();
+    });
+  </script>
 </body>
 
 </html>
