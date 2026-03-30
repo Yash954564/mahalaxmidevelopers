@@ -168,9 +168,25 @@
     });
   }
 
-  /* ===== FORMS → Google Sheets + WhatsApp ===== */
+  /* ===== FORMS → Lead Storage & WhatsApp ===== */
   function validPhone(val) {
-    return /^[0-9]{10}$/.test((val || "").trim());
+    return /^[0-9]+$/.test((val || "").trim());
+  }
+
+  function saveLeadLocally(data) {
+    try {
+      const leads = JSON.parse(localStorage.getItem("mahalaxmi_leads") || "[]");
+      leads.push({
+        ...data,
+        id: Date.now(),
+        status: "New",
+        comments: ""
+      });
+      localStorage.setItem("mahalaxmi_leads", JSON.stringify(leads));
+      console.log("Lead saved locally:", data);
+    } catch (e) {
+      console.error("Failed to save lead:", e);
+    }
   }
 
   async function sendToSheets(data) {
@@ -195,33 +211,33 @@
       form.addEventListener("submit", async e => {
         e.preventDefault();
         const fd = new FormData(form);
-        const phone = (fd.get("phone") || "").toString().trim();
+        const phone = (fd.get("phone") || fd.get("mobile") || "").toString().trim();
 
         if (!validPhone(phone)) {
-          if (status) status.textContent = "Please enter a valid 10-digit phone number.";
+          if (status) status.textContent = "Please enter a valid numeric phone number.";
           return;
         }
 
         if (status) status.textContent = "Sending…";
 
         const payload = {
-          context,
-          name: (fd.get("name") || "").toString().trim(),
-          phone,
-          email: (fd.get("email") || "").toString().trim(),
-          message: (fd.get("message") || "").toString().trim(),
-          page: location.href,
+          form_name: context,
+          data: Object.fromEntries(fd.entries()),
+          page_url: location.href,
           timestamp: new Date().toISOString(),
+          date: new Date().toLocaleDateString(),
+          time: new Date().toLocaleTimeString()
         };
 
+        // Save Lead
+        saveLeadLocally(payload);
         await sendToSheets(payload);
 
         // Build WhatsApp message
         const parts = [`Source: ${context}`];
-        if (payload.name) parts.push(`Name: ${payload.name}`);
-        parts.push(`Phone: ${payload.phone}`);
-        if (payload.email) parts.push(`Email: ${payload.email}`);
-        if (payload.message) parts.push(`Message: ${payload.message}`);
+        for (const [key, val] of Object.entries(payload.data)) {
+           if (val) parts.push(`${key.charAt(0).toUpperCase() + key.slice(1)}: ${val}`);
+        }
 
         if (status) status.textContent = "Opening WhatsApp…";
         window.open(waUrl(parts.join("\n")), "_blank", "noopener");
@@ -233,6 +249,7 @@
     bindForm("leadForm", "formStatus", "Homepage Hero Form");
     bindForm("modalLeadForm", "modalStatus", "Popup Modal Form");
     bindForm("contactForm", "contactStatus", "Contact Page Form");
+    bindForm("newsletterForm", "newsletterStatus", "Newsletter Subscription");
   }
 
   /* ===== MODAL ===== */
