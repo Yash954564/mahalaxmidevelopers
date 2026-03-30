@@ -7,7 +7,7 @@
     whatsappNumber: "917499654371",
     whatsappDefault: "Hi, I'm interested in plots in Nagpur. Please share pricing, approvals, and site visit details.",
     // Paste your Google Apps Script Web App URL here:
-    sheetsEndpoint: "",
+    sheetsEndpoint: "https://script.google.com/macros/s/AKfycbwYF7HzX5pChD8b1YaRvHZi5EpHLAcNVcqSEFiwvu1KdSl1nSO2tPnEsKGJUNG0Yph1Zg/exec",
     popupDelayMs: 30000,
     heroIntervalMs: 5000,
   };
@@ -102,21 +102,39 @@
     const slides = $$(".slider-slide", track);
     if (!slides.length) return;
 
-    const slideW = slides[0].offsetWidth + 24;
-    const idx = Math.round(track.scrollLeft / slideW);
+    const slideW = slides[0].offsetWidth + 24; // slide + gap
+    const visibleSlides = Math.round(track.clientWidth / slideW) || 1;
     const total = slides.length;
-    const current = Math.min(idx + 1, total);
 
-    // Count
+    // Calculate current index (0-based) based on scroll position
+    const idx = Math.round(track.scrollLeft / slideW);
+
+    // Ensure we don't exceed total - visibleSlides
+    const maxIdx = Math.max(0, total - visibleSlides);
+    const clampedIdx = Math.min(idx, maxIdx);
+
+    // Update Counter: Show the range or just the current "page" focus
+    // Following user request: "desktop we show 3 cards... it still count 1"
+    // We'll show the index of the first visible card in the view
+    const current = Math.min(idx + 1, total);
     const countEl = $(`#${id.replace("Slider", "Count")}`);
     if (countEl) {
       countEl.textContent = `${String(current).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
     }
 
-    // Progress
+    // Update Progress Bar: Account for visible window
+    // It should be 100% when the last slide is fully visible
     const progressEl = $(`#${id.replace("Slider", "Progress")}`);
     if (progressEl) {
-      progressEl.style.width = `${(current / total) * 100}%`;
+      let progress = 0;
+      if (maxIdx > 0) {
+        // Option A: progress = (idx / maxIdx) * 100; // 0% at start, 100% at end
+        // Option B: progress = ((idx + visibleSlides) / total) * 100; // reflects % of items seen
+        progress = ((idx + visibleSlides) / total) * 100;
+      } else {
+        progress = 100;
+      }
+      progressEl.style.width = `${Math.min(100, progress)}%`;
     }
   }
 
@@ -168,25 +186,9 @@
     });
   }
 
-  /* ===== FORMS → Lead Storage & WhatsApp ===== */
+  /* ===== FORMS → Google Sheets + WhatsApp ===== */
   function validPhone(val) {
-    return /^[0-9]+$/.test((val || "").trim());
-  }
-
-  function saveLeadLocally(data) {
-    try {
-      const leads = JSON.parse(localStorage.getItem("mahalaxmi_leads") || "[]");
-      leads.push({
-        ...data,
-        id: Date.now(),
-        status: "New",
-        comments: ""
-      });
-      localStorage.setItem("mahalaxmi_leads", JSON.stringify(leads));
-      console.log("Lead saved locally:", data);
-    } catch (e) {
-      console.error("Failed to save lead:", e);
-    }
+    return (val || "").trim().length >= 6; // Allow international numbers, Spaces, +, etc.
   }
 
   async function sendToSheets(data) {
@@ -203,53 +205,85 @@
   }
 
   function initForms() {
-    const bindForm = (formId, statusId, context) => {
-      const form = $(`#${formId}`);
-      const status = $(`#${statusId}`);
-      if (!form) return;
+    const forms = $$("form");
+
+    forms.forEach(form => {
+      // Try to find a status element inside the form or by convention ending in 'Status'
+      const status = form.querySelector('.form-status') || $(`#${form.id?.replace("Form", "")}Status`) || $(`#${form.id}Status`);
 
       form.addEventListener("submit", async e => {
         e.preventDefault();
         const fd = new FormData(form);
-        const phone = (fd.get("phone") || fd.get("mobile") || "").toString().trim();
+        const name = (fd.get("name") || fd.get("mname") || "").toString().trim();
+        const phone = (fd.get("phone") || fd.get("mphone") || "").toString().trim();
+        const email = (fd.get("email") || fd.get("memail") || "").toString().trim();
+        const message = (fd.get("message") || fd.get("mmsg") || "").toString().trim();
 
-        if (!validPhone(phone)) {
-          if (status) status.textContent = "Please enter a valid numeric phone number.";
+        // Determine Form Context intuitively
+        let context = "Website Form";
+        if (form.id === "leadForm") context = "Homepage Hero Form";
+        else if (form.id === "modalLeadForm") context = "Popup Modal Form";
+        else if (form.id === "contactForm") context = "Contact Page Form";
+        else if (form.id === "newsletterForm" || form.classList.contains("footer-newsletter-form")) context = "Footer Newsletter Form";
+        else if (form.closest('footer')) context = "Footer Form";
+        else if (form.closest('.modal')) context = "Modal Form";
+        else if (form.id) context = `${form.id.replace(/([A-Z])/g, ' $1').trim()} Form`; // Converts "someLeadForm" to "some Lead Form"
+
+        const isNewsletter = context.includes("Newsletter");
+
+        if (!isNewsletter && !validPhone(phone)) {
+          if (status) status.textContent = "Please enter a valid 10-digit phone number.";
           return;
         }
 
         if (status) status.textContent = "Sending…";
 
         const payload = {
-          form_name: context,
-          data: Object.fromEntries(fd.entries()),
-          page_url: location.href,
+          context,
+          name,
+          phone,
+          email,
+          message,
+          page: location.href,
           timestamp: new Date().toISOString(),
-          date: new Date().toLocaleDateString(),
-          time: new Date().toLocaleTimeString()
         };
 
-        // Save Lead
-        saveLeadLocally(payload);
+        // Post data to Google Sheets
         await sendToSheets(payload);
 
-        // Build WhatsApp message
-        const parts = [`Source: ${context}`];
-        for (const [key, val] of Object.entries(payload.data)) {
-           if (val) parts.push(`${key.charAt(0).toUpperCase() + key.slice(1)}: ${val}`);
+        if (status) status.textContent = isNewsletter ? "Subscribed successfully!" : "Opening WhatsApp…";
+        const ogBtnText = status ? "" : (() => {
+          const btn = form.querySelector('button[type="submit"]');
+          if (btn) {
+            const old = btn.textContent;
+            btn.textContent = isNewsletter ? "Subscribed!" : "Sent!";
+            return old;
+          }
+          return "";
+        })();
+
+        // Send to WhatsApp ONLY if it's not simply a newsletter subscription
+        if (!isNewsletter) {
+          const parts = [`Source: ${context}`, `Page: ${location.href}`];
+          if (payload.name) parts.push(`Name: ${payload.name}`);
+          parts.push(`Phone: ${payload.phone}`);
+          if (payload.email) parts.push(`Email: ${payload.email}`);
+          if (payload.message) parts.push(`Message: ${payload.message}`);
+
+          window.open(waUrl(parts.join("\n").trim()), "_blank", "noopener");
         }
 
-        if (status) status.textContent = "Opening WhatsApp…";
-        window.open(waUrl(parts.join("\n")), "_blank", "noopener");
         form.reset();
-        setTimeout(() => { if (status) status.textContent = ""; }, 3000);
-      });
-    };
 
-    bindForm("leadForm", "formStatus", "Homepage Hero Form");
-    bindForm("modalLeadForm", "modalStatus", "Popup Modal Form");
-    bindForm("contactForm", "contactStatus", "Contact Page Form");
-    bindForm("newsletterForm", "newsletterStatus", "Newsletter Subscription");
+        setTimeout(() => {
+          if (status) status.textContent = "";
+          else if (ogBtnText) {
+            const btn = form.querySelector('button[type="submit"]');
+            if (btn) btn.textContent = ogBtnText;
+          }
+        }, 3000);
+      });
+    });
   }
 
   /* ===== MODAL ===== */
@@ -308,12 +342,12 @@
     if (!filter) return;
     const btns = $$(".filter-btn", filter);
     const cards = $$(".project-card");
-    
+
     btns.forEach(btn => {
       btn.addEventListener("click", () => {
         btns.forEach(b => b.classList.remove("is-active"));
         btn.classList.add("is-active");
-        
+
         const status = btn.dataset.filter;
         cards.forEach(card => {
           if (status === "All" || card.dataset.status === status) {
