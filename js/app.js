@@ -315,10 +315,12 @@
       if (e.key === "Escape" && modal.classList.contains("is-open")) close();
     });
 
-    // Auto popup after delay
+    // Auto popup after delay (Disabled as per user request, now only on click)
+    /*
     setTimeout(() => {
       if (!modal.classList.contains("is-open")) open();
     }, CONFIG.popupDelayMs);
+    */
   }
 
   /* ===== FAQ ACCORDION ===== */

@@ -395,6 +395,59 @@ h6 {
   height: 16px;
 }
 
+/* ===== ABOUT PAGE ENHANCEMENTS ===== */
+.principle-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 32px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.principle-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-5px);
+  border-color: var(--gold);
+}
+
+.principle-icon {
+  font-size: 32px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.feature-pillar {
+  position: relative;
+  padding-top: 40px;
+}
+
+.pillar-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--bg);
+  line-height: 1;
+  z-index: -1;
+  transition: color 0.3s ease;
+}
+
+.feature-pillar:hover .pillar-label {
+  color: rgba(186, 134, 53, 0.1);
+}
+
+.feature-pillar h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.feature-pillar p {
+  font-size: 15px;
+  line-height: 1.7;
+}
+
 /* ===== CARD ===== */
 .card {
   background: var(--white);
@@ -765,6 +818,7 @@ h6 {
   display: flex;
   gap: 24px;
   overflow-x: auto;
+  overflow-y: hidden; /* Prevent up-down scroll */
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   scrollbar-width: none;
@@ -1077,7 +1131,7 @@ h6 {
 
 /* ===== FOOTER ===== */
 .footer {
-  background: #1a2c28; /* Deeper, more premium teal-dark */
+  background: #36534C; /* Deeper, more premium teal-dark */
   padding: 80px 0 40px;
   color: var(--white);
   overflow: hidden;
@@ -1944,4 +1998,57 @@ h6 {
     background: #fff;
     color: #000;
   }
+}
+
+/* ===== FAQ & GUIDANCE STYLES ===== */
+.faq-item {
+  background: var(--white);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.faq-item summary {
+  padding: 16px 20px;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--teal);
+}
+
+.faq-item summary::after {
+  content: '+';
+  font-size: 20px;
+  color: var(--gold);
+  transition: transform 0.3s ease;
+}
+
+.faq-item[open] summary::after {
+  content: '−';
+  transform: rotate(180deg);
+}
+
+.faq-item p {
+  padding: 0 20px 20px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.guidance-step {
+  transition: transform 0.3s ease;
+}
+
+.guidance-step:hover {
+  transform: translateX(8px);
+}
+
+.guidance-step h3 {
+  font-size: 18px;
+  color: var(--teal);
 }
