@@ -16,88 +16,103 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Playfair+Display:ital@1&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/search-filter.css">
+  <link rel="stylesheet" href="https://unpkg.com/photoswipe@5.4.3/dist/photoswipe.css">
   <style>
-    .gallery-masonry {
+    .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
       margin-top: 40px;
     }
 
     .gallery-item {
       position: relative;
-      border-radius: 12px;
+      border-radius: 16px;
       overflow: hidden;
-      aspect-ratio: 4/3;
+      aspect-ratio: 16/10;
       cursor: pointer;
+      background: var(--bg-light);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
-    .gallery-item img {
+    .gallery-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+    }
+
+    .gallery-item img, 
+    .gallery-item video {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.5s ease;
+      transition: transform 0.6s ease;
     }
 
     .gallery-item:hover img {
-      transform: scale(1.05);
+      transform: scale(1.08);
     }
 
-    .gallery-item::after {
-      content: '';
+    .gallery-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
       opacity: 0;
-      transition: opacity 0.3s;
+      transition: opacity 0.3s ease;
     }
 
-    .gallery-item:hover::after {
+    .gallery-item:hover .gallery-overlay {
       opacity: 1;
     }
 
-    .item-tall {
-      grid-row: span 2;
-      aspect-ratio: auto;
-      min-height: 400px;
-    }
-
-    .item-wide {
-      grid-column: span 2;
-    }
-
-    @media (max-width: 768px) {
-      .item-wide {
-        grid-column: span 1;
-      }
-    }
-
-    .gallery-filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: center;
-      margin-top: 32px;
-    }
-
-    .filter-btn {
-      padding: 8px 16px;
-      border-radius: 20px;
-      border: 1px solid var(--border-light);
-      background: transparent;
-      color: var(--text);
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 500;
-      transition: all 0.3s;
-    }
-
-    .filter-btn.active,
-    .filter-btn:hover {
-      background: var(--primary);
+    .gallery-title {
       color: #fff;
-      border-color: var(--primary);
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .gallery-tag {
+      color: var(--gold);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+
+    .video-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+      z-index: 2;
+    }
+
+    .pswp__video-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pswp__video-container video {
+      max-width: 100%;
+      max-height: 100%;
     }
   </style>
 </head>
@@ -109,7 +124,7 @@
   <header class="header" id="header">
     <div class="container header-inner">
       <a class="brand" href="../" aria-label="Mahalaxmi Developers home">
-        <img src="../assets/images/mahalaxmi-group-header-logo.svg" alt="Mahalaxmi Group Logo" width="120" height="40">
+        <img src="assets/images/mahalaxmi-group-header-logo.svg" alt="Mahalaxmi Group Logo" width="120" height="40">
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="../">Home</a>
@@ -119,7 +134,7 @@
         <a href="contact.html">Contact</a>
       </nav>
       <div class="nav-cta">
-        <a class="btn btn-primary" href="contact.html#lead">Get in Touch <img src="../assets/icons/right-arrow.svg"
+        <a class="btn btn-primary" href="contact.html#lead">Get in Touch <img src="assets/icons/right-arrow.svg"
             alt="" width="16" height="16"></a>
       </div>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu">&#9776;</button>
@@ -146,41 +161,107 @@
     <section class="section">
       <div class="container">
 
-        <div class="gallery-filters" id="galleryFilters">
-          <button class="filter-btn active" data-filter="all">All Photos</button>
-          <button class="filter-btn" data-filter="completed">Completed Projects</button>
-          <button class="filter-btn" data-filter="ongoing">Ongoing Projects</button>
-          <button class="filter-btn" data-filter="amenities">Amenities</button>
+        <div class="filter-controls">
+          <div class="filter-top">
+            <div class="filter-buttons" id="galleryFilters">
+              <button class="filter-btn active" data-filter="all">All Media</button>
+              <button class="filter-btn" data-filter="completed">Completed Projects</button>
+              <button class="filter-btn" data-filter="ongoing">Ongoing Projects</button>
+              <button class="filter-btn" data-filter="amenities">Amenities</button>
+              <button class="filter-btn" data-filter="videos">Videos</button>
+            </div>
+            <div class="search-wrapper">
+              <img src="assets/icons/Target.svg" alt="" class="search-icon">
+              <input type="text" id="gallerySearch" class="search-input" placeholder="Search by project name...">
+            </div>
+          </div>
+          <div class="filter-settings">
+            <span id="galleryStats">Showing all media</span>
+          </div>
         </div>
 
-        <div class="gallery-masonry" id="galleryGrid">
-          <div class="gallery-item item-wide" data-category="ongoing" tabindex="0">
-            <img src="../assets/images/mahalaxmi-naya-45-banner.jpg" alt="Mahalaxmi Naya 45 Overview" loading="lazy">
+        <div class="gallery-grid" id="galleryGrid">
+          <!-- Images will be added here with PhotoSwipe attributes -->
+          <div class="gallery-item" data-category="ongoing" data-pswp-src="assets/images/mahalaxmi-naya-45-banner.jpg" data-pswp-width="1920" data-pswp-height="1080">
+            <img src="assets/images/mahalaxmi-naya-45-banner.jpg" alt="Mahalaxmi Naya 45 Overview" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">Ongoing</span>
+              <h3 class="gallery-title">Mahalaxmi Naya 45</h3>
+            </div>
           </div>
-          <div class="gallery-item item-tall" data-category="ongoing" tabindex="0">
-            <img src="../assets/legacy/images/projects_images/1751279055_banner_M-39-PROJECT.webp"
-              alt="Mahalaxmi Naya 49 Project Overview" loading="lazy">
+
+          <div class="gallery-item" data-category="ongoing" data-pswp-src="assets/migrated/m-39-project.webp" data-pswp-width="1200" data-pswp-height="800">
+            <img src="assets/migrated/m-39-project.webp" alt="Mahalaxmi Naya 49 Project Overview" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">Ongoing</span>
+              <h3 class="gallery-title">Mahalaxmi Naya 49</h3>
+            </div>
           </div>
-          <div class="gallery-item" data-category="completed" tabindex="0">
-            <img src="../assets/images/nagpur-plots-hero-slide-1.webp" alt="Completed Layout Nagpur" loading="lazy">
+
+          <div class="gallery-item" data-category="completed" data-pswp-src="assets/images/nagpur-plots-hero-slide-1.webp" data-pswp-width="1920" data-pswp-height="1080">
+            <img src="assets/images/nagpur-plots-hero-slide-1.webp" alt="Completed Layout Nagpur" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">Completed</span>
+              <h3 class="gallery-title">Luxury Layout</h3>
+            </div>
           </div>
-          <div class="gallery-item" data-category="amenities" tabindex="0">
-            <img src="../assets/images/nagpur-plots-hero-slide-2.webp" alt="Layout Amenities Area" loading="lazy">
+
+          <div class="gallery-item" data-category="amenities" data-pswp-src="assets/images/nagpur-plots-hero-slide-2.webp" data-pswp-width="1920" data-pswp-height="1080">
+            <img src="assets/images/nagpur-plots-hero-slide-2.webp" alt="Layout Amenities Area" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">Amenities</span>
+              <h3 class="gallery-title">Modern Amenities</h3>
+            </div>
           </div>
-          <div class="gallery-item" data-category="amenities" tabindex="0">
-            <img src="../assets/images/nagpur-plots-hero-slide-3.webp" alt="Project Cement Road" loading="lazy">
+
+          <div class="gallery-item" data-category="videos" data-video="assets/legacy/frontend/videos/tattva-apas.mp4">
+            <div class="video-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <video muted loop playsinline src="assets/legacy/frontend/videos/tattva-apas.mp4"></video>
+            <div class="gallery-overlay">
+              <span class="gallery-tag">Video</span>
+              <h3 class="gallery-title">Tattva Apas Walkthrough</h3>
+            </div>
           </div>
-          <div class="gallery-item item-tall" data-category="completed" tabindex="0">
-            <img src="../assets/images/nagpur-plots-hero-slide-4.webp" alt="Completed Corner Plot" loading="lazy">
+
+          <div class="gallery-item" data-category="amenities" data-pswp-src="assets/images/nagpur-plots-hero-slide-3.webp" data-pswp-width="1920" data-pswp-height="1080">
+            <img src="assets/images/nagpur-plots-hero-slide-3.webp" alt="Project Cement Road" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">Amenities</span>
+              <h3 class="gallery-title">Cement Road Infrastructure</h3>
+            </div>
           </div>
-          <div class="gallery-item" data-category="completed" tabindex="0">
-            <img src="../assets/images/nagpur-plots-hero-slide-5.webp" alt="Gated Community Entrance" loading="lazy">
+
+          <div class="gallery-item" data-category="completed" data-pswp-src="assets/images/nagpur-plots-hero-slide-4.webp" data-pswp-width="1920" data-pswp-height="1080">
+            <img src="assets/images/nagpur-plots-hero-slide-4.webp" alt="Completed Corner Plot" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">Completed</span>
+              <h3 class="gallery-title">Premium Corner Plot</h3>
+            </div>
           </div>
-          <div class="gallery-item" data-category="ongoing" tabindex="0">
-            <img src="../assets/images/mahalaxmi-naya-43-thumbnail.jpg" alt="Mahalaxmi Naya 43 Shankarpur"
-              loading="lazy">
+
+          <div class="gallery-item" data-category="ongoing" data-pswp-src="assets/migrated/m-43-thumbnail.jpg" data-pswp-width="800" data-pswp-height="600">
+            <img src="assets/migrated/m-43-thumbnail.jpg" alt="Mahalaxmi Naya 43 Shankarpur" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">Ongoing</span>
+              <h3 class="gallery-title">Mahalaxmi Naya 43</h3>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="videos" data-video="assets/legacy/frontend/videos/m41.mp4">
+            <div class="video-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <video muted loop playsinline src="assets/legacy/frontend/videos/m41.mp4"></video>
+            <div class="gallery-overlay">
+              <span class="gallery-tag">Video</span>
+              <h3 class="gallery-title">Mahalaxmi 41 Project Tour</h3>
+            </div>
           </div>
         </div>
+
+        <div id="galleryPagination" class="pagination-container"></div>
       </div>
     </section>
   </main>
@@ -283,55 +364,102 @@
     </div>
   </div>
 
-  <script src="../js/app.js" defer></script>
-  <script>
+  <script src="js/search-filter.js"></script>
+  <script type="module">
+    import PhotoSwipeLightbox from 'https://unpkg.com/photoswipe@5.4.3/dist/photoswipe-lightbox.esm.js';
+
     document.addEventListener('DOMContentLoaded', () => {
-      // Gallery Filtering
-      const filters = document.querySelectorAll('.filter-btn');
-      const items = document.querySelectorAll('.gallery-item');
+      // Initialize filtering
+      const gallerySystem = new SearchFilterSystem({
+        containerId: 'galleryGrid',
+        itemsSelector: '.gallery-item',
+        filterGroupId: 'galleryFilters',
+        searchInputId: 'gallerySearch',
+         paginationId: 'galleryPagination',
+         itemsPerPage: 12
+       });
 
-      filters.forEach(btn => {
-        btn.addEventListener('click', () => {
-          filters.forEach(f => f.classList.remove('active'));
-          btn.classList.add('active');
-          const filter = btn.getAttribute('data-filter');
+      // Override updateUI to update stats
+      const originalUpdateUI = gallerySystem.updateUI.bind(gallerySystem);
+      gallerySystem.updateUI = function() {
+        originalUpdateUI();
+        const stats = document.getElementById('galleryStats');
+        if (stats) {
+          const total = this.filteredItems.length;
+          stats.textContent = `Showing ${total} item${total !== 1 ? 's' : ''}`;
+        }
+        // Re-init lightbox after filter
+        initLightbox();
+      };
 
-          items.forEach(item => {
-            if (filter === 'all' || item.getAttribute('data-category') === filter) {
-              item.style.display = 'block';
-              // Trigger reflow for animation
-              setTimeout(() => { item.style.opacity = '1'; item.style.transform = 'scale(1)'; }, 50);
-            } else {
-              item.style.opacity = '0';
-              item.style.transform = 'scale(0.9)';
-              setTimeout(() => item.style.display = 'none', 300);
-            }
-          });
+      // PhotoSwipe initialization
+      let lightbox;
+      function initLightbox() {
+        if (lightbox) lightbox.destroy();
+        
+        lightbox = new PhotoSwipeLightbox({
+          gallery: '#galleryGrid',
+          children: '.gallery-item[data-pswp-src]',
+          pswpModule: () => import('https://unpkg.com/photoswipe@5.4.3/dist/photoswipe.esm.js')
         });
-      });
 
-      // Simple Lightbox
-      const lightboxModal = document.getElementById('lightboxModal');
-      const lightboxImg = document.getElementById('lightboxImg');
+        // Add video support to PhotoSwipe
+        lightbox.on('contentLoad', (e) => {
+          const { content } = e;
+          if (content.type === 'video') {
+            e.preventDefault();
+            content.element = document.createElement('div');
+            content.element.className = 'pswp__video-container';
+            const video = document.createElement('video');
+            video.src = content.data.video;
+            video.controls = true;
+            video.autoplay = true;
+            content.element.appendChild(video);
+          }
+        });
 
-      items.forEach(item => {
-        item.addEventListener('click', () => {
-          const imgSrc = item.querySelector('img').src;
-          lightboxImg.src = imgSrc;
-          lightboxModal.classList.add('is-open');
-          lightboxModal.setAttribute('aria-hidden', 'false');
-        });
-        // Accessibility
-        item.addEventListener('keypress', (e) => {
-          if (e.key === 'Enter') item.click();
-        });
+        lightbox.init();
+      }
+
+      // Handle video clicks separately for items without data-pswp-src
+      document.getElementById('galleryGrid').addEventListener('click', (e) => {
+        const videoItem = e.target.closest('.gallery-item[data-video]');
+        if (videoItem) {
+          const videoSrc = videoItem.dataset.video;
+          // Simple video modal for now or integrate with PS
+          const modal = document.getElementById('lightboxModal');
+          const lightboxImg = document.getElementById('lightboxImg');
+          
+          // Clear previous
+          lightboxImg.style.display = 'none';
+          let videoEl = modal.querySelector('video');
+          if (!videoEl) {
+            videoEl = document.createElement('video');
+            videoEl.style.maxWidth = '100%';
+            videoEl.style.maxHeight = '85vh';
+            videoEl.style.borderRadius = '8px';
+            videoEl.controls = true;
+            lightboxImg.parentNode.appendChild(videoEl);
+          }
+          videoEl.src = videoSrc;
+          videoEl.style.display = 'block';
+          videoEl.play();
+          
+          modal.classList.add('is-open');
+        }
       });
 
       window.closeLightbox = () => {
-        lightboxModal.classList.remove('is-open');
-        lightboxModal.setAttribute('aria-hidden', 'true');
-        lightboxImg.src = '';
+        const modal = document.getElementById('lightboxModal');
+        const videoEl = modal.querySelector('video');
+        if (videoEl) {
+          videoEl.pause();
+          videoEl.style.display = 'none';
+        }
+        modal.classList.remove('is-open');
       };
+
+      gallerySystem.updateUI();
     });
   </script>
 </body>

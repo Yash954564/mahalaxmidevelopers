@@ -1,0 +1,143 @@
+/* ===== AMENITY ICON SYSTEM ===== */
+
+.amenities-container {
+  margin-top: 40px;
+}
+
+.amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 20px;
+}
+
+.amenity-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px 16px;
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+
+.amenity-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+  transform-origin: left;
+}
+
+.amenity-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--gold);
+  box-shadow: var(--shadow);
+}
+
+.amenity-card:hover::before {
+  transform: scaleX(1);
+}
+
+.amenity-icon-box {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-light);
+  border-radius: 50%;
+  margin-bottom: 16px;
+  transition: all 0.4s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.amenity-card:hover .amenity-icon-box {
+  background: var(--gold);
+  transform: scale(1.1) rotate(8deg);
+}
+
+.amenity-icon-box img,
+.amenity-icon-box svg {
+  width: 32px;
+  height: 32px;
+  transition: all 0.4s ease;
+  object-fit: contain;
+}
+
+.amenity-card:hover .amenity-icon-box img,
+.amenity-card:hover .amenity-icon-box svg {
+  filter: brightness(0) invert(1);
+}
+
+.amenity-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--dark);
+  margin: 0;
+  line-height: 1.4;
+  transition: color 0.3s ease;
+}
+
+.amenity-card:hover .amenity-name {
+  color: var(--gold-dark);
+}
+
+/* Accessibility Tooltip (Simple version) */
+.amenity-card[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--dark);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards 0.5s;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .amenities-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .amenity-card {
+    padding: 16px 12px;
+  }
+  
+  .amenity-icon-box {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 12px;
+  }
+  
+  .amenity-icon-box img {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .amenity-name {
+    font-size: 12px;
+  }
+}

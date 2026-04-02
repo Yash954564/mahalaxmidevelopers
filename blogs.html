@@ -23,6 +23,7 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Playfair+Display:ital@1&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/search-filter.css">
 </head>
 
 <body>
@@ -67,21 +68,65 @@
     <section class="section">
       <div class="container">
 
-        <div id="blogFilterBar"
-          style="background: var(--bg-light); padding: 16px 24px; border-radius: 12px; margin-bottom: 40px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center;">
-          <div style="display: flex; gap: 12px; flex-wrap: wrap;" id="categoryFilters">
-            <button class="filter-btn is-active" data-cat="all">All</button>
-            <button class="filter-btn" data-cat="Buyer Guide">Buyer Guide</button>
-            <button class="filter-btn" data-cat="Finance">Finance</button>
-            <button class="filter-btn" data-cat="Investment">Investment</button>
-            <button class="filter-btn" data-cat="Legal">Legal</button>
-            <button class="filter-btn" data-cat="Market Guide">Market Guide</button>
+        <button class="mobile-filter-trigger" id="mobileFilterTrigger">
+          <img src="assets/icons/Target.svg" alt="" width="20" height="20" style="filter: grayscale(1);">
+          Search & Filter Blogs
+        </button>
+
+        <div class="filter-controls">
+          <div class="filter-top">
+            <div class="filter-buttons" id="categoryFilters">
+              <button class="filter-btn active" data-filter="all">All</button>
+              <button class="filter-btn" data-filter="Buyer Guide">Buyer Guide</button>
+              <button class="filter-btn" data-filter="Finance">Finance</button>
+              <button class="filter-btn" data-filter="Investment">Investment</button>
+              <button class="filter-btn" data-filter="Legal">Legal</button>
+              <button class="filter-btn" data-filter="Market Guide">Market Guide</button>
+            </div>
+            <div class="search-wrapper">
+              <img src="assets/icons/Target.svg" alt="" class="search-icon">
+              <input type="text" id="blogSearch" class="search-input" placeholder="Search insights...">
+            </div>
           </div>
-          <div style="display:flex;align-items:center;gap:16px;flex:1;max-width:400px;justify-content:flex-end;">
-            <span id="blogCount" style="font-size:13px;color:var(--muted);white-space:nowrap;">Showing 34
-              articles</span>
-            <input type="text" id="blogSearch" placeholder="Search insights..."
-              style="width: 100%; max-width: 240px; padding: 10px 16px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px;">
+          <div class="filter-settings">
+            <span id="blogStats">Showing all articles</span>
+            <div class="ipp-wrapper">
+              <label for="itemsPerPage">Items per page:</label>
+              <select id="itemsPerPage" class="ipp-select">
+                <option value="6">6</option>
+                <option value="9" selected>9</option>
+                <option value="12">12</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Filter Drawer -->
+        <div class="drawer-backdrop" id="drawerBackdrop"></div>
+        <div class="filter-drawer" id="filterDrawer">
+          <div class="drawer-header">
+            <h3>Filter Blogs</h3>
+            <button class="drawer-close" id="closeDrawer">&times;</button>
+          </div>
+          <div class="drawer-body">
+            <div class="field" style="margin-bottom: 24px;">
+              <label style="color: var(--text); margin-bottom: 8px; display: block;">Search Insights</label>
+              <div class="search-wrapper">
+                <img src="assets/icons/Target.svg" alt="" class="search-icon">
+                <input type="text" id="blogSearchMobile" class="search-input" placeholder="Search blog posts...">
+              </div>
+            </div>
+            <div class="field">
+              <label style="color: var(--text); margin-bottom: 12px; display: block;">Topic</label>
+              <div class="filter-buttons" id="mobileFilterGroup">
+                <button class="filter-btn active" data-filter="all">All Topics</button>
+                <button class="filter-btn" data-filter="Buyer Guide">Buyer Guide</button>
+                <button class="filter-btn" data-filter="Finance">Finance</button>
+                <button class="filter-btn" data-filter="Investment">Investment</button>
+                <button class="filter-btn" data-filter="Legal">Legal</button>
+                <button class="filter-btn" data-filter="Market Guide">Market Guide</button>
+              </div>
+            </div>
           </div>
         </div>
         <div class="grid grid-3" id="blogsGrid">
@@ -703,9 +748,7 @@
         </div>
 
         <!-- Pagination -->
-        <div class="pagination-container" id="pagination"
-          style="margin-top: 64px; display: flex; justify-content: center; gap: 8px;">
-        </div>
+        <div id="blogPagination" class="pagination-container"></div>
       </div>
     </section>
 
@@ -869,94 +912,29 @@
 
   <script src="js/app.js" defer></script>
 
-  <script data-pagination="true">
+  <script src="js/search-filter.js"></script>
+  <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const postsPerPage = 9;
-      const allCards = Array.from(document.querySelectorAll('.blog-card'));
-      const paginationContainer = document.getElementById('pagination');
-      const filterBtns = document.querySelectorAll('#categoryFilters .filter-btn');
-      const searchInput = document.getElementById('blogSearch');
-      const blogCount = document.getElementById('blogCount');
-
-      let filteredCards = [...allCards];
-      let currentPage = 1;
-
-      function applyFilters() {
-        const activeCat = document.querySelector('#categoryFilters .filter-btn.is-active').getAttribute('data-cat');
-        const searchTerm = searchInput.value.toLowerCase().trim();
-
-        filteredCards = allCards.filter(card => {
-          const matchesCat = activeCat === 'all' || card.getAttribute('data-category') === activeCat;
-          const matchesSearch = searchTerm === '' || card.getAttribute('data-search').includes(searchTerm);
-          return matchesCat && matchesSearch;
-        });
-
-        currentPage = 1;
-        showPage(1);
-      }
-
-      filterBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          filterBtns.forEach(b => b.classList.remove('is-active'));
-          e.target.classList.add('is-active');
-          applyFilters();
-        });
+      const blogSystem = new SearchFilterSystem({
+        containerId: 'blogsGrid',
+        itemsSelector: '.blog-card',
+        filterGroupId: 'categoryFilters',
+        searchInputId: 'blogSearch',
+        paginationId: 'blogPagination',
+        itemsPerPage: 9
       });
 
-      searchInput.addEventListener('input', () => { applyFilters(); });
-
-      function showPage(page) {
-        currentPage = page;
-        const start = (page - 1) * postsPerPage;
-        const end = start + postsPerPage;
-
-        allCards.forEach(card => card.style.display = 'none');
-
-        filteredCards.forEach((card, index) => {
-          if (index >= start && index < end) {
-            card.style.display = 'flex';
-          }
-        });
-
-        if (blogCount) {
-          const total = filteredCards.length;
-          const showing = Math.min(end, total) - start;
-          blogCount.textContent = 'Showing ' + (start + 1) + '-' + Math.min(end, total) + ' of ' + total + ' articles';
+      // Override updateUI to also update stats
+      const originalUpdateUI = blogSystem.updateUI.bind(blogSystem);
+      blogSystem.updateUI = function () {
+        originalUpdateUI();
+        const stats = document.getElementById('blogStats');
+        if (stats) {
+          const total = this.filteredItems.length;
+          stats.textContent = `Showing ${total} article${total !== 1 ? 's' : ''}`;
         }
-
-        updatePagination();
-        if (page > 1) window.scrollTo({ top: 300, behavior: 'smooth' });
-      }
-
-      function updatePagination() {
-        paginationContainer.innerHTML = '';
-        const totalPages = Math.ceil(filteredCards.length / postsPerPage);
-        if (totalPages <= 1) return;
-
-        const prevBtn = document.createElement('button');
-        prevBtn.innerHTML = '\u2190';
-        prevBtn.className = 'filter-btn' + (currentPage === 1 ? ' muted' : '');
-        prevBtn.disabled = currentPage === 1;
-        prevBtn.onclick = () => showPage(currentPage - 1);
-        paginationContainer.appendChild(prevBtn);
-
-        for (let i = 1; i <= totalPages; i++) {
-          const btn = document.createElement('button');
-          btn.innerText = i;
-          btn.className = 'filter-btn' + (i === currentPage ? ' is-active' : '');
-          btn.onclick = () => showPage(i);
-          paginationContainer.appendChild(btn);
-        }
-
-        const nextBtn = document.createElement('button');
-        nextBtn.innerHTML = '\u2192';
-        nextBtn.className = 'filter-btn' + (currentPage === totalPages ? ' muted' : '');
-        nextBtn.disabled = currentPage === totalPages;
-        nextBtn.onclick = () => showPage(currentPage + 1);
-        paginationContainer.appendChild(nextBtn);
-      }
-
-      applyFilters();
+      };
+      blogSystem.updateUI();
     });
   </script>
 </body>

@@ -17,7 +17,9 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=Playfair+Display:ital@1&amp;display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/search-filter.css">
+  <link rel="stylesheet" href="css/amenity-icons.css">
 </head>
 
 <body>
@@ -25,7 +27,7 @@
   <header class="header" id="header">
     <div class="container header-inner">
       <a class="brand" href="../" aria-label="Mahalaxmi Developers home">
-        <img src="../assets/images/mahalaxmi-group-header-logo.svg" alt="Mahalaxmi Group Logo" width="120" height="40">
+        <img src="assets/images/mahalaxmi-group-header-logo.svg" alt="Mahalaxmi Group Logo" width="120" height="40">
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="../">Home</a>
@@ -35,7 +37,7 @@
         <a href="../contact.html">Contact</a>
       </nav>
       <div class="nav-cta">
-        <a class="btn btn-primary" href="../contact.html#lead">Get in Touch <img src="../assets/icons/right-arrow.svg"
+        <a class="btn btn-primary" href="../contact.html#lead">Get in Touch <img src="assets/icons/right-arrow.svg"
             alt="" width="16" height="16"></a>
       </div>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu">☰</button>
@@ -65,19 +67,63 @@
         <div class="sub-label"><span class="dot"></span> Featured Projects</div>
         <h2 class="heading-sm" style="margin-bottom:24px">Explore Our <em class="serif-accent">Developments</em></h2>
 
-        <div id="projectFilterBar"
-          style="background: var(--bg-light); padding: 16px 24px; border-radius: 12px; margin-bottom: 40px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center;">
-          <div style="display: flex; gap: 12px; flex-wrap: wrap;" id="projectFilter">
-            <button class="filter-btn is-active" data-filter="All">All</button>
-            <button class="filter-btn" data-filter="Ongoing">Ongoing</button>
-            <button class="filter-btn" data-filter="Upcoming">Upcoming</button>
-            <button class="filter-btn" data-filter="Completed">Completed</button>
+        <button class="mobile-filter-trigger" id="mobileFilterTrigger">
+          <img src="assets/icons/Target.svg" alt="" width="20" height="20" style="filter: grayscale(1);">
+          Filter & Search Projects
+        </button>
+
+        <div class="filter-controls">
+          <div class="filter-top">
+            <div class="filter-buttons" id="projectFilter">
+              <button class="filter-btn active" data-filter="all">All Projects</button>
+              <button class="filter-btn" data-filter="Ongoing">Ongoing</button>
+              <button class="filter-btn" data-filter="Upcoming">Upcoming</button>
+              <button class="filter-btn" data-filter="Completed">Completed</button>
+            </div>
+            <div class="search-wrapper">
+              <img src="assets/icons/Target.svg" alt="" class="search-icon">
+              <input type="text" id="projectSearch" class="search-input"
+                placeholder="Search by name, location or keywords...">
+            </div>
           </div>
-          <div style="display:flex;align-items:center;gap:16px;flex:1;max-width:450px;justify-content:flex-end;">
-            <span id="projectStats" style="font-size:13px;color:var(--muted);white-space:nowrap;">Showing all
-              projects</span>
-            <input type="text" id="projectSearch" placeholder="Search projects by name or location..."
-              style="width: 100%; max-width: 280px; padding: 10px 16px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px;">
+          <div class="filter-settings">
+            <span id="projectStats">Showing all projects</span>
+            <div class="ipp-wrapper">
+              <label for="itemsPerPage">Items per page:</label>
+              <select id="itemsPerPage" class="ipp-select">
+                <option value="6">6</option>
+                <option value="9" selected>9</option>
+                <option value="12">12</option>
+                <option value="24">24</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Filter Drawer -->
+        <div class="drawer-backdrop" id="drawerBackdrop"></div>
+        <div class="filter-drawer" id="filterDrawer">
+          <div class="drawer-header">
+            <h3>Filter Projects</h3>
+            <button class="drawer-close" id="closeDrawer">&times;</button>
+          </div>
+          <div class="drawer-body">
+            <div class="field" style="margin-bottom: 24px;">
+              <label style="color: var(--text); margin-bottom: 8px; display: block;">Search Projects</label>
+              <div class="search-wrapper">
+                <img src="assets/icons/Target.svg" alt="" class="search-icon">
+                <input type="text" id="projectSearchMobile" class="search-input" placeholder="Search projects...">
+              </div>
+            </div>
+            <div class="field">
+              <label style="color: var(--text); margin-bottom: 12px; display: block;">Project Status</label>
+              <div class="filter-buttons" id="mobileFilterGroup">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="Ongoing">Ongoing</button>
+                <button class="filter-btn" data-filter="Upcoming">Upcoming</button>
+                <button class="filter-btn" data-filter="Completed">Completed</button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -191,7 +237,8 @@
               alt="Mahalaxmi Nagar-45" loading="lazy">
             <div class="card-content">
               <h3>Mahalaxmi Nagar-45</h3>
-              <p class="muted">Luxury premium residential and commercial plots near Samruddhi Mahamarg Near TCS, Infosys, AIIMS</p>
+              <p class="muted">Luxury premium residential and commercial plots near Samruddhi Mahamarg Near TCS,
+                Infosys, AIIMS</p>
               <div class="project-location"><img src="assets/icons/MapPin.svg" alt="" width="18" height="18">
                 near Samruddhi Mahamarg, Nagpur</div>
             </div>
@@ -1065,14 +1112,9 @@
               <a class="btn btn-outline btn-sm" href="projects/mahalaxmi-nagar-39.html">Know More</a>
             </div>
           </article>
-        </div>
-        <div id="pagination" class="pagination"
-          style="display: flex; justify-content: center; gap: 8px; margin-top: 48px;"></div>
+        <div id="projectPagination" class="pagination-container"></div>
       </div>
     </section>
-
-    <!-- Completed Projects -->
-
 
     <section class="section cta-section">
       <div class="container cta-inner">
@@ -1082,20 +1124,23 @@
         </div>
         <div class="hero-ctas"><a class="btn btn-primary" href="contact.html#lead">Enquire Now</a><a
             class="btn btn-outline" href="#" data-wa="general">WhatsApp Us</a> </div>
-        <div id="pagination" class="pagination"
-          style="display: flex; justify-content: center; gap: 8px; margin-top: 48px;"></div>
       </div>
     </section>
 
-    <section class="section-lg bg-white" style="text-align:center; padding: 80px 20px; border-top: 1px solid var(--border-light)">
+    <section class="section-lg bg-white"
+      style="text-align:center; padding: 80px 20px; border-top: 1px solid var(--border-light)">
       <div class="container">
-        <div class="sub-label" style="display:inline-flex; align-items:center; gap:8px; justify-content:center; width:100%"><span class="dot"></span> Book a Visit</div>
+        <div class="sub-label"
+          style="display:inline-flex; align-items:center; gap:8px; justify-content:center; width:100%"><span
+            class="dot"></span> Book a Visit</div>
         <h2 class="heading-md" style="margin: 20px 0">Ready to Find Your <em class="serif-accent">Dream Plot?</em></h2>
-        <p class="muted" style="max-width:600px; margin: 0 auto 32px">Join 15,000+ happy families who found their perfect investment with Mahalaxmi Developers. Schedule a free site visit today.</p>
+        <p class="muted" style="max-width:600px; margin: 0 auto 32px">Join 15,000+ happy families who found their
+          perfect investment with Mahalaxmi Developers. Schedule a free site visit today.</p>
         <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap">
           <button class="btn btn-primary" data-open-modal>Book Appointment</button>
           <a href="tel:+917499654371" class="btn btn-outline">Call: +91 74996 54371</a>
-        </div>
+        </div> <!-- end projectsGrid -->
+
       </div>
     </section>
 
@@ -1104,12 +1149,15 @@
         <div class="grid grid-2" style="gap:48px;align-items:start">
           <div>
             <div class="sub-label"><span class="dot"></span> Plot Investment FAQ</div>
-            <h2 class="heading-md" style="margin-bottom:24px">Investing in Nagpur <em class="serif-accent">Plotted Development</em></h2>
-            <p class="muted" style="line-height:1.7">Finding the right plot requires the right information. We've compiled the most common questions our investors ask.</p>
-            
+            <h2 class="heading-md" style="margin-bottom:24px">Investing in Nagpur <em class="serif-accent">Plotted
+                Development</em></h2>
+            <p class="muted" style="line-height:1.7">Finding the right plot requires the right information. We've
+              compiled the most common questions our investors ask.</p>
+
             <div class="card" style="margin-top:40px;background:var(--teal);color:#fff">
               <h3 style="color:#fff">Need a Guided Tour?</h3>
-              <p style="color:rgba(255,255,255,0.8);margin-bottom:20px">Our experts can take you through multiple projects in one evening. Book your personalized site visit now.</p>
+              <p style="color:rgba(255,255,255,0.8);margin-bottom:20px">Our experts can take you through multiple
+                projects in one evening. Book your personalized site visit now.</p>
               <button class="btn btn-white" data-open-modal>Book Guided Visit</button>
             </div>
           </div>
@@ -1118,27 +1166,34 @@
             <div class="faq-list">
               <details class="faq-item" open>
                 <summary>Why invest in Nagpur's peripheral growth areas?</summary>
-                <p>Areas like Samruddhi Mahamarg, Wardha Road, and Besa are witnessing rapid infrastructure development. With the Metro expansion and MIHAN growth, these areas offer the highest appreciation potential in Nagpur.</p>
+                <p>Areas like Samruddhi Mahamarg, Wardha Road, and Besa are witnessing rapid infrastructure development.
+                  With the Metro expansion and MIHAN growth, these areas offer the highest appreciation potential in
+                  Nagpur.</p>
               </details>
 
               <details class="faq-item">
                 <summary>How much loan can I get for a residential plot?</summary>
-                <p>For NMRDA/NIT sanctioned plots, most banks offer up to 75-80% loan. However, through our strategic banking partners, <strong>Upto 90% loan finance facilities</strong> are available for eligible profiles.</p>
+                <p>For NMRDA/NIT sanctioned plots, most banks offer up to 75-80% loan. However, through our strategic
+                  banking partners, <strong>Upto 90% loan finance facilities</strong> are available for eligible
+                  profiles.</p>
               </details>
 
               <details class="faq-item">
                 <summary>What is RL (Release Letter) and why is it important?</summary>
-                <p>RL is a document issued by the planning authority (NIT/NMRDA) confirming that the layout is sanctioned and the plot is ready for construction. All our projects come with valid RLs.</p>
+                <p>RL is a document issued by the planning authority (NIT/NMRDA) confirming that the layout is
+                  sanctioned and the plot is ready for construction. All our projects come with valid RLs.</p>
               </details>
 
               <details class="faq-item">
                 <summary>Do you provide help with the registration process?</summary>
-                <p>Yes, our dedicated documentation team handles everything from agreement drafting to final registration at the Sub-Registrar office, ensuring a hassle-free experience for you.</p>
+                <p>Yes, our dedicated documentation team handles everything from agreement drafting to final
+                  registration at the Sub-Registrar office, ensuring a hassle-free experience for you.</p>
               </details>
 
               <details class="faq-item">
                 <summary>What are the development charges?</summary>
-                <p>Development charges cover infrastructure like roads, drainage, water, and electricity. We provide a transparent breakup of all charges at the time of booking with no hidden costs.</p>
+                <p>Development charges cover infrastructure like roads, drainage, water, and electricity. We provide a
+                  transparent breakup of all charges at the time of booking with no hidden costs.</p>
               </details>
             </div>
           </div>
@@ -1302,108 +1357,30 @@
 
 
 
-  <script src="../js/app.js" defer=""></script>
-
-
-
-  <script data-pagination="true">
+  <script src="js/app.js" defer=""></script>
+  <script src="js/search-filter.js"></script>
+  <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const projectsPerPage = 12;
-      const allCards = Array.from(document.querySelectorAll('.project-card'));
-      const paginationContainer = document.getElementById('pagination');
-      const filterBtns = document.querySelectorAll('#projectFilter .filter-btn');
-      const searchInput = document.getElementById('projectSearch');
-      const projectStats = document.getElementById('projectStats');
-
-      let filteredCards = [...allCards];
-      let currentPage = 1;
-
-      function applyFilters() {
-        const activeFilter = document.querySelector('#projectFilter .filter-btn.is-active').getAttribute('data-filter');
-        const searchTerm = searchInput.value.toLowerCase().trim();
-
-        filteredCards = allCards.filter(card => {
-          const matchesStatus = activeFilter === 'All' || card.getAttribute('data-status') === activeFilter;
-          const matchesSearch = searchTerm === '' || (card.getAttribute('data-search') && card.getAttribute('data-search').toLowerCase().includes(searchTerm));
-          return matchesStatus && matchesSearch;
-        });
-
-        currentPage = 1;
-        showPage(1);
-      }
-
-      filterBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          filterBtns.forEach(b => b.classList.remove('is-active'));
-          e.target.classList.add('is-active');
-          applyFilters();
-        });
+      const projectSystem = new SearchFilterSystem({
+        containerId: 'projectsGrid',
+        itemsSelector: '.project-card',
+        filterGroupId: 'projectFilter',
+        searchInputId: 'projectSearch',
+        paginationId: 'projectPagination',
+        itemsPerPage: 9
       });
 
-      searchInput.addEventListener('input', () => { try { applyFilters(); } catch (e) { } });
-
-      function showPage(page) {
-        currentPage = page;
-        const start = (page - 1) * projectsPerPage;
-        const end = start + projectsPerPage;
-
-        allCards.forEach(card => {
-          card.style.display = 'none';
-        });
-
-        filteredCards.forEach((card, index) => {
-          if (index >= start && index < end) {
-            card.style.display = 'block';
-          }
-        });
-
-        if (projectStats) {
-          const total = filteredCards.length;
-          if (total === 0) {
-            projectStats.textContent = 'No projects found';
-          } else {
-            const currentEnd = Math.min(end, total);
-            projectStats.textContent = 'Showing ' + (start + 1) + '-' + currentEnd + ' of ' + total + ' projects';
-          }
+      // Override updateUI to also update stats
+      const originalUpdateUI = projectSystem.updateUI.bind(projectSystem);
+      projectSystem.updateUI = function () {
+        originalUpdateUI();
+        const stats = document.getElementById('projectStats');
+        if (stats) {
+          const total = this.filteredItems.length;
+          stats.textContent = `Showing ${total} project${total !== 1 ? 's' : ''}`;
         }
-
-        updatePagination();
-        if (page > 1) {
-          const gridTop = document.getElementById('projectsGrid').getBoundingClientRect().top + window.pageYOffset - 120;
-          window.scrollTo({ top: gridTop, behavior: 'smooth' });
-        }
-      }
-
-      function updatePagination() {
-        paginationContainer.innerHTML = '';
-        const totalPages = Math.ceil(filteredCards.length / projectsPerPage);
-        if (totalPages <= 1) return;
-
-        const prevBtn = document.createElement('button');
-        prevBtn.innerHTML = '\u2190';
-        prevBtn.className = 'filter-btn' + (currentPage === 1 ? ' muted' : '');
-        prevBtn.disabled = currentPage === 1;
-        prevBtn.onclick = () => showPage(currentPage - 1);
-        paginationContainer.appendChild(prevBtn);
-
-        for (let i = 1; i <= totalPages; i++) {
-          const btn = document.createElement('button');
-          btn.innerText = i;
-          btn.className = 'filter-btn' + (i === currentPage ? ' is-active' : '');
-          btn.onclick = () => showPage(i);
-          paginationContainer.appendChild(btn);
-        }
-
-        const nextBtn = document.createElement('button');
-        nextBtn.innerHTML = '\u2192';
-        nextBtn.className = 'filter-btn' + (currentPage === totalPages ? ' muted' : '');
-        nextBtn.disabled = currentPage === totalPages;
-        nextBtn.onclick = () => showPage(currentPage + 1);
-        paginationContainer.appendChild(nextBtn);
-      }
-
-      // Initial apply
-      applyFilters();
+      };
+      projectSystem.updateUI();
     });
   </script>
 </body>
