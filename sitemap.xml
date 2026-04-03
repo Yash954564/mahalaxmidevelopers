@@ -7,54 +7,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sz.mahalaxmidevelopers.com/blogs.html</loc>
-    <lastmod>2026-04-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://sz.mahalaxmidevelopers.com/contact.html</loc>
-    <lastmod>2026-04-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://sz.mahalaxmidevelopers.com/gallery.html</loc>
-    <lastmod>2026-04-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://sz.mahalaxmidevelopers.com/</loc>
-    <lastmod>2026-04-03</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://sz.mahalaxmidevelopers.com/locations.html</loc>
-    <lastmod>2026-04-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://sz.mahalaxmidevelopers.com/privacy.html</loc>
-    <lastmod>2026-04-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://sz.mahalaxmidevelopers.com/projects.html</loc>
-    <lastmod>2026-04-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://sz.mahalaxmidevelopers.com/terms.html</loc>
-    <lastmod>2026-04-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://sz.mahalaxmidevelopers.com/blogs/7-reasons-buy-plot-in-nagpur-2026.html</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
@@ -86,12 +38,6 @@
   </url>
   <url>
     <loc>https://sz.mahalaxmidevelopers.com/blogs/best-time-to-buy-plot-in-nagpur.html</loc>
-    <lastmod>2026-04-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sz.mahalaxmidevelopers.com/blogs/blog-template.html</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -343,31 +289,103 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sz.mahalaxmidevelopers.com/plots/plots-in-beltarodi/</loc>
+    <loc>https://sz.mahalaxmidevelopers.com/blogs.html</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sz.mahalaxmidevelopers.com/plots/plots-in-besa/</loc>
+    <loc>https://sz.mahalaxmidevelopers.com/cities/plots-in-bengaluru.html</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sz.mahalaxmidevelopers.com/plots/plots-in-jamtha/</loc>
+    <loc>https://sz.mahalaxmidevelopers.com/cities/plots-in-delhi.html</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sz.mahalaxmidevelopers.com/plots/plots-in-manish-nagar/</loc>
+    <loc>https://sz.mahalaxmidevelopers.com/cities/plots-in-hyderabad.html</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sz.mahalaxmidevelopers.com/plots/plots-on-wardha-road/</loc>
+    <loc>https://sz.mahalaxmidevelopers.com/cities/plots-in-mumbai.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sz.mahalaxmidevelopers.com/cities/plots-in-nagpur.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sz.mahalaxmidevelopers.com/cities/plots-in-pune.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sz.mahalaxmidevelopers.com/contact.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sz.mahalaxmidevelopers.com/gallery.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sz.mahalaxmidevelopers.com/</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://sz.mahalaxmidevelopers.com/locations.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sz.mahalaxmidevelopers.com/plots/plots-in-beltarodi/index.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sz.mahalaxmidevelopers.com/plots/plots-in-besa/index.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sz.mahalaxmidevelopers.com/plots/plots-in-jamtha/index.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sz.mahalaxmidevelopers.com/plots/plots-in-manish-nagar/index.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sz.mahalaxmidevelopers.com/plots/plots-on-wardha-road/index.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sz.mahalaxmidevelopers.com/privacy.html</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -619,15 +637,21 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://sz.mahalaxmidevelopers.com/projects/project-template.html</loc>
+    <loc>https://sz.mahalaxmidevelopers.com/projects/tattva-apas.html</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://sz.mahalaxmidevelopers.com/projects/tattva-apas.html</loc>
+    <loc>https://sz.mahalaxmidevelopers.com/projects.html</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sz.mahalaxmidevelopers.com/terms.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
