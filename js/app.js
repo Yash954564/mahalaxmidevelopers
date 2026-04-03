@@ -384,7 +384,29 @@
     }, { passive: true });
   }
 
+  /* ===== ACTIVE LINKS ===== */
+  function initActiveLinks() {
+    const path = window.location.pathname;
+    const page = path.split("/").pop() || "index.html";
+
+    $$(".nav-links a, .mobile-menu a, .footer-nav a").forEach(link => {
+      const href = link.getAttribute("href");
+      if (!href) return;
+
+      // Normalize href
+      let linkPage = href.split("/").pop().split("#")[0];
+      if (linkPage === "." || linkPage === "") linkPage = "index.html";
+
+      const normalizedCurrentPage = (page === "" || page === "index.html") ? "index.html" : page;
+
+      if (linkPage === normalizedCurrentPage) {
+        link.classList.add("active");
+      }
+    });
+  }
+
   /* ===== Init All ===== */
+  initActiveLinks();
   initHeroCarousel();
   initSliders();
   initCounters();
