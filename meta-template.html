@@ -2,7 +2,7 @@
 
 <!-- 1. Copy the following block into the <head> of your new page. -->
 <!-- 2. Replace the placeholders (e.g., [PAGE_TITLE]) with actual values. -->
-<!-- 3. Ensure the og:image and twitter:image URLs are absolute (start with https://). -->
+<!-- 3. Ensure the og:image and twitter:image URLs are absolute (start with https://) and prefer JPG/PNG for broad app preview support. -->
 
 <!-- SEO Meta Tags -->
 <title>[PAGE_TITLE] | Mahalaxmi Developers</title>
@@ -16,10 +16,12 @@
 <meta property="og:title" content="[PAGE_TITLE] | Mahalaxmi Developers" />
 <meta property="og:description" content="[PAGE_DESCRIPTION]" />
 <meta property="og:image" content="https://sz.mahalaxmidevelopers.com/[PATH_TO_IMAGE]" />
+<meta property="og:image:secure_url" content="https://sz.mahalaxmidevelopers.com/[PATH_TO_IMAGE]" />
 <meta property="og:image:type" content="image/jpeg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:image:alt" content="[IMAGE_ALT_TEXT]" />
+<meta property="og:locale" content="en_IN" />
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
@@ -27,5 +29,7 @@
 <meta name="twitter:title" content="[PAGE_TITLE] | Mahalaxmi Developers" />
 <meta name="twitter:description" content="[PAGE_DESCRIPTION]" />
 <meta name="twitter:image" content="https://sz.mahalaxmidevelopers.com/[PATH_TO_IMAGE]" />
+<meta name="twitter:image:src" content="https://sz.mahalaxmidevelopers.com/[PATH_TO_IMAGE]" />
+<meta itemprop="image" content="https://sz.mahalaxmidevelopers.com/[PATH_TO_IMAGE]" />
 
 <!-- END OF META TAGS TEMPLATE -->
