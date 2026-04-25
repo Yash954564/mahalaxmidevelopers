@@ -323,6 +323,39 @@
     */
   }
 
+  /* ===== VIDEO MODAL ===== */
+  function initVideoModal() {
+    const modal = $("#videoModal");
+    const iframe = $("#videoIframe");
+    if (!modal || !iframe) return;
+
+    const open = (videoId) => {
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+      modal.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+    };
+
+    const close = () => {
+      modal.classList.remove("is-open");
+      iframe.src = "";
+      document.body.style.overflow = "";
+    };
+
+    $$(".video-trigger").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-video-id");
+        if (id) open(id);
+      });
+    });
+
+    $("#closeVideoModal")?.addEventListener("click", close);
+    $("#btnVideoClose")?.addEventListener("click", close);
+
+    window.addEventListener("keydown", e => {
+      if (e.key === "Escape" && modal.classList.contains("is-open")) close();
+    });
+  }
+
   /* ===== FAQ ACCORDION ===== */
   function initFaqAccordion() {
     $$(".faq-item").forEach(item => {
@@ -413,6 +446,7 @@
   initScrollAnimations();
   initForms();
   initModal();
+  initVideoModal();
   initFaqAccordion();
   initProjectFilter();
   initHeaderScroll();
